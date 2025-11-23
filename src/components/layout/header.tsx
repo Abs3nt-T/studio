@@ -36,8 +36,8 @@ export function Header() {
     }>
       <div className="container flex h-16 max-w-screen-xl items-center justify-between">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <Beef className={`h-8 w-8 transition-colors ${headerTextColor}`} />
-          <span className={`font-headline text-2xl font-bold transition-colors ${headerTextColor}`}>
+          <Beef className={`h-8 w-8 transition-colors duration-300 ${headerTextColor}`} />
+          <span className={`font-headline text-2xl font-bold transition-colors duration-300 ${headerTextColor}`}>
             Fanuli Carni Equine
           </span>
         </Link>
@@ -47,7 +47,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`transition-colors ${navLinkColor}`}
+              className={`transition-colors duration-300 ${navLinkColor}`}
             >
               {link.label}
             </Link>
@@ -57,7 +57,7 @@ export function Header() {
         <div className="flex items-center gap-2 md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={mobileMenuButtonColor}>
+              <Button variant="ghost" size="icon" className={`${mobileMenuButtonColor} transition-colors duration-300`}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Apri menu</span>
               </Button>
