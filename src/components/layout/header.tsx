@@ -25,6 +25,10 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const headerTextColor = isScrolled ? 'text-primary' : 'text-primary-foreground';
+  const navLinkColor = isScrolled ? 'text-foreground/80 hover:text-foreground' : 'text-primary-foreground/80 hover:text-primary-foreground';
+  const mobileMenuButtonColor = isScrolled ? 'text-foreground' : 'text-primary-foreground hover:bg-white/10';
+
   return (
     <header className={
       `sticky top-0 z-50 w-full transition-colors duration-300
@@ -32,8 +36,8 @@ export function Header() {
     }>
       <div className="container flex h-16 max-w-screen-xl items-center justify-between">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <Beef className={`h-8 w-8 transition-colors ${isScrolled ? 'text-primary' : 'text-primary-foreground'}`} />
-          <span className={`font-headline text-2xl font-bold transition-colors ${isScrolled ? 'text-primary' : 'text-primary-foreground'}`}>
+          <Beef className={`h-8 w-8 transition-colors ${headerTextColor}`} />
+          <span className={`font-headline text-2xl font-bold transition-colors ${headerTextColor}`}>
             Fanuli Carni Equine
           </span>
         </Link>
@@ -43,7 +47,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`transition-colors hover:text-foreground ${isScrolled ? 'text-foreground/80' : 'text-primary-foreground/80 hover:text-primary-foreground'}`}
+              className={`transition-colors ${navLinkColor}`}
             >
               {link.label}
             </Link>
@@ -53,7 +57,7 @@ export function Header() {
         <div className="flex items-center gap-2 md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={`${isScrolled ? 'text-foreground' : 'text-primary-foreground hover:bg-white/10'}`}>
+              <Button variant="ghost" size="icon" className={mobileMenuButtonColor}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Apri menu</span>
               </Button>
