@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { contactBgImage } from '@/lib/images/contact-bg';
+import { whatsappBgImage } from '@/lib/images/whatsapp-bg';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -13,21 +14,16 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const bgImage = PlaceHolderImages.find(p => p.id === 'contact-bg-new');
-    const whatsappImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
-
     return (
         <div className="w-full bg-background">
             <section className="relative w-full">
-                {bgImage && (
-                    <Image
-                      src={bgImage.imageUrl}
-                      alt={bgImage.description}
-                      fill
-                      className="object-cover object-center"
-                      data-ai-hint={bgImage.imageHint}
-                    />
-                )}
+                <Image
+                  src={contactBgImage.imageUrl}
+                  alt={contactBgImage.description}
+                  fill
+                  className="object-cover object-center"
+                  data-ai-hint={contactBgImage.imageHint}
+                />
                 <div className="absolute inset-0 bg-black/70"></div>
                 <div className="container relative mx-auto flex min-h-[calc(60vh)] flex-col items-center justify-center space-y-8 px-4 py-16 text-center text-primary-foreground md:px-6">
                     <div className="space-y-4">
@@ -64,15 +60,13 @@ export default function ContattiPage() {
                         </Link>
                     </div>
                      <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl">
-                        {whatsappImage && (
-                            <Image
-                                src={whatsappImage.imageUrl}
-                                alt={whatsappImage.description}
-                                fill
-                                className="object-cover"
-                                data-ai-hint={whatsappImage.imageHint}
-                            />
-                        )}
+                        <Image
+                            src={whatsappBgImage.imageUrl}
+                            alt={whatsappBgImage.description}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={whatsappBgImage.imageHint}
+                        />
                     </div>
                 </div>
             </section>
