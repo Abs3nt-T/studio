@@ -5,7 +5,7 @@ export default function SalutePage() {
     <div className="bg-background">
       <div className="container mx-auto max-w-4xl px-4 py-16 md:px-6 lg:py-24">
         <div className="text-center">
-          <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl">
+          <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             La Carne Equina: Il Carburante Nobile
           </h1>
           <p className="mt-6 text-lg leading-8 text-foreground/80">

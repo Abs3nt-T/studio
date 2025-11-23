@@ -16,10 +16,10 @@ export default function ContattiPage() {
             <div className="container mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-12 px-4 py-16 text-center md:px-6">
                 
                 <div className="space-y-4">
-                    <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+                    <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
                         Vieni a trovarci in Bottega
                     </h1>
-                    <Card className="mx-auto max-w-md border-primary/20 bg-secondary/30 pt-6 shadow-lg">
+                    <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 shadow-lg">
                         <CardContent className="flex flex-col items-center justify-center gap-4">
                             <MapPin className="h-10 w-10 text-primary" />
                             <p className="text-xl font-medium text-foreground">

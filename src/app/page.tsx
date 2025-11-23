@@ -21,9 +21,9 @@ export default function Home() {
               data-ai-hint={heroImage.imageHint}
             />
           )}
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        <div className="container relative mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-8 px-4 py-12 text-center text-white md:min-h-[calc(100vh-4rem)] md:px-6">
+        <div className="container relative mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-8 px-4 py-12 text-center text-primary-foreground md:min-h-[calc(100vh-4rem)] md:px-6">
           <div className="space-y-4">
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Fanuli Carni Equine: L'Eccellenza della Tradizione.
@@ -41,10 +41,10 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section id="valori" className="w-full bg-secondary/30 py-20 md:py-24 lg:py-32">
+      <section id="valori" className="w-full bg-background py-20 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">I Nostri Valori</h2>
+            <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">I Nostri Valori</h2>
             <p className="mt-4 text-lg text-muted-foreground">La nostra promessa di qualità, dal 1968.</p>
           </div>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">

@@ -54,7 +54,7 @@ export default function ProdottiPage() {
         {/* La Tradizione Section */}
         <section id="tradizione" className="mb-20">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl">
+            <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               La Tradizione (Il Fresco)
             </h1>
             <p className="mt-4 text-lg text-foreground/80">
@@ -93,7 +93,7 @@ export default function ProdottiPage() {
         {/* Pronti a Cuocere Section */}
         <section id="pronti-a-cuocere">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl">
+            <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               I Pronti a Cuocere
             </h2>
             <p className="mt-4 text-lg text-foreground/80">
