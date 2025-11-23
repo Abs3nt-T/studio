@@ -3,9 +3,12 @@ import { ChefHat, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+  const valuesBgImage = PlaceHolderImages.find(p => p.id === 'values-bg');
+
   return (
     <>
       {/* Hero Section */}
@@ -41,34 +44,45 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section id="valori" className="w-full bg-background py-20 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
+      <section id="valori" className="relative w-full py-20 md:py-24 lg:py-32">
+        {valuesBgImage && (
+            <Image
+              src={valuesBgImage.imageUrl}
+              alt={valuesBgImage.description}
+              fill
+              className="object-cover object-center"
+              data-ai-hint={valuesBgImage.imageHint}
+            />
+          )}
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+
+        <div className="container relative px-4 md:px-6">
           <div className="mx-auto mb-16 max-w-3xl text-center">
             <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">I Nostri Valori</h2>
             <p className="mt-4 text-lg text-muted-foreground">La nostra promessa di qualità, dal 1968.</p>
           </div>
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-            <div className="flex flex-col items-center gap-4 text-center">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <Card className="flex flex-col items-center gap-4 rounded-lg border border-white/20 bg-white/10 p-8 text-center text-foreground shadow-2xl backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-primary/20">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
                 <MapPin className="h-8 w-8" />
               </div>
               <h3 className="font-headline text-2xl font-bold">Selezione Pugliese</h3>
               <p className="text-muted-foreground">Solo capi scelti con cura dal nostro territorio per garantire freschezza e sapore unici.</p>
-            </div>
-            <div className="flex flex-col items-center gap-4 text-center">
+            </Card>
+            <Card className="flex flex-col items-center gap-4 rounded-lg border border-white/20 bg-white/10 p-8 text-center text-foreground shadow-2xl backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-primary/20">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
                 <ChefHat className="h-8 w-8" />
               </div>
               <h3 className="font-headline text-2xl font-bold">Maestri Macellai</h3>
               <p className="text-muted-foreground">La nostra arte si tramanda da generazioni, con una lavorazione artigianale quotidiana.</p>
-            </div>
-            <div className="flex flex-col items-center gap-4 text-center">
+            </Card>
+            <Card className="flex flex-col items-center gap-4 rounded-lg border border-white/20 bg-white/10 p-8 text-center text-foreground shadow-2xl backdrop-blur-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-primary/20">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
                 <Heart className="h-8 w-8" />
               </div>
               <h3 className="font-headline text-2xl font-bold">Gusto e Salute</h3>
               <p className="text-muted-foreground">La carne equina è un'alleata del benessere: nutriente, magra e ricca di ferro.</p>
-            </div>
+            </Card>
           </div>
         </div>
       </section>

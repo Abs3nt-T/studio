@@ -3,8 +3,14 @@
     {
       "id": "hero",
       "description": "Una selezione di tagli di carne cruda esposti su un bancone di legno scuro in una macelleria.",
-      "imageUrl": "https://images.unsplash.com/photo-1622597440432-13247a305b4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxidXRjaGVyJTIwc2hvcCUyMGRhcmslMjB3b29kfGVufDB8fHx8MTc2NTQxMTU4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1551028150-64b9f398f678?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3NjU1NzY4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "butcher shop"
+    },
+    {
+      "id": "values-bg",
+      "description": "Uno sfondo leggero con una texture di marmo bianco.",
+      "imageUrl": "https://images.unsplash.com/photo-1560707303-11e5932a4542?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxsaWdodCUyMG1hcmJsZSUyMHRleHR1cmV8ZW58MHx8fHwxNzY1NTc5NDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "light marble"
     },
     {
       "id": "product1",
