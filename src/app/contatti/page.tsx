@@ -2,7 +2,6 @@ import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -13,18 +12,17 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const contactBgImage = PlaceHolderImages.find(p => p.id === 'contact-bg');
+    const contactBgImage = PlaceHolderImages.find(p => p.id === 'contact-bg-new');
     const whatsappBgImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
 
     return (
         <div className="w-full bg-background">
             <section className="relative w-full">
                 {contactBgImage && (
-                    <Image
+                    <img
                       src={contactBgImage.imageUrl}
                       alt={contactBgImage.description}
-                      fill
-                      className="object-cover object-center"
+                      className="absolute inset-0 h-full w-full object-cover object-center"
                       data-ai-hint={contactBgImage.imageHint}
                     />
                 )}
@@ -65,11 +63,10 @@ export default function ContattiPage() {
                     </div>
                      <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl">
                         {whatsappBgImage && (
-                            <Image
+                            <img
                                 src={whatsappBgImage.imageUrl}
                                 alt={whatsappBgImage.description}
-                                fill
-                                className="object-cover"
+                                className="absolute inset-0 h-full w-full object-cover"
                                 data-ai-hint={whatsappBgImage.imageHint}
                             />
                         )}
