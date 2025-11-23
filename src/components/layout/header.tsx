@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Beef } from "lucide-react";
+import { Menu, Beef, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
@@ -52,6 +52,7 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+           <Snowflake className="h-5 w-5 text-primary/70" />
         </nav>
         
         <div className="flex items-center gap-2 md:hidden">

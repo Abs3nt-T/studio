@@ -2,15 +2,15 @@
   "placeholderImages": [
     {
       "id": "hero",
-      "description": "Una selezione di tagli di carne cruda esposti su un bancone di legno scuro in una macelleria.",
-      "imageUrl": "https://images.unsplash.com/photo-1551028150-64b9f398f678?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3NjU1NzY4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "butcher shop"
+      "description": "Una macelleria addobbata per Natale, con luci calde e un'atmosfera festiva.",
+      "imageUrl": "https://images.unsplash.com/photo-1606995368673-9a286c07a049?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaHJpc3RtYXMlMjBidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3MTc2MjY4MTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "christmas butcher"
     },
     {
       "id": "values-bg",
-      "description": "Uno sfondo leggero con una texture di marmo bianco.",
-      "imageUrl": "https://images.unsplash.com/photo-1560707303-11e5932a4542?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxsaWdodCUyMG1hcmJsZSUyMHRleHR1cmV8ZW58MHx8fHwxNzY1NTc5NDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "light marble"
+      "description": "Uno sfondo natalizio con neve e bokeh dorati.",
+      "imageUrl": "https://images.unsplash.com/photo-1542379374-5369e462dc51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjaHJpc3RtYXMlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTcxNzYyNjg3N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "christmas background"
     },
     {
       "id": "product1",
@@ -49,16 +49,16 @@
       "imageHint": "steak tartare"
     },
     {
-      "id": "contact-bg",
-      "description": "Primo piano di un macellaio che affila un coltello con un acciaino.",
-      "imageUrl": "https://images.unsplash.com/photo-1579992869482-a6e1d5a71b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxidXRjaGVyJTIwa25pZmV8ZW58MHx8fHwxNzY1ODMzMDI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "butcher knife"
+      "id": "contact-bg-new",
+      "description": "Banco di macelleria con luci calde e decorazioni natalizie.",
+      "imageUrl": "https://images.unsplash.com/photo-1545301133-8a3986873c68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxidXRjaGVyJTIwY2hyaXN0bWFzfGVufDB8fHx8MTcxNzYyNzA2OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "butcher christmas"
     },
     {
       "id": "whatsapp-bg",
-      "description": "Scaffali con prodotti e salumi appesi in una salumeria tradizionale.",
-      "imageUrl": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwZGVsaXxlbnwwfHx8fDE3NjU4MTkyNzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "italian deli"
+      "description": "Interno di una salumeria con prosciutti appesi e un'atmosfera accogliente.",
+      "imageUrl": "https://images.unsplash.com/photo-1542838132-92c53300491e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwZGVsaSUyMGNocmlzdG1hc3xlbnwwfHx8fDE3MTc2MjcxNTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "deli christmas"
     }
   ]
 }
