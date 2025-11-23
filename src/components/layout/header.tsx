@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { Menu, Beef, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import React from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/chisiamo", label: "Chi Siamo" },
   { href: "/prodotti", label: "I Nostri Prodotti" },
   { href: "/salute", label: "Salute" },
   { href: "/contatti", label: "Contatti" },
@@ -64,6 +65,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="p-4">
                 <Link href="/" className="mb-8 flex items-center gap-3" onClick={() => setIsOpen(false)}>
                    <Beef className="h-8 w-8 text-primary" />
