@@ -65,35 +65,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section id="valori" className="bg-background py-20 sm:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              I Nostri Valori
-            </h2>
-            <p className="mt-4 text-lg text-foreground/80">
-              Passione, qualità e rispetto per la tradizione sono i pilastri del nostro lavoro.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {values.map((value) => (
-              <Card key={value.title} className="text-center">
-                <CardHeader className="items-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <value.icon className="h-8 w-8" />
-                  </div>
-                  <CardTitle className="font-headline text-2xl">{value.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Reviews Section */}
       <section id="recensioni" className="bg-secondary/30 py-20 sm:py-24">
         <div className="container mx-auto px-4 md:px-6">
@@ -126,6 +97,35 @@ export default function Home() {
                     </Card>
                 ))}
             </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section id="valori" className="bg-background py-20 sm:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+              I Nostri Valori
+            </h2>
+            <p className="mt-4 text-lg text-foreground/80">
+              Passione, qualità e rispetto per la tradizione sono i pilastri del nostro lavoro.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {values.map((value) => (
+              <Card key={value.title} className="text-center">
+                <CardHeader className="items-center">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <value.icon className="h-8 w-8" />
+                  </div>
+                  <CardTitle className="font-headline text-2xl">{value.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{value.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </div>
