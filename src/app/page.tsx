@@ -1,10 +1,11 @@
-
 'use client';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Gem, ScrollText, Leaf, Star } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const values = [
   {
@@ -42,92 +43,103 @@ const reviews = [
     }
 ];
 
-
 export default function Home() {
-  return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative w-full bg-primary/80">
-        <div className="container relative mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-8 px-4 py-12 text-center text-primary-foreground md:min-h-[calc(100vh-4rem)] md:px-6">
-          <div className="space-y-4">
-            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Fanuli Carni Equine: L'Eccellenza della Tradizione.
-            </h1>
-            <p className="mx-auto max-w-[700px] text-lg md:text-xl">
-              A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
-            </p>
-          </div>
-          <Link href="https://wa.me/390123456789" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="px-8 text-lg">
-              Prenota su WhatsApp
-            </Button>
-          </Link>
-        </div>
-      </section>
+    const heroImage = PlaceHolderImages.find(img => img.id === 'hero-1');
 
-      {/* Reviews Section */}
-      <section id="recensioni" className="bg-secondary/30 py-20 sm:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-            <div className="mx-auto mb-12 max-w-3xl text-center">
-                <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                    Dicono di Noi
-                </h2>
-                <p className="mt-4 text-lg text-foreground/80">
-                    La soddisfazione dei nostri clienti è la nostra più grande ricompensa.
-                </p>
-            </div>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {reviews.map((review) => (
-                    <Card key={review.name} className="flex flex-col justify-between">
-                        <CardHeader>
-                            <div className="flex items-center gap-4">
-                                <div>
-                                    <CardTitle className="font-headline text-xl">{review.name}</CardTitle>
-                                    <div className="flex items-center">
-                                        {[...Array(review.rating)].map((_, i) => (
-                                            <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                                        ))}
+    return (
+        <div className="flex flex-col">
+            {/* Hero Section */}
+            <section className="w-full bg-primary/10 py-20 md:py-32">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-6">
+                    <div className="space-y-6 text-center md:text-left">
+                        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+                          Fanuli Carni Equine: L'Eccellenza della Tradizione.
+                        </h1>
+                        <p className="mx-auto max-w-[700px] text-lg text-foreground/80 md:mx-0 md:text-xl">
+                          A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
+                        </p>
+                        <Link href="https://wa.me/390123456789" target="_blank" rel="noopener noreferrer">
+                            <Button size="lg" className="px-8 text-lg">
+                                Prenota su WhatsApp
+                            </Button>
+                        </Link>
+                    </div>
+                    {heroImage && (
+                        <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
+                            <img
+                                src={heroImage.imageUrl}
+                                alt={heroImage.description}
+                                className="h-full w-full object-cover"
+                                data-ai-hint={heroImage.imageHint}
+                            />
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* Reviews Section */}
+            <section id="recensioni" className="bg-secondary/30 py-20 sm:py-24">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="mx-auto mb-12 max-w-3xl text-center">
+                        <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                            Dicono di Noi
+                        </h2>
+                        <p className="mt-4 text-lg text-foreground/80">
+                            La soddisfazione dei nostri clienti è la nostra più grande ricompensa.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        {reviews.map((review) => (
+                            <Card key={review.name} className="flex flex-col justify-between">
+                                <CardHeader>
+                                    <div className="flex items-center gap-4">
+                                        <div>
+                                            <CardTitle className="font-headline text-xl">{review.name}</CardTitle>
+                                            <div className="flex items-center">
+                                                {[...Array(review.rating)].map((_, i) => (
+                                                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground">"{review.text}"</p>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
-        </div>
-      </section>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground">"{review.text}"</p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-      {/* Values Section */}
-      <section id="valori" className="bg-background py-20 sm:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              I Nostri Valori
-            </h2>
-            <p className="mt-4 text-lg text-foreground/80">
-              Passione, qualità e rispetto per la tradizione sono i pilastri del nostro lavoro.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {values.map((value) => (
-              <Card key={value.title} className="text-center">
-                <CardHeader className="items-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <value.icon className="h-8 w-8" />
-                  </div>
-                  <CardTitle className="font-headline text-2xl">{value.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+            {/* Values Section */}
+            <section id="valori" className="bg-background py-20 sm:py-24">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="mx-auto mb-12 max-w-3xl text-center">
+                        <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                            I Nostri Valori
+                        </h2>
+                        <p className="mt-4 text-lg text-foreground/80">
+                            Passione, qualità e rispetto per la tradizione sono i pilastri del nostro lavoro.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        {values.map((value) => (
+                            <Card key={value.title} className="text-center">
+                                <CardHeader className="items-center">
+                                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                        <value.icon className="h-8 w-8" />
+                                    </div>
+                                    <CardTitle className="font-headline text-2xl">{value.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground">{value.description}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 }

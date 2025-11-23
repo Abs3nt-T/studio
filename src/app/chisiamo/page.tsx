@@ -1,5 +1,3 @@
-
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function ChiSiamoPage() {
@@ -7,26 +5,26 @@ export default function ChiSiamoPage() {
 
     return (
         <div className="bg-background">
-            <section className="relative w-full bg-primary/10">
-                {heroImage && (
-                     <Image
-                        src={heroImage.imageUrl}
-                        alt={heroImage.description}
-                        fill
-                        className="object-cover object-center"
-                        data-ai-hint={heroImage.imageHint}
-                    />
-                )}
-                <div className="absolute inset-0 bg-black/50" />
-                <div className="container relative mx-auto flex min-h-[50vh] flex-col items-center justify-center space-y-8 px-4 py-16 text-center text-primary-foreground md:px-6">
-                    <div className="space-y-4">
-                        <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            <section className="w-full bg-primary/10 py-20 md:py-32">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-6">
+                    <div className="space-y-6 text-center md:text-left">
+                        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
                             Scegliamo per voi le carni migliori da generazioni
                         </h1>
-                        <p className="mx-auto max-w-3xl text-lg text-primary-foreground/90 md:text-xl">
+                        <p className="mx-auto max-w-3xl text-lg text-foreground/80 md:mx-0 md:text-xl">
                             Una storia di famiglia, passione e qualità che dura dal 1840.
                         </p>
                     </div>
+                    {heroImage && (
+                        <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
+                             <img
+                                src={heroImage.imageUrl}
+                                alt={heroImage.description}
+                                className="h-full w-full object-cover"
+                                data-ai-hint={heroImage.imageHint}
+                            />
+                        </div>
+                    )}
                 </div>
             </section>
 
