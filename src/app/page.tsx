@@ -1,29 +1,47 @@
 
+'use client';
 import { Button } from "@/components/ui/button";
 import { ChefHat, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Card } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+  const heroImages = [
+    PlaceHolderImages.find(p => p.id === 'hero-1'),
+    PlaceHolderImages.find(p => p.id === 'hero-2'),
+    PlaceHolderImages.find(p => p.id === 'hero-3'),
+  ].filter(Boolean);
+
   const valuesBgImage = PlaceHolderImages.find(p => p.id === 'values-bg');
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative w-full bg-background">
-        <div className="absolute inset-0">
-          {heroImage && (
-            <img
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              className="h-full w-full object-cover object-center"
-              data-ai-hint={heroImage.imageHint}
-            />
-          )}
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
+         <Carousel
+          opts={{ loop: true }}
+          plugins={[Autoplay({ delay: 5000, stopOnInteraction: false })]}
+          className="absolute inset-0 h-full w-full"
+        >
+          <CarouselContent className="h-full">
+            {heroImages.map((image, index) => image && (
+              <CarouselItem key={index} className="h-full">
+                <img
+                  src={image.imageUrl}
+                  alt={image.description}
+                  className="h-full w-full object-cover object-center"
+                  data-ai-hint={image.imageHint}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        <div className="absolute inset-0 bg-black/60"></div>
+        
         <div className="container relative mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-8 px-4 py-12 text-center text-primary-foreground md:min-h-[calc(100vh-4rem)] md:px-6">
           <div className="space-y-4">
             <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">

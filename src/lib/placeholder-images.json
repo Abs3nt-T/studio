@@ -1,10 +1,22 @@
 {
   "placeholderImages": [
     {
-      "id": "hero",
-      "description": "Una macelleria addobbata per Natale, con luci calde e un'atmosfera festiva.",
-      "imageUrl": "/images/hero-natale.jpg",
-      "imageHint": "christmas butcher"
+      "id": "hero-1",
+      "description": "Banco macelleria con addobbi natalizi e luci calde.",
+      "imageUrl": "/images/hero-1.jpg",
+      "imageHint": "butcher counter christmas"
+    },
+    {
+      "id": "hero-2",
+      "description": "Dettaglio di carni selezionate nel banco frigo.",
+      "imageUrl": "/images/hero-2.jpg",
+      "imageHint": "selected meats"
+    },
+    {
+      "id": "hero-3",
+      "description": "Esterno della macelleria illuminata per le feste.",
+      "imageUrl": "/images/hero-3.jpg",
+      "imageHint": "butcher shop exterior"
     },
     {
       "id": "values-bg",
@@ -49,10 +61,16 @@
       "imageHint": "steak tartare"
     },
     {
-      "id": "contact-bg",
-      "description": "Banco di macelleria con luci calde e decorazioni natalizie.",
-      "imageUrl": "/images/contact-bg-natale.jpg",
-      "imageHint": "butcher christmas"
+      "id": "contact-bg-1",
+      "description": "Interno accogliente di una macelleria con cliente.",
+      "imageUrl": "/images/contact-1.jpg",
+      "imageHint": "cozy butcher shop"
+    },
+    {
+      "id": "contact-bg-2",
+      "description": "Insegna al neon della macelleria di notte.",
+      "imageUrl": "/images/contact-2.jpg",
+      "imageHint": "butcher neon sign"
     },
     {
       "id": "whatsapp-bg",

@@ -1,9 +1,14 @@
 
+'use client';
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import React from 'react';
+
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -13,20 +18,33 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const contactBgImage = PlaceHolderImages.find(p => p.id === 'contact-bg');
+    const contactBgImages = [
+        PlaceHolderImages.find(p => p.id === 'contact-bg-1'),
+        PlaceHolderImages.find(p => p.id === 'contact-bg-2'),
+    ].filter(Boolean);
     const whatsappBgImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
 
     return (
         <div className="w-full bg-background">
             <section className="relative w-full">
-                {contactBgImage && (
-                    <img
-                      src={contactBgImage.imageUrl}
-                      alt={contactBgImage.description}
-                      className="absolute inset-0 h-full w-full object-cover object-center"
-                      data-ai-hint={contactBgImage.imageHint}
-                    />
-                )}
+                <Carousel
+                    opts={{ loop: true }}
+                    plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
+                    className="absolute inset-0 h-full w-full"
+                >
+                    <CarouselContent className="h-full">
+                        {contactBgImages.map((image, index) => image && (
+                            <CarouselItem key={index} className="h-full">
+                                <img
+                                    src={image.imageUrl}
+                                    alt={image.description}
+                                    className="h-full w-full object-cover object-center"
+                                    data-ai-hint={image.imageHint}
+                                />
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
                 <div className="absolute inset-0 bg-black/70"></div>
                 <div className="container relative mx-auto flex min-h-[calc(60vh)] flex-col items-center justify-center space-y-8 px-4 py-16 text-center text-primary-foreground md:px-6">
                     <div className="space-y-4">
