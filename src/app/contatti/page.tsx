@@ -13,7 +13,7 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const bgImage = PlaceHolderImages.find(p => p.id === 'contact-bg');
+    const bgImage = PlaceHolderImages.find(p => p.id === 'contact-bg-new');
     const whatsappImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
 
     return (
