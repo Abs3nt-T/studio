@@ -66,7 +66,7 @@ export default function ProdottiPage() {
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
                 <CardHeader className="p-0">
                   {product.image && (
-                     <Image
+                     <img
                         src={product.image.imageUrl}
                         alt={product.name}
                         width={600}
@@ -105,7 +105,7 @@ export default function ProdottiPage() {
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
                  <CardHeader className="p-0">
                   {product.image && (
-                     <Image
+                     <img
                         src={product.image.imageUrl}
                         alt={product.name}
                         width={600}

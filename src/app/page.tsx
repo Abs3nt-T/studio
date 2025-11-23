@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChefHat, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Card } from "@/components/ui/card";
 
@@ -15,12 +14,10 @@ export default function Home() {
       <section className="relative w-full bg-background">
         <div className="absolute inset-0">
           {heroImage && (
-            <Image
+            <img
               src={heroImage.imageUrl}
               alt={heroImage.description}
-              fill
-              className="object-cover object-center"
-              priority
+              className="h-full w-full object-cover object-center"
               data-ai-hint={heroImage.imageHint}
             />
           )}
@@ -45,15 +42,16 @@ export default function Home() {
 
       {/* Values Section */}
       <section id="valori" className="relative w-full py-20 md:py-24 lg:py-32">
-        {valuesBgImage && (
-            <Image
+        <div className="absolute inset-0">
+          {valuesBgImage && (
+            <img
               src={valuesBgImage.imageUrl}
               alt={valuesBgImage.description}
-              fill
-              className="object-cover object-center"
+              className="h-full w-full object-cover object-center"
               data-ai-hint={valuesBgImage.imageHint}
             />
           )}
+        </div>
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
 
         <div className="container relative px-4 md:px-6">
