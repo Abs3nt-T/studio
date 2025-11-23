@@ -1,5 +1,4 @@
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import Image from 'next/image';
 
 export default function ChiSiamoPage() {
     const heroImage = PlaceHolderImages.find((img) => img.id === 'contact-bg-1');
@@ -18,10 +17,9 @@ export default function ChiSiamoPage() {
                     </div>
                     {heroImage && (
                         <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                             <Image
+                             <img
                                 src={heroImage.imageUrl}
                                 alt={heroImage.description}
-                                fill
                                 className="h-full w-full object-cover"
                                 data-ai-hint={heroImage.imageHint}
                             />

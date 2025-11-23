@@ -5,7 +5,6 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { Gem, ScrollText, Leaf, Star } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Autoplay from "embla-carousel-autoplay";
 
@@ -80,11 +79,10 @@ export default function Home() {
                                 {heroGallery.map((image) => (
                                      <CarouselItem key={image.id}>
                                          <div className="relative h-80 w-full md:h-96">
-                                             <Image
+                                             <img
                                                  src={image.imageUrl}
                                                  alt={image.description}
-                                                 fill
-                                                 className="object-cover"
+                                                 className="h-full w-full object-cover"
                                                  data-ai-hint={image.imageHint}
                                              />
                                          </div>
