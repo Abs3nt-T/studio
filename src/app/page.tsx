@@ -1,11 +1,13 @@
 'use client';
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Gem, ScrollText, Leaf, Star } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import Autoplay from "embla-carousel-autoplay";
 
 const values = [
   {
@@ -44,12 +46,16 @@ const reviews = [
 ];
 
 export default function Home() {
-    const heroImage = PlaceHolderImages.find(img => img.id === 'hero-1');
+    const heroGallery = [
+        PlaceHolderImages.find(img => img.id === 'hero-1'),
+        PlaceHolderImages.find(img => img.id === 'hero-2'),
+        PlaceHolderImages.find(img => img.id === 'hero-3'),
+    ].filter(Boolean) as any[];
 
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="w-full bg-primary/10 py-20 md:py-32">
+             <section className="w-full bg-primary/10 py-20 md:py-32">
                 <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-6">
                     <div className="space-y-6 text-center md:text-left">
                         <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
@@ -64,16 +70,29 @@ export default function Home() {
                             </Button>
                         </Link>
                     </div>
-                    {heroImage && (
-                        <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                            <img
-                                src={heroImage.imageUrl}
-                                alt={heroImage.description}
-                                className="h-full w-full object-cover"
-                                data-ai-hint={heroImage.imageHint}
-                            />
-                        </div>
-                    )}
+                    <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
+                        <Carousel
+                            className="h-full w-full"
+                            plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
+                            opts={{ loop: true }}
+                        >
+                            <CarouselContent>
+                                {heroGallery.map((image) => (
+                                     <CarouselItem key={image.id}>
+                                         <div className="relative h-80 w-full md:h-96">
+                                             <Image
+                                                 src={image.imageUrl}
+                                                 alt={image.description}
+                                                 fill
+                                                 className="object-cover"
+                                                 data-ai-hint={image.imageHint}
+                                             />
+                                         </div>
+                                     </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </div>
                 </div>
             </section>
 

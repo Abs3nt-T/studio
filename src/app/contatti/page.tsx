@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import React from 'react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import Image from 'next/image';
 
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -41,9 +42,10 @@ export default function ContattiPage() {
                     </div>
                     {heroImage && (
                         <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                             <img
+                             <Image
                                 src={heroImage.imageUrl}
                                 alt={heroImage.description}
+                                fill
                                 className="h-full w-full object-cover"
                                 data-ai-hint={heroImage.imageHint}
                             />
@@ -68,9 +70,10 @@ export default function ContattiPage() {
                     </div>
                      {whatsappImage && (
                          <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                            <img
+                            <Image
                                 src={whatsappImage.imageUrl}
                                 alt={whatsappImage.description}
+                                fill
                                 className="h-full w-full object-cover"
                                 data-ai-hint={whatsappImage.imageHint}
                             />
