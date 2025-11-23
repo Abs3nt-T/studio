@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Steak } from "lucide-react";
+import { Menu, Beef } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
@@ -20,7 +20,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-xl items-center justify-between">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <Steak className="h-8 w-8 text-primary" />
+          <Beef className="h-8 w-8 text-primary" />
           <span className="font-headline text-2xl font-bold text-primary">
             Fanuli Carni Equine
           </span>
@@ -49,7 +49,7 @@ export function Header() {
             <SheetContent side="right">
               <div className="p-4">
                 <Link href="/" className="mb-8 flex items-center gap-3" onClick={() => setIsOpen(false)}>
-                   <Steak className="h-8 w-8 text-primary" />
+                   <Beef className="h-8 w-8 text-primary" />
                    <span className="font-headline text-xl font-bold text-primary">
                       Fanuli Carni Equine
                   </span>
