@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "hero",
+      "description": "Una selezione di tagli di carne cruda esposti su un bancone di legno scuro in una macelleria.",
+      "imageUrl": "https://images.unsplash.com/photo-1622597440432-13247a305b4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxidXRjaGVyJTIwc2hvcCUyMGRhcmslMjB3b29kfGVufDB8fHx8MTc2NTQxMTU4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "butcher shop"
+    },
+    {
       "id": "product1",
       "description": "Una bistecca di cavallo cruda su un tagliere di legno.",
       "imageUrl": "https://images.unsplash.com/photo-1666013942642-b7b54ecafd7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyYXclMjBzdGVha3xlbnwwfHx8fDE3NjM5MDg4NzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
