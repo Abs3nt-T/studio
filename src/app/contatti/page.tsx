@@ -2,6 +2,8 @@ import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -11,40 +13,69 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
+    const bgImage = PlaceHolderImages.find(p => p.id === 'contact-bg');
+    const whatsappImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
+
     return (
         <div className="w-full bg-background">
-            <div className="container mx-auto flex min-h-[calc(80vh)] flex-col items-center justify-center space-y-12 px-4 py-16 text-center md:px-6">
-                
-                <div className="space-y-4">
-                    <h1 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                        Vieni a trovarci in Bottega
-                    </h1>
-                    <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 shadow-lg">
-                        <CardContent className="flex flex-col items-center justify-center gap-4">
-                            <MapPin className="h-10 w-10 text-primary" />
-                            <p className="text-xl font-medium text-foreground">
-                                Siamo a Erchie (BR)
-                            </p>
-                            <p className="text-2xl font-bold text-primary">
-                                Via Santa Lucia, 69
-                            </p>
-                        </CardContent>
-                    </Card>
+            <section className="relative w-full">
+                {bgImage && (
+                    <Image
+                      src={bgImage.imageUrl}
+                      alt={bgImage.description}
+                      fill
+                      className="object-cover object-center"
+                      data-ai-hint={bgImage.imageHint}
+                    />
+                )}
+                <div className="absolute inset-0 bg-black/70"></div>
+                <div className="container relative mx-auto flex min-h-[calc(60vh)] flex-col items-center justify-center space-y-8 px-4 py-16 text-center text-primary-foreground md:px-6">
+                    <div className="space-y-4">
+                        <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                            Vieni a trovarci in Bottega
+                        </h1>
+                        <Card className="mx-auto max-w-md border-primary/20 bg-card/80 pt-6 text-foreground shadow-lg backdrop-blur-sm">
+                            <CardContent className="flex flex-col items-center justify-center gap-4">
+                                <MapPin className="h-10 w-10 text-primary" />
+                                <p className="text-xl font-medium">
+                                    Siamo a Erchie (BR)
+                                </p>
+                                <p className="text-2xl font-bold text-primary">
+                                    Via Santa Lucia, 69
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
-
-                <div className="w-full max-w-2xl space-y-6 rounded-lg bg-secondary/50 p-8 shadow-inner">
-                    <h2 className="font-headline text-3xl font-bold text-primary">Non fare la fila!</h2>
-                    <p className="text-xl text-foreground/80">
-                        Prenota la tua spesa su WhatsApp e passa solo a ritirare. Semplice, veloce e senza attese.
-                    </p>
-                    <Link href="https://wa.me/390123456789" target="_blank" rel="noopener noreferrer">
-                        <Button size="lg" className="h-14 bg-[#25D366] px-8 text-lg text-white hover:bg-[#1EBE57]">
-                            <WhatsAppIcon className="mr-3 h-7 w-7" />
-                            Prenota su WhatsApp
-                        </Button>
-                    </Link>
+            </section>
+            
+            <section className="relative bg-secondary/30 py-20">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+                    <div className="space-y-6 text-center md:text-left">
+                         <h2 className="font-headline text-4xl font-bold text-primary">Non fare la fila!</h2>
+                        <p className="text-2xl text-foreground/80">
+                            Prenota la tua spesa su WhatsApp e passa solo a ritirare. Semplice, veloce e senza attese.
+                        </p>
+                        <Link href="https://wa.me/390123456789" target="_blank" rel="noopener noreferrer" className="inline-block">
+                            <Button size="lg" className="h-16 bg-[#25D366] px-10 text-xl text-white shadow-lg transition-transform hover:scale-105 hover:bg-[#1EBE57]">
+                                <WhatsAppIcon className="mr-3 h-8 w-8" />
+                                Prenota su WhatsApp
+                            </Button>
+                        </Link>
+                    </div>
+                     <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl">
+                        {whatsappImage && (
+                            <Image
+                                src={whatsappImage.imageUrl}
+                                alt={whatsappImage.description}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={whatsappImage.imageHint}
+                            />
+                        )}
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 }

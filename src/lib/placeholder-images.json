@@ -47,6 +47,18 @@
       "description": "Tartare di carne finemente tritata con un tuorlo d'uovo sopra.",
       "imageUrl": "https://images.unsplash.com/photo-1650847897525-64244fc9f8df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8c3RlYWslMjB0YXJ0YXJlfGVufDB8fHx8MTc2MzkxNzE2NXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "steak tartare"
+    },
+    {
+      "id": "contact-bg",
+      "description": "Interno rustico di una macelleria con mattoni a vista e ganci per la carne.",
+      "imageUrl": "https://images.unsplash.com/photo-1620921020469-9524a49df89c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXN0aWMlMjBidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3NjU3MjQwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "rustic butcher"
+    },
+    {
+      "id": "whatsapp-bg",
+      "description": "Un grembiule da macellaio appeso a una parete di piastrelle bianche.",
+      "imageUrl": "https://images.unsplash.com/photo-1620921020469-9524a49df89c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXN0aWMlMjBidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3NjU3MjQwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "butcher apron"
     }
   ]
 }
