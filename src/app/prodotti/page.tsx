@@ -2,26 +2,22 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const tradizioneProducts = [
   {
     id: 'bistecca',
     name: 'Bistecca di Cavallo',
     description: 'Un taglio classico, tenero e saporito, perfetto per la griglia.',
-    image: PlaceHolderImages.find(p => p.id === 'product1'),
   },
   {
     id: 'spezzatino',
     name: 'Spezzatino Tradizionale',
     description: 'Morbidi bocconcini di carne, ideali per lente cotture e sughi ricchi.',
-    image: PlaceHolderImages.find(p => p.id === 'product2'),
   },
   {
     id: 'macinato',
     name: 'Macinato Scelto',
     description: 'Carne di prima qualità macinata fresca ogni giorno, versatile e gustosa.',
-    image: PlaceHolderImages.find(p => p.id === 'product3'),
   },
 ];
 
@@ -30,19 +26,16 @@ const prontiACuocereProducts = [
         id: 'bombette',
         name: 'Le Bombette Equine',
         description: 'Involtini saporiti con un cuore filante, pronti per la brace.',
-        image: PlaceHolderImages.find(p => p.id === 'product4'),
     },
     {
         id: 'burger',
         name: 'Burger Fit',
         description: 'Hamburger magri e proteici, pensati per gli sportivi e per chi ama la leggerezza.',
-        image: PlaceHolderImages.find(p => p.id === 'product5'),
     },
     {
         id: 'tartare',
         name: 'Tartare di Puledro',
         description: 'Il crudo di eccellenza. Freschezza e qualità da gustare in purezza.',
-        image: PlaceHolderImages.find(p => p.id === 'product6'),
     },
 ];
 
@@ -64,16 +57,6 @@ export default function ProdottiPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {tradizioneProducts.map((product) => (
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
-                <div className="relative h-60 w-full">
-                  {product.image && (
-                     <img
-                        src={product.image.imageUrl}
-                        alt={product.name}
-                        className="h-full w-full object-cover"
-                        data-ai-hint={product.image.imageHint}
-                     />
-                  )}
-                </div>
                 <CardContent className="flex-1 p-6">
                   <CardTitle className="font-headline text-2xl">{product.name}</CardTitle>
                   <CardDescription className="mt-2 text-base text-muted-foreground">{product.description}</CardDescription>
@@ -101,16 +84,6 @@ export default function ProdottiPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {prontiACuocereProducts.map((product) => (
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
-                 <div className="relative h-60 w-full">
-                  {product.image && (
-                     <img
-                        src={product.image.imageUrl}
-                        alt={product.name}
-                        className="h-full w-full object-cover"
-                        data-ai-hint={product.image.imageHint}
-                     />
-                  )}
-                </div>
                 <CardContent className="flex-1 p-6">
                   <CardTitle className="font-headline text-2xl">{product.name}</CardTitle>
                   <CardDescription className="mt-2 text-base text-muted-foreground">{product.description}</CardDescription>

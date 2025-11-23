@@ -4,9 +4,6 @@ import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Autoplay from 'embla-carousel-autoplay';
 import React from 'react';
 
 
@@ -18,34 +15,9 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const contactBgImages = [
-        PlaceHolderImages.find(p => p.id === 'contact-bg-1'),
-        PlaceHolderImages.find(p => p.id === 'contact-bg-2'),
-    ].filter(Boolean);
-    const whatsappBgImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
-
     return (
         <div className="w-full bg-background">
-            <section className="relative w-full">
-                <Carousel
-                    opts={{ loop: true }}
-                    plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
-                    className="absolute inset-0 h-full w-full"
-                >
-                    <CarouselContent className="h-full">
-                        {contactBgImages.map((image, index) => image && (
-                            <CarouselItem key={index} className="h-full">
-                                <img
-                                    src={image.imageUrl}
-                                    alt={image.description}
-                                    className="h-full w-full object-cover object-center"
-                                    data-ai-hint={image.imageHint}
-                                />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
-                <div className="absolute inset-0 bg-black/70"></div>
+            <section className="relative w-full bg-primary/80">
                 <div className="container relative mx-auto flex min-h-[calc(60vh)] flex-col items-center justify-center space-y-8 px-4 py-16 text-center text-primary-foreground md:px-6">
                     <div className="space-y-4">
                         <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
@@ -80,15 +52,8 @@ export default function ContattiPage() {
                             </Button>
                         </Link>
                     </div>
-                     <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl">
-                        {whatsappBgImage && (
-                            <img
-                                src={whatsappBgImage.imageUrl}
-                                alt={whatsappBgImage.description}
-                                className="absolute inset-0 h-full w-full object-cover"
-                                data-ai-hint={whatsappBgImage.imageHint}
-                            />
-                        )}
+                     <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl bg-gray-200">
+                        {/* Placeholder for image */}
                     </div>
                 </div>
             </section>
