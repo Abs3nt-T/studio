@@ -50,15 +50,15 @@
     },
     {
       "id": "contact-bg",
-      "description": "Interno rustico di una macelleria con mattoni a vista e ganci per la carne.",
-      "imageUrl": "https://images.unsplash.com/photo-1620921020469-9524a49df89c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXN0aWMlMjBidXRjaGVyJTIwc2hvcHxlbnwwfHx8fDE3NjU3MjQwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "rustic butcher"
+      "description": "Interno di una macelleria rustica con bancone in legno e piastrelle bianche.",
+      "imageUrl": "https://images.unsplash.com/photo-1549497217-10873092f153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWF0JTIwYXBwcm9ufGVufDB8fHx8MTc2NTcyNDY4OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "butcher counter"
     },
     {
       "id": "whatsapp-bg",
-      "description": "Un grembiule da macellaio appeso a una parete di piastrelle bianche.",
-      "imageUrl": "https://images.unsplash.com/photo-1549497217-10873092f153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWF0JTIwYXBwcm9ufGVufDB8fHx8MTc2NTcyNDY4OXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "butcher apron"
+      "description": "Scaffali con prodotti e salumi appesi in una salumeria tradizionale.",
+      "imageUrl": "https://images.unsplash.com/photo-1528605248644-14dd04022da1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwZGVsaXxlbnwwfHx8fDE3NjU4MTkyNzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "italian deli"
     }
   ]
 }
