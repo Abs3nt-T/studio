@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -64,18 +64,16 @@ export default function ProdottiPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {tradizioneProducts.map((product) => (
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
-                <CardHeader className="p-0">
+                <div className="relative h-60 w-full">
                   {product.image && (
                      <img
                         src={product.image.imageUrl}
                         alt={product.name}
-                        width={600}
-                        height={400}
-                        className="h-60 w-full object-cover"
+                        className="h-full w-full object-cover"
                         data-ai-hint={product.image.imageHint}
                      />
                   )}
-                </CardHeader>
+                </div>
                 <CardContent className="flex-1 p-6">
                   <CardTitle className="font-headline text-2xl">{product.name}</CardTitle>
                   <CardDescription className="mt-2 text-base text-muted-foreground">{product.description}</CardDescription>
@@ -103,18 +101,16 @@ export default function ProdottiPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {prontiACuocereProducts.map((product) => (
               <Card key={product.id} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
-                 <CardHeader className="p-0">
+                 <div className="relative h-60 w-full">
                   {product.image && (
                      <img
                         src={product.image.imageUrl}
                         alt={product.name}
-                        width={600}
-                        height={400}
-                        className="h-60 w-full object-cover"
+                        className="h-full w-full object-cover"
                         data-ai-hint={product.image.imageHint}
                      />
                   )}
-                </CardHeader>
+                </div>
                 <CardContent className="flex-1 p-6">
                   <CardTitle className="font-headline text-2xl">{product.name}</CardTitle>
                   <CardDescription className="mt-2 text-base text-muted-foreground">{product.description}</CardDescription>

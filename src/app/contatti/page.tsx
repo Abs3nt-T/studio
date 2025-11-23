@@ -1,3 +1,4 @@
+
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -12,7 +13,7 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const contactBgImage = PlaceHolderImages.find(p => p.id === 'contact-bg-new');
+    const contactBgImage = PlaceHolderImages.find(p => p.id === 'contact-bg');
     const whatsappBgImage = PlaceHolderImages.find(p => p.id === 'whatsapp-bg');
 
     return (
