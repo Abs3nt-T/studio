@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
+import { Snowfall } from '@/components/effects/Snowfall';
 
 export const metadata: Metadata = {
   title: 'Fanuli Carni Equine',
@@ -23,6 +24,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <div className="relative flex min-h-dvh flex-col">
+          <Snowfall />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

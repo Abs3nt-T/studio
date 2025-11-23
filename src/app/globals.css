@@ -86,3 +86,103 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Christmas Lights */
+.christmas-lights {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 40;
+}
+
+.christmas-lights li {
+  position: relative;
+  list-style: none;
+  margin: 0 15px;
+  padding: 0;
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  border-radius: 50%;
+  animation: जगमगाना 1.5s infinite;
+}
+
+.christmas-lights li:before {
+  content: "";
+  position: absolute;
+  background: #222;
+  width: 8px;
+  height: 5px;
+  border-radius: 5px 5px 0 0;
+  top: -3px;
+  left: 1px;
+}
+
+.christmas-lights li.blue {
+  background: #009fff;
+  box-shadow: 0px 2px 20px #009fff;
+  animation-delay: 0.2s;
+}
+
+.christmas-lights li.red {
+  background: #ff0042;
+  box-shadow: 0px 2px 20px #ff0042;
+  animation-delay: 0.4s;
+}
+
+.christmas-lights li.yellow {
+  background: #f9d800;
+  box-shadow: 0px 2px 20px #f9d800;
+  animation-delay: 0.6s;
+}
+
+.christmas-lights li.green {
+  background: #00f09a;
+  box-shadow: 0px 2px 20px #00f09a;
+  animation-delay: 0.8s;
+}
+
+.christmas-lights li.pink {
+  background: #ff00cf;
+  box-shadow: 0px 2px 20px #ff00cf;
+  animation-delay: 1s;
+}
+
+@keyframes जगमगाना {
+  0%,
+  100% {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    background:;
+    box-shadow:;
+  }
+}
+
+/* Snowfall */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0vh) translateX(0vw);
+  }
+  to {
+    transform: translateY(105vh) translateX(calc(var(--i) * 30vw - 15vw));
+  }
+}

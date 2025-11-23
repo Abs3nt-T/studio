@@ -5,6 +5,7 @@ import { Menu, Beef, Snowflake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React from "react";
+import { ChristmasLights } from '@/components/effects/ChristmasLights';
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -88,6 +89,7 @@ export function Header() {
           </Sheet>
         </div>
       </div>
+      <ChristmasLights />
     </header>
   );
 }
