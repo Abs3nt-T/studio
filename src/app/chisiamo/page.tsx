@@ -8,25 +8,22 @@ export default function ChiSiamoPage() {
 
     return (
         <div className="bg-background">
-             <section className="relative w-full h-[50vh] md:h-[60vh] bg-secondary text-white">
+             <section className="w-full bg-secondary text-foreground">
                  {heroImage && (
                     <img
                         src={heroImage.imageUrl}
                         alt={heroImage.description}
-                        className="w-full h-full object-cover"
+                        className="w-full h-[50vh] object-cover"
                         data-ai-hint={heroImage.imageHint}
                     />
                  )}
-                <div className="absolute inset-0 bg-black/50" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="container mx-auto px-4 md:px-6 text-center">
-                        <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-                            Scegliamo per voi le carni migliori da generazioni
-                        </h1>
-                        <p className="mx-auto mt-6 max-w-3xl text-lg text-white/90 md:mx-0 md:text-xl">
-                            Una storia di famiglia, passione e qualità che dura dal 1840.
-                        </p>
-                    </div>
+                <div className="container mx-auto px-4 md:px-6 py-8 text-center">
+                    <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+                        Scegliamo per voi le carni migliori da generazioni
+                    </h1>
+                    <p className="mx-auto mt-6 max-w-3xl text-lg text-foreground/80 md:mx-0 md:text-xl">
+                        Una storia di famiglia, passione e qualità che dura dal 1840.
+                    </p>
                 </div>
             </section>
 
