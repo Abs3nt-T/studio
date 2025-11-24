@@ -34,7 +34,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         const storedCart = localStorage.getItem('fanuli_cart');
         if (storedCart) {
             try {
-                setCart(JSON.parse(storedCart));
+                const parsedCart = JSON.parse(storedCart);
+                if (Array.isArray(parsedCart)) {
+                    setCart(parsedCart);
+                }
             } catch (error) {
                 console.error("Failed to parse cart from localStorage", error);
                 setCart([]);
@@ -43,7 +46,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('fanuli_cart', JSON.stringify(cart));
+        if(cart.length > 0) {
+            localStorage.setItem('fanuli_cart', JSON.stringify(cart));
+        } else {
+            localStorage.removeItem('fanuli_cart');
+        }
     }, [cart]);
 
     const addToCart = (product: Product) => {
@@ -77,6 +84,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const clearCart = () => {
         setCart([]);
+        localStorage.removeItem('fanuli_cart');
     };
 
     const getCartTotal = () => {

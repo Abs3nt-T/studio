@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { Plus, Minus, Trash2 } from 'lucide-react';
 
 const formSchema = z.object({
     name: z.string().min(2, "Il nome è obbligatorio"),
@@ -29,7 +30,7 @@ const formatPrice = (price: number) => {
 };
 
 export default function CheckoutPage() {
-    const { cart, getCartTotal, clearCart } = useContext(CartContext);
+    const { cart, getCartTotal, clearCart, addToCart, decreaseQuantity } = useContext(CartContext);
     const router = useRouter();
     const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
@@ -112,8 +113,16 @@ export default function CheckoutPage() {
                                     <div className="space-y-4">
                                         {cart.map(item => (
                                             <div key={item.id} className="flex justify-between items-center text-sm">
-                                                <span>{item.name} x {item.quantity}</span>
-                                                <span className="font-medium">{formatPrice(item.offerPrice * item.quantity)}</span>
+                                                <div className="flex-grow">
+                                                    <p className="font-medium">{item.name}</p>
+                                                    <p className="text-muted-foreground">{formatPrice(item.offerPrice)} cad.</p>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => decreaseQuantity(item.id)}><Minus className="h-4 w-4" /></Button>
+                                                    <span className="font-bold w-4 text-center">{item.quantity}</span>
+                                                     <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => addToCart(item)}><Plus className="h-4 w-4" /></Button>
+                                                </div>
+                                                <span className="font-medium w-20 text-right">{formatPrice(item.offerPrice * item.quantity)}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -121,6 +130,15 @@ export default function CheckoutPage() {
                                         <span>Totale</span>
                                         <span>{formatPrice(getCartTotal())}</span>
                                     </div>
+
+                                    {cart.length > 0 && (
+                                        <div className="flex justify-end">
+                                            <Button variant="outline" size="sm" onClick={clearCart} className="text-red-500 hover:text-red-600">
+                                                <Trash2 className="mr-2 h-4 w-4" />
+                                                Svuota Carrello
+                                            </Button>
+                                        </div>
+                                    )}
                                     
                                     <div className="pt-4">
                                          <PayPalButtons
