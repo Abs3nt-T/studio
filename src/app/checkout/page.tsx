@@ -14,13 +14,20 @@ import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { blockedProvinces, blockedZipCodes } from '@/lib/geography';
 
 const shippingSchema = z.object({
     name: z.string().min(2, "Il nome e cognome sono obbligatori."),
     address: z.string().min(5, "L'indirizzo è obbligatorio."),
     city: z.string().min(2, "La città è obbligatoria."),
-    province: z.string().length(2, "La provincia deve essere di 2 caratteri.").transform(val => val.toUpperCase()),
-    zip: z.string().length(5, "Il CAP deve essere di 5 cifre."),
+    province: z.string().length(2, "La provincia deve essere di 2 caratteri.").transform(val => val.toUpperCase())
+      .refine(val => !blockedProvinces.includes(val), {
+          message: "Spiacenti, non spediamo in questa provincia."
+      }),
+    zip: z.string().length(5, "Il CAP deve essere di 5 cifre.")
+      .refine(val => !blockedZipCodes.some(prefix => val.startsWith(prefix)), {
+          message: "Spiacenti, non spediamo a questo CAP."
+      }),
     email: z.string().email("L'email non è valida."),
     phone: z.string().min(9, "Il numero di telefono non è valido."),
 });
@@ -245,7 +252,7 @@ export default function CheckoutPage() {
                                                 if (!isFormValid) {
                                                     toast({
                                                         title: "Dati mancanti o non validi",
-                                                        description: "Per favore, compila tutti i campi obbligatori prima di procedere.",
+                                                        description: "Per favore, compila tutti i campi obbligatori e correggi gli errori prima di procedere.",
                                                         variant: "destructive",
                                                     });
                                                     return actions.reject();
