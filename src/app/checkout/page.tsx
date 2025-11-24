@@ -107,9 +107,9 @@ export default function CheckoutPage() {
                                     <FormField control={form.control} name="customer.address" render={({ field }) => (
                                         <FormItem><FormLabel>Indirizzo</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                                         <FormField control={form.control} name="customer.city" render={({ field }) => (
-                                            <FormItem className="sm:col-span-2"><FormLabel>Città</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                            <FormItem className="sm:col-span-3"><FormLabel>Città</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
                                         <FormField control={form.control} name="customer.province" render={({ field }) => (
                                             <FormItem>
@@ -124,10 +124,10 @@ export default function CheckoutPage() {
                                                 <FormMessage />
                                             </FormItem>
                                         )} />
+                                         <FormField control={form.control} name="customer.zip" render={({ field }) => (
+                                            <FormItem><FormLabel>CAP</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        )} />
                                     </div>
-                                     <FormField control={form.control} name="customer.zip" render={({ field }) => (
-                                        <FormItem><FormLabel>CAP</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-                                    )} />
                                     <FormField control={form.control} name="customer.email" render={({ field }) => (
                                         <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
@@ -167,9 +167,9 @@ export default function CheckoutPage() {
                                         <FormField control={form.control} name="billing.address" render={({ field }) => (
                                             <FormItem><FormLabel>Indirizzo (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                                             <FormField control={form.control} name="billing.city" render={({ field }) => (
-                                               <FormItem className="sm:col-span-2"><FormLabel>Città (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                               <FormItem className="sm:col-span-3"><FormLabel>Città (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                             )} />
                                             <FormField control={form.control} name="billing.province" render={({ field }) => (
                                                 <FormItem>
@@ -184,10 +184,10 @@ export default function CheckoutPage() {
                                                     <FormMessage />
                                                 </FormItem>
                                             )} />
+                                            <FormField control={form.control} name="billing.zip" render={({ field }) => (
+                                                <FormItem><FormLabel>CAP (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                            )} />
                                         </div>
-                                        <FormField control={form.control} name="billing.zip" render={({ field }) => (
-                                            <FormItem><FormLabel>CAP (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-                                        )} />
                                         <FormField control={form.control} name="billing.email" render={({ field }) => (
                                             <FormItem><FormLabel>Email (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
@@ -319,5 +319,3 @@ export default function CheckoutPage() {
         </PayPalScriptProvider>
     );
 }
-
-    
