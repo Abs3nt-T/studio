@@ -57,7 +57,7 @@
     {
       "id": "rosticciana-asino",
       "description": "Rosticciana di asino, costine marinate pronte per essere grigliate e gustate in compagnia.",
-      "imageUrl": "https://images.unsplash.com/photo-1602193837247-96c9b86545c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb25rZXklMjByaWJzfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1602193837247-96c9b86545c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb25rZXklMjByaWJzfGVufDB8fHx8fDE3NjM5Nzk4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "donkey ribs"
     },
     {
@@ -141,7 +141,7 @@
     {
       "id": "pezzetti-asino",
       "description": "Teneri pezzetti di asino, ideali per uno spezzatino dal sapore unico e avvolgente.",
-      "imageUrl": "https://images.unsplash.com/photo-1590844649795-dc795a86101e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9ua2V5JTIwc3Rld3xlbnwwfHx8fDE3NjM5Nzk4NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/prodotti/pezzetti-asino.jpg",
       "imageHint": "donkey stew"
     },
     {
