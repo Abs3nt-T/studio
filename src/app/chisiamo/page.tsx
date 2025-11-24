@@ -1,26 +1,18 @@
 'use client';
 import React from "react";
-import placeholderData from "@/lib/placeholder-images.json";
 
 
 export default function ChiSiamoPage() {
-    const heroImageId = placeholderData.galleries.chiSiamoHero[0];
-    const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
 
     return (
         <div className="bg-background">
              <section className="relative w-full h-[50vh] min-h-[400px] text-white">
-                 {heroImage && (
-                    <>
-                        <img
-                            src={heroImage.imageUrl}
-                            alt={heroImage.description}
-                            className="absolute inset-0 h-full w-full object-cover"
-                            data-ai-hint={heroImage.imageHint}
-                        />
-                        <div className="absolute inset-0 bg-black/50" />
-                    </>
-                 )}
+                <img
+                    src="/hero-section/our-story.jpg"
+                    alt="Il team della macelleria Fanuli"
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/50" />
                 <div className="relative z-10 flex h-full flex-col items-center justify-center text-center p-4">
                     <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-md">
                         Scegliamo per voi le carni migliori da generazioni
