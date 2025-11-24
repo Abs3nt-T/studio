@@ -69,7 +69,7 @@
     {
       "id": "tagliata-asino-marinata",
       "description": "Tagliata di asino già marinata, pronta per essere scottata e servita al sangue.",
-      "imageUrl": "https://images.unsplash.com/photo-1732763897987-ce7e63a94d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJpbmF0ZWQlMjBkb25rZXklMjBzdGVha3xlbnwwfHx8fDE3NjM5Nzk4NTF8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1732763897987-ce7e63a94d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJpbmF0ZWQlMjBkb25rZXklMjBzdGVha3xlbnwwfHx8fDE3NjM5Nzk4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "marinated donkey steak"
     },
     {
@@ -99,19 +99,19 @@
     {
       "id": "fettine-asino",
       "description": "Fettine sottili e tenere di asino, versatili per involtini, cotolette o cotture veloci.",
-      "imageUrl": "https://images.unsplash.com/photo-1602193837247-96c9b86545c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb25rZXklMjBzbGljZXN8ZW58MHx8fHwxNzYzOTc5ODUxfDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1602193837247-96c9b86545c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb25rZXklMjBzbGljZXN8ZW58MHx8fHwxNzYzOTc5ODUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "donkey slices"
     },
     {
       "id": "pezzetti-cavallo",
       "description": "I classici pezzetti di cavallo della tradizione, ideali per uno stufato ricco e saporito.",
-      "imageUrl": "https://images.unsplash.com/photo-1739217744880-472f59559cc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxob3JzZSUyMHN0ZXd8ZW58MHx8fHwxNzYzOTc5ODUxfDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1739217744880-472f59559cc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxob3JzZSUyMHN0ZXd8ZW58MHx8fHwxNzYzOTc5ODUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "horse stew"
     },
     {
       "id": "fettine-mulo",
       "description": "Fettine di mulo, una carne magra e saporita, perfetta per una cucina sana e veloce.",
-      "imageUrl": "https://images.unsplash.com/photo-1738612005456-ffd9e91f172a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtdWxlJTIwc2xpY2VzfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1738612005456-ffd9e91f172a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtdWxlJTIwc2xpY2VzfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "mule slices"
     },
     {
@@ -123,37 +123,37 @@
     {
       "id": "fettine-lattone",
       "description": "Fettine tenere di lattone, una carne bianca equina delicata, adatta a tutti i palati.",
-      "imageUrl": "https://images.unsplash.com/photo-1760368104451-513645c1ada4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx2ZWFsJTIwc2xpY2VzfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1760368104451-513645c1ada4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx2ZWFsJTIwc2xpY2VzfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "veal slices"
     },
     {
       "id": "polpa-equina",
       "description": "Polpa scelta di equino, macinata o a pezzi, la base perfetta per le tue ricette creative.",
-      "imageUrl": "https://images.unsplash.com/photo-1590268583343-b647ab9ebeda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxlcXVpbmUlMjBwdWxwfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1590268583343-b647ab9ebeda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxlcXVpbmUlMjBwdWxwfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "equine pulp"
     },
     {
       "id": "asado-asino-osso",
       "description": "Asado di asino con osso, per un sapore ancora più intenso e una presentazione rustica.",
-      "imageUrl": "https://images.unsplash.com/photo-1713811834260-e65965c46e02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9ua2V5JTIwYXNhZG8lMjBib25lfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1713811834260-e65965c46e02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9ua2V5JTIwYXNhZG8lMjBib25lfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "donkey asado bone"
     },
     {
       "id": "pezzetti-asino",
       "description": "Teneri pezzetti di asino, ideali per uno spezzatino dal sapore unico e avvolgente.",
-      "imageUrl": "https://images.unsplash.com/photo-1590844649795-dc795a86101e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9ua2V5JTIwc3Rld3xlbnwwfHx8fDE3NjM5Nzk4NTZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1590844649795-dc795a86101e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZG9ua2V5JTIwc3Rld3xlbnwwfHx8fDE3NjM5Nzk4NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "donkey stew"
     },
     {
       "id": "tritato-equino",
       "description": "Tritato fresco di equino, perfetto per ragù, polpette o ripieni dal sapore autentico.",
-      "imageUrl": "https://images.unsplash.com/photo-1590124149162-6b0ac99e34d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z3JvdW5kJTIwZXF1aW5lfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1590124149162-6b0ac99e34d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z3JvdW5kJTIwZXF1aW5lfGVufDB8fHx8MTc2Mzk3OTg1MXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "ground equine"
     },
     {
       "id": "salsiccia-lattone",
       "description": "La nostra salsiccia della casa, un classico intramontabile preparato con carne di lattone.",
-      "imageUrl": "https://images.unsplash.com/photo-1677050205812-1fbf1a832efa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2ZWFsJTIwc2F1c2FnZXxlbnwwfHx8fDE3NjM5Nzk4NTF8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1677050205812-1fbf1a832efa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2ZWFsJTIwc2F1c2FnZXxlbnwwfHx8fDE3NjM5Nzk4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "veal sausage"
     },
     {
@@ -163,8 +163,8 @@
       "imageHint": "cleaned tripe"
     },
     {
-      "id": "rebay-asino",
-      "description": "Il Rebay di asino, un taglio pregiato simile al ribeye, incredibilmente tenero e marezzato.",
+      "id": "ribeye-asino",
+      "description": "Il Ribeye di asino, un taglio pregiato incredibilmente tenero e marezzato.",
       "imageUrl": "/prodotti/ribeye-asino.jpg",
       "imageHint": "donkey ribeye"
     },

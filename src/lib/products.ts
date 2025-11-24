@@ -262,14 +262,14 @@ export const allProducts: Product[] = [
         description: 'La trippa della tradizione, già pulita e pronta per essere cucinata. Un ingrediente povero ma ricco di sapore, per riscoprire i gusti di una volta.'
     },
     {
-        id: 'rebay-asino',
-        name: 'Rebay di Asino',
+        id: 'ribeye-asino',
+        name: 'Ribeye di Asino',
         listPrice: 27.8,
         offerPrice: 26,
         weight: 1,
         category: 'Carne di asino',
-        imageId: 'rebay-asino',
-        description: 'Un taglio eccezionale, l\'equivalente del Ribeye. La sua marezzatura garantisce una tenerezza e un sapore che vi lasceranno senza parole.'
+        imageId: 'ribeye-asino',
+        description: 'Un taglio eccezionale, il nostro Ribeye di asino. La sua marezzatura garantisce una tenerezza e un sapore che vi lasceranno senza parole.'
     },
     {
         id: 'asado-mulo-marinato',
@@ -302,3 +302,5 @@ export const allProducts: Product[] = [
         description: 'Un grande classico per una cena perfetta. Tenera, saporita e magra, da servire semplicemente con rucola e scaglie di grana.'
     }
 ];
+
+    
