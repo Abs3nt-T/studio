@@ -18,21 +18,25 @@ export default function ContattiPage() {
 
     return (
         <div className="w-full bg-background">
-             <section className="w-full bg-secondary text-foreground">
-                {heroImage && (
-                    <img
+             <section className="w-full py-10 text-center bg-secondary text-foreground">
+                <div className="container mx-auto px-4 md:px-6 mb-8 text-center">
+                    <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+                        Vieni a trovarci in Bottega
+                    </h1>
+                </div>
+                 {heroImage && (
+                     <img
                         src={heroImage.imageUrl}
                         alt={heroImage.description}
-                        className="w-full h-[50vh] object-cover"
+                        className="mx-auto max-w-4xl rounded-lg shadow-lg"
                         data-ai-hint={heroImage.imageHint}
                     />
-                )}
-                <div className="container mx-auto px-4 md:px-6 py-8">
-                     <div className="grid grid-cols-1 items-center gap-12 text-center">
-                        <div className="space-y-6">
-                            <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
-                                Vieni a trovarci in Bottega
-                            </h1>
+                 )}
+            </section>
+            
+            <section className="py-20">
+                 <div className="container mx-auto px-4 md:px-6">
+                    <div className="grid grid-cols-1 items-center gap-12 text-center">
                             <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg">
                                 <CardContent className="flex flex-col items-center justify-center gap-4">
                                     <MapPin className="h-10 w-10 text-primary" />
@@ -44,7 +48,6 @@ export default function ContattiPage() {
                                     </p>
                                 </CardContent>
                             </Card>
-                        </div>
                     </div>
                 </div>
             </section>

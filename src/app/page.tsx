@@ -47,16 +47,8 @@ export default function Home() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="w-full bg-secondary text-foreground">
-                 {heroImage && (
-                    <img
-                        src={heroImage.imageUrl}
-                        alt={heroImage.description}
-                        className="w-full h-[50vh] object-cover"
-                        data-ai-hint={heroImage.imageHint}
-                    />
-                 )}
-                <div className="container mx-auto px-4 md:px-6 py-8 text-center">
+            <section className="w-full py-10 text-center bg-secondary text-foreground">
+                <div className="container mx-auto px-4 md:px-6 mb-8">
                     <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
                       Fanuli Carni Equine: L'Eccellenza della Tradizione.
                     </h1>
@@ -64,6 +56,14 @@ export default function Home() {
                       A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
                     </p>
                 </div>
+                 {heroImage && (
+                     <img 
+                        src={heroImage.imageUrl} 
+                        alt={heroImage.description}
+                        className="mx-auto max-w-4xl rounded-lg shadow-lg"
+                        data-ai-hint={heroImage.imageHint}
+                     />
+                 )}
             </section>
             
             <section className="py-10 text-center">
