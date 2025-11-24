@@ -4,7 +4,8 @@ import placeholderData from "@/lib/placeholder-images.json";
 
 
 export default function ChiSiamoPage() {
-    const heroImage = placeholderData.placeholderImages.find(p => p.id === 'chisiamo-1');
+    const heroImageId = placeholderData.galleries.chiSiamoHero[0];
+    const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
 
     return (
         <div className="bg-background">

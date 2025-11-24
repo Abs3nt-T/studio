@@ -14,7 +14,8 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-     const heroImage = placeholderData.placeholderImages.find(p => p.id === 'contatti-1');
+     const heroImageId = placeholderData.galleries.contattiHero[0];
+     const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
 
     return (
         <div className="w-full bg-background">

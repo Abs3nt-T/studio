@@ -41,7 +41,8 @@ const reviews = [
 ];
 
 export default function Home() {
-    const heroImage = placeholderData.placeholderImages.find(p => p.id === 'hero-1');
+    const heroImageId = placeholderData.galleries.homeHero[0];
+    const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
 
     return (
         <div className="flex flex-col">

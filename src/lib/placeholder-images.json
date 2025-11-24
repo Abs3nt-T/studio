@@ -1,57 +1,45 @@
 {
   "placeholderImages": [
     {
-      "id": "test-image",
-      "description": "Banco macelleria con selezione di carni.",
-      "imageUrl": "https://images.unsplash.com/photo-1763033035770-e83f50e8e8b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YnV0Y2hlciUyMGNvdW50ZXJ8ZW58MHx8fHwxNzYzOTQ3MDA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "butcher counter"
-    },
-    {
       "id": "hero-1",
       "description": "Banco macelleria festivo con luci di Natale.",
-      "imageUrl": "https://images.unsplash.com/photo-1542365889-1db8f837e263?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxidXRjaGVyJTIwY2hyaXN0bWFzfGVufDB8fHx8MTc2NDA0MDgzNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1608085575884-f275a60d3eb8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxidXRjaGVyJTIwY2hyaXN0bWFzfGVufDB8fHx8MTc2Mzk0NzcyOHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "butcher christmas"
     },
     {
       "id": "hero-2",
       "description": "Tagli di carne cruda pronti per la cottura.",
-      "imageUrl": "https://images.unsplash.com/photo-1607623814075-e51d3822bfd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyYXclMjBtZWF0fGVufDB8fHx8MTc2Mzk0MjQwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1690983321750-ad6f6d59a84b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyYXclMjBtZWF0fGVufDB8fHx8MTc2Mzk0NzcyOHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "raw meat"
     },
     {
       "id": "hero-3",
       "description": "Macellaio che affila un coltello.",
-      "imageUrl": "https://images.unsplash.com/photo-1588167035955-c3f333796395?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxidXRjaGVyJTIwa25pZmV8ZW58MHx8fHwxNzY0MDQwOTIwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1704895291540-87d8be60a46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YnV0Y2hlciUyMGtuaWZlfGVufDB8fHx8MTc2Mzk0NzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "butcher knife"
     },
     {
       "id": "chisiamo-1",
       "description": "Ritratto di un macellaio anziano sorridente.",
-      "imageUrl": "https://images.unsplash.com/photo-1556441029-5a9d001a14b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvZCUyMGJ1dGNoZXJ8ZW58MHx8fHwxNzY0MDQxMDA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1760309891259-af3f5189333b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxvbGQlMjBidXRjaGVyfGVufDB8fHx8MTc2Mzk0NzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "old butcher"
     },
     {
       "id": "contatti-1",
       "description": "Insegna al neon di una macelleria di notte.",
-      "imageUrl": "https://images.unsplash.com/photo-1579974294432-34c4424eabf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxidXRjaGVyJTIwc2hvcCUyMG5lb258ZW58MHx8fHwxNzY0MDQxMDYzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1718656726096-799ae1bd3cff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxidXRjaGVyJTIwc2hvcCUyMG5lb258ZW58MHx8fHwxNzYzOTQ3NzI4fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "butcher shop neon"
     }
   ],
   "galleries": {
     "homeHero": [
-      "hero-1",
-      "hero-2",
-      "hero-3"
+      "hero-1"
     ],
     "chiSiamoHero": [
-      "chisiamo-1",
-      "hero-2",
-      "hero-3"
+      "chisiamo-1"
     ],
     "contattiHero": [
-      "contatti-1",
-      "hero-1",
-      "hero-2"
+      "contatti-1"
     ]
   }
 }
