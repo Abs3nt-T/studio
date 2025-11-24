@@ -1,12 +1,13 @@
-
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { allProducts, Product } from '@/lib/products';
-import { PlaceHolderImages, ImagePlaceholder } from '@/lib/placeholder-images';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { CartContext } from '@/context/CartContext';
+import { toast } from '@/hooks/use-toast';
 
 const categories = ['Tutti', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
@@ -16,6 +17,15 @@ const formatPrice = (price: number) => {
 
 export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState('Tutti');
+    const { addToCart } = useContext(CartContext);
+
+    const handleAddToCart = (product: Product) => {
+        addToCart(product);
+        toast({
+            title: "Prodotto aggiunto!",
+            description: `${product.name} è stato aggiunto al carrello.`,
+        });
+    };
 
     const productsWithImages = allProducts.map(product => {
         const image = PlaceHolderImages.find(img => img.id === product.imageId);
@@ -57,12 +67,12 @@ export default function ShopPage() {
                             <CardHeader className="p-0">
                                 {product.image && (
                                     <div className="aspect-video w-full overflow-hidden">
-                                    <img
-                                        src={product.image.imageUrl}
-                                        alt={product.image.description}
-                                        className="object-cover w-full h-full"
-                                        data-ai-hint={product.image.imageHint}
-                                    />
+                                        <img
+                                            src={product.image.imageUrl}
+                                            alt={product.image.description}
+                                            className="object-cover w-full h-full"
+                                            data-ai-hint={product.image.imageHint}
+                                        />
                                     </div>
                                 )}
                             </CardHeader>
@@ -77,9 +87,9 @@ export default function ShopPage() {
                                 <p className="text-xs text-muted-foreground mt-1">/ {product.weight} kg</p>
                             </CardContent>
                             <CardFooter className="p-6 pt-0">
-                                <Link href="https://wa.me/390123456789" target="_blank" rel="noopener noreferrer" className="w-full">
-                                    <Button className="w-full">Ordina su WhatsApp</Button>
-                                </Link>
+                                <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                                    Aggiungi al Carrello
+                                </Button>
                             </CardFooter>
                         </Card>
                     ))}

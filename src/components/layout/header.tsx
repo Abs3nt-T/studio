@@ -6,6 +6,7 @@ import { Menu, Beef } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import React from "react";
+import { CartIcon } from "../CartIcon";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -57,38 +58,47 @@ export function Header() {
           ))}
         </nav>
         
-        <div className="flex items-center gap-2 md:hidden">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${navLinkColor}`}>
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Apri menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <div className="p-4">
-                <Link href="/" className="mb-8 flex items-center gap-3" onClick={() => setIsOpen(false)}>
-                   <Beef className="h-8 w-8 text-primary" />
-                   <span className="font-headline text-xl font-bold text-primary">
-                      Fanuli Carni Equine
-                  </span>
-                </Link>
-                <div className="flex flex-col gap-6">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-lg font-medium text-foreground/80 hover:text-foreground"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
+        <div className="flex items-center gap-2">
+           <div className="hidden md:block">
+            <CartIcon />
+          </div>
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${navLinkColor}`}>
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Apri menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                <div className="p-4">
+                  <div className="mb-8 flex justify-between items-center">
+                    <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
+                       <Beef className="h-8 w-8 text-primary" />
+                       <span className="font-headline text-xl font-bold text-primary">
+                          Fanuli Carni Equine
+                      </span>
                     </Link>
-                  ))}
+                    <CartIcon />
+                  </div>
+
+                  <div className="flex flex-col gap-6">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-lg font-medium text-foreground/80 hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
