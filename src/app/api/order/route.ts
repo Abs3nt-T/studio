@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { CartItem } from '@/context/CartContext';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const shopEmail = process.env.SHOP_EMAIL || 'info@fanulicarniequine.it';
+const shopEmail = 'pagamenti@fanulicarniequine.it';
 
 const orderSchema = z.object({
     customer: z.object({
