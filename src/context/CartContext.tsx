@@ -7,14 +7,22 @@ export interface CartItem extends Product {
     quantity: number;
 }
 
+interface CartTotals {
+    subtotal: number;
+    shippingCost: number;
+    total: number;
+}
+
 interface CartContextType {
     cart: CartItem[];
     addToCart: (product: Product) => void;
     removeFromCart: (productId: string) => void;
     decreaseQuantity: (productId: string) => void;
     clearCart: () => void;
-    getCartTotal: () => number;
+    getCartTotal: () => CartTotals;
     getCartItemCount: () => number;
+    getCartTotalWeight: () => number;
+    getShippingCost: (weight: number) => number;
 }
 
 export const CartContext = createContext<CartContextType>({
@@ -23,8 +31,10 @@ export const CartContext = createContext<CartContextType>({
     removeFromCart: () => {},
     decreaseQuantity: () => {},
     clearCart: () => {},
-    getCartTotal: () => 0,
+    getCartTotal: () => ({ subtotal: 0, shippingCost: 0, total: 0 }),
     getCartItemCount: () => 0,
+    getCartTotalWeight: () => 0,
+    getShippingCost: () => 0,
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -86,9 +96,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart([]);
         localStorage.removeItem('fanuli_cart');
     };
+    
+    const getCartTotalWeight = (): number => {
+        return cart.reduce((totalWeight, item) => totalWeight + item.weight * item.quantity, 0);
+    };
 
-    const getCartTotal = () => {
-        return cart.reduce((total, item) => total + item.offerPrice * item.quantity, 0);
+    const getShippingCost = (weight: number): number => {
+        if (weight === 0) return 0;
+        if (weight > 0 && weight <= 10) return 15;
+        if (weight > 10 && weight <= 20) return 13;
+        return 0; // Free shipping for 21kg or more
+    };
+
+    const getCartTotal = (): CartTotals => {
+        const subtotal = cart.reduce((total, item) => total + item.offerPrice * item.quantity, 0);
+        const totalWeight = getCartTotalWeight();
+        const shippingCost = getShippingCost(totalWeight);
+        const total = subtotal + shippingCost;
+        return { subtotal, shippingCost, total };
     };
 
     const getCartItemCount = () => {
@@ -96,7 +121,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, decreaseQuantity, clearCart, getCartTotal, getCartItemCount }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, decreaseQuantity, clearCart, getCartTotal, getCartItemCount, getCartTotalWeight, getShippingCost }}>
             {children}
         </CartContext.Provider>
     );

@@ -33,7 +33,20 @@ const formatPrice = (price: number) => {
     return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
 };
 
-const generateCustomerEmailHtml = (customerName: string, products: CartItem[], total: number, orderId: string) => `
+const getShippingCost = (weight: number): number => {
+    if (weight === 0) return 0;
+    if (weight > 0 && weight <= 10) return 15;
+    if (weight > 10 && weight <= 20) return 13;
+    return 0; // Free shipping for 21kg or more
+};
+
+
+const generateCustomerEmailHtml = (customerName: string, products: CartItem[], total: number, orderId: string) => {
+    const totalWeight = products.reduce((acc, item) => acc + (item.weight * item.quantity), 0);
+    const shippingCost = getShippingCost(totalWeight);
+    const subtotal = total - shippingCost;
+
+    return `
 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
     <h1 style="color: #A32E2E; text-align: center;">Grazie per il tuo ordine!</h1>
     <p>Ciao ${customerName},</p>
@@ -58,15 +71,21 @@ const generateCustomerEmailHtml = (customerName: string, products: CartItem[], t
         </tbody>
     </table>
     <div style="text-align: right;">
-        <p style="margin: 5px 0;"><strong>Subtotale:</strong> ${formatPrice(products.reduce((acc, item) => acc + item.offerPrice * item.quantity, 0))}</p>
-        <p style="margin: 5px 0;"><strong>Spedizione:</strong> Da calcolare</p>
+        <p style="margin: 5px 0;"><strong>Subtotale:</strong> ${formatPrice(subtotal)}</p>
+        <p style="margin: 5px 0;"><strong>Spedizione:</strong> ${shippingCost > 0 ? formatPrice(shippingCost) : 'Gratuita'}</p>
         <h3 style="margin: 10px 0; color: #A32E2E;">Totale: ${formatPrice(total)}</h3>
     </div>
     <p>Grazie per aver scelto Fanuli Carni Equine.</p>
 </div>
 `;
+}
 
-const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | undefined, products: CartItem[], total: number, transactionId: string) => `
+const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | undefined, products: CartItem[], total: number, transactionId: string) => {
+    const totalWeight = products.reduce((acc, item) => acc + (item.weight * item.quantity), 0);
+    const shippingCost = getShippingCost(totalWeight);
+    const subtotal = total - shippingCost;
+    
+    return `
 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
     <h1 style="color: #A32E2E; text-align: center;">Nuovo Ordine Ricevuto!</h1>
     <p>Hai ricevuto un nuovo ordine da preparare. Ecco i dettagli:</p>
@@ -91,6 +110,14 @@ const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | un
         </tbody>
         <tfoot>
             <tr style="font-weight: bold;">
+                <td colspan="2" style="padding: 10px; text-align: right;">Subtotale Prodotti:</td>
+                <td style="padding: 10px; text-align: right;">${formatPrice(subtotal)}</td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="2" style="padding: 10px; text-align: right;">Spedizione:</td>
+                <td style="padding: 10px; text-align: right;">${shippingCost > 0 ? formatPrice(shippingCost) : 'Gratuita'}</td>
+            </tr>
+             <tr style="font-weight: bold;">
                 <td colspan="2" style="padding: 10px; text-align: right; border-top: 2px solid #333;">Totale Ordine:</td>
                 <td style="padding: 10px; text-align: right; border-top: 2px solid #333;">${formatPrice(total)}</td>
             </tr>
@@ -120,6 +147,8 @@ const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | un
     ` : '<p><i>L\'indirizzo di fatturazione è lo stesso di quello di spedizione.</i></p>'}
 </div>
 `;
+}
+
 
 export async function POST(req: NextRequest) {
     console.log('--- AVVIO API ORDINE ---');
@@ -135,7 +164,6 @@ export async function POST(req: NextRequest) {
 
         if (!validation.success) {
             console.log('--- ERRORE: Dati non validi ---', validation.error.flatten());
-            // Return success to not block the user, but log the error.
             return NextResponse.json({ success: true, message: "Invalid data received, but pretending it worked." });
         }
 
@@ -185,5 +213,3 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, message: "General error, but pretending it worked for the user." });
     }
 }
-
-    

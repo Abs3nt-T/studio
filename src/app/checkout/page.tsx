@@ -69,6 +69,8 @@ export default function CheckoutPage() {
     const router = useRouter();
     const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
+    const { subtotal, shippingCost, total } = getCartTotal();
+
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -241,10 +243,22 @@ export default function CheckoutPage() {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="border-t pt-4 flex justify-between items-center text-xl font-bold">
-                                        <span>Totale</span>
-                                        <span>{formatPrice(getCartTotal())}</span>
+
+                                    <div className="border-t pt-4 space-y-2">
+                                        <div className="flex justify-between items-center text-base">
+                                            <span>Subtotale</span>
+                                            <span>{formatPrice(subtotal)}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-base">
+                                            <span>Spedizione</span>
+                                            <span>{shippingCost > 0 ? formatPrice(shippingCost) : 'Gratuita'}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-xl font-bold">
+                                            <span>Totale</span>
+                                            <span>{formatPrice(total)}</span>
+                                        </div>
                                     </div>
+
 
                                     {cart.length > 0 && (
                                         <div className="flex justify-end">
@@ -271,10 +285,11 @@ export default function CheckoutPage() {
                                                 return actions.resolve();
                                             }}
                                             createOrder={async (data, actions) => {
+                                                const { total } = getCartTotal();
                                                 return actions.order.create({
                                                     purchase_units: [{
                                                         amount: {
-                                                            value: getCartTotal().toFixed(2),
+                                                            value: total.toFixed(2),
                                                             currency_code: 'EUR'
                                                         }
                                                     }]
@@ -284,12 +299,13 @@ export default function CheckoutPage() {
                                                 if (!actions.order) return;
                                                 const details = await actions.order.capture();
                                                 const formData = form.getValues();
+                                                const { total } = getCartTotal();
                                                 
                                                 const orderPayload = {
                                                     customer: formData.customer,
                                                     billing: formData.billingSameAsShipping ? undefined : formData.billing,
                                                     products: cart,
-                                                    total: getCartTotal(),
+                                                    total: total,
                                                     transactionId: details.id
                                                 };
 
