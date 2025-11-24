@@ -69,7 +69,7 @@
     {
       "id": "tagliata-asino-marinata",
       "description": "Tagliata di asino già marinata, pronta per essere scottata e servita al sangue.",
-      "imageUrl": "https://images.unsplash.com/photo-1732763897987-ce7e63a94d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJpbmF0ZWQlMjBkb25rZXklMjBzdGVha3xlbnwwfHx8fDE3NjMzkNzk4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1732763897987-ce7e63a94d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYXJpbmF0ZWQlMjBkb25rZXklMjBzdGVha3xlbnwwfHx8fDE3NjM5Nzk4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "marinated donkey steak"
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": "asado-asino",
       "description": "Classico asado di asino, per gli amanti dei sapori intensi e della cottura al fuoco.",
-      "imageUrl": "https://images.unsplash.com/photo-1748255440730-65cd9913eb85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb25rZXklMjBhc2Fkb3xlbnwwfHx8fDE3NjMzk3OTg1Mlow&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1748255440730-65cd9913eb85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb25rZXklMjBhc2Fkb3xlbnwwfHx8fDE3NjM5Nzk4NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "donkey asado"
     },
     {
@@ -189,7 +189,7 @@
     {
       "id": "salsiccia-asino",
       "description": "Una salsiccia dal carattere forte e deciso, con una speziatura equilibrata che ne esalta il gusto unico. Ottima per sughi o alla griglia.",
-      "imageUrl": "https://images.unsplash.com/photo-1588694883322-a254dec1758c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkb25rZXklMjBzYXVzYWdlfGVufDB8fHx8MTc2Mzk5Nzk1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/prodotti/salsiccia-asino.jpg",
       "imageHint": "donkey sausage"
     }
   ],
