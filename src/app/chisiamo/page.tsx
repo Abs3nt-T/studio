@@ -1,13 +1,11 @@
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function ChiSiamoPage() {
-    const heroImage = PlaceHolderImages.find((img) => img.id === 'contact-bg-1');
 
     return (
         <div className="bg-background">
             <section className="w-full bg-primary/10 py-20 md:py-32">
-                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-6">
-                    <div className="space-y-6 text-center md:text-left">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6">
+                    <div className="space-y-6 text-center">
                         <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
                             Scegliamo per voi le carni migliori da generazioni
                         </h1>
@@ -15,16 +13,6 @@ export default function ChiSiamoPage() {
                             Una storia di famiglia, passione e qualità che dura dal 1840.
                         </p>
                     </div>
-                    {heroImage && (
-                        <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                             <img
-                                src={heroImage.imageUrl}
-                                alt={heroImage.description}
-                                className="h-full w-full object-cover"
-                                data-ai-hint={heroImage.imageHint}
-                            />
-                        </div>
-                    )}
                 </div>
             </section>
 

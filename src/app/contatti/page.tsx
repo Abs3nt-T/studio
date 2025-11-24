@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import React from 'react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -16,18 +14,16 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-    const heroImage = PlaceHolderImages.find((img) => img.id === 'contact-bg-2');
-    const whatsappImage = PlaceHolderImages.find((img) => img.id === 'whatsapp-bg');
 
     return (
         <div className="w-full bg-background">
              <section className="w-full bg-primary/10 py-20 md:py-32">
-                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-6">
-                    <div className="space-y-6 text-center md:text-left">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6">
+                    <div className="space-y-6 text-center">
                         <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
                             Vieni a trovarci in Bottega
                         </h1>
-                        <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg md:mx-0">
+                        <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg">
                             <CardContent className="flex flex-col items-center justify-center gap-4">
                                 <MapPin className="h-10 w-10 text-primary" />
                                 <p className="text-xl font-medium">
@@ -39,22 +35,12 @@ export default function ContattiPage() {
                             </CardContent>
                         </Card>
                     </div>
-                    {heroImage && (
-                        <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                             <img
-                                src={heroImage.imageUrl}
-                                alt={heroImage.description}
-                                className="h-full w-full object-cover"
-                                data-ai-hint={heroImage.imageHint}
-                            />
-                        </div>
-                    )}
                 </div>
             </section>
             
             <section className="relative bg-secondary/30 py-20">
-                <div className="container mx-auto grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-                    <div className="space-y-6 text-center md:text-left">
+                <div className="container mx-auto grid grid-cols-1 items-center gap-12 text-center">
+                    <div className="space-y-6">
                          <h2 className="font-headline text-4xl font-bold text-primary">Non fare la fila!</h2>
                         <p className="text-2xl text-foreground/80">
                             Prenota la tua spesa su WhatsApp e passa solo a ritirare. Semplice, veloce e senza attese.
@@ -66,16 +52,6 @@ export default function ContattiPage() {
                             </Button>
                         </Link>
                     </div>
-                     {whatsappImage && (
-                         <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-2xl md:h-96">
-                            <img
-                                src={whatsappImage.imageUrl}
-                                alt={whatsappImage.description}
-                                className="h-full w-full object-cover"
-                                data-ai-hint={whatsappImage.imageHint}
-                            />
-                        </div>
-                     )}
                 </div>
             </section>
         </div>
