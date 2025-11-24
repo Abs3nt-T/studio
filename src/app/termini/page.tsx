@@ -6,7 +6,7 @@ export default function TerminiPage() {
         <div className="prose prose-lg mx-auto text-foreground/90 prose-headings:font-headline prose-headings:text-primary prose-p:font-body prose-p:leading-relaxed">
           <h1 className="text-center">Termini di Servizio</h1>
 
-          <h2>Politica Resi</h2>
+          <h2 className="mt-12 text-3xl">Politica Resi</h2>
           <p>
             Data la natura deperibile dei nostri prodotti, non è possibile effettuare un reso per la merce acquistata. La qualità e la freschezza dei nostri prodotti sono la nostra massima priorità. All'acquisto, il cliente accetta la merce nello stato in cui si trova.
           </p>
@@ -19,7 +19,7 @@ export default function TerminiPage() {
             Valuteremo ogni caso singolarmente per trovare una soluzione soddisfacente, che potrebbe includere un buono sconto per un futuro acquisto o, in casi eccezionali, un rimborso parziale o totale a nostra discrezione. La tua soddisfazione è fondamentale per noi e faremo del nostro meglio per risolvere qualsiasi inconveniente.
           </p>
 
-          <h2>Trattamento dei Dati Personali (Privacy Policy)</h2>
+          <h2 className="mt-12 text-3xl">Trattamento dei Dati Personali (Privacy Policy)</h2>
           <p>
             La presente Privacy Policy descrive come i tuoi dati personali vengono raccolti, utilizzati e condivisi quando visiti o effettui un acquisto su questo sito web.
           </p>
