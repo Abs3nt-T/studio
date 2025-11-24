@@ -148,7 +148,7 @@ export async function POST(req: NextRequest) {
                 from: 'Ordini Web <info@fanulicarniequine.it>',
                 to: ['pagamenti@fanulicarniequine.it'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
-                reply_to: customer.email,
+                replyTo: customer.email,
                 html: generateShopEmailHtml(customer, billing, products as CartItem[], total, transactionId),
             });
             if (shopEmailResponse.data) {
@@ -185,5 +185,3 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, message: "General error" });
     }
 }
-
-    
