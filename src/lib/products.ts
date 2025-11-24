@@ -39,7 +39,7 @@ export const allProducts: Product[] = [
         weight: 0.1,
         category: 'Carne di asino',
         imageId: 'bresaola-asino',
-        description: 'Leggera, magra e incredibilmente saporita. La nostra bresaola è una delizia per il palato, ideale per piatti freschi e carpacci gourmet.'
+        description: "Leggera, magra e incredibilmente saporita. La nostra bresaola, venduta all'etto (100g), è una delizia per il palato, ideale per piatti freschi e carpacci gourmet."
     },
     {
         id: 'costate-asino-osso',
