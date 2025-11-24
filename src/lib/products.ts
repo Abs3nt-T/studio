@@ -88,7 +88,7 @@ export const allProducts: Product[] = [
         offerPrice: 17,
         weight: 1,
         category: 'Carne di asino',
-        imageId: 'straccetti-asino',
+        imageId: 'straccetti-asino-marinati',
         description: 'Sottili e saporiti, i nostri straccetti sono già marinati e pronti per essere saltati in padella. La soluzione perfetta per un pasto veloce e gourmet.'
     },
     {
@@ -303,4 +303,5 @@ export const allProducts: Product[] = [
     }
 ];
 
+    
     

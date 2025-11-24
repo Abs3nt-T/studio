@@ -63,7 +63,7 @@
     {
       "id": "straccetti-asino",
       "description": "Sottili straccetti di asino marinati, veloci da cuocere e perfetti per piatti sfiziosi.",
-      "imageUrl": "https://images.unsplash.com/photo-1743430579656-e12638d78662?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkb25rZXklMjBzdHJpcHN8ZW58MHx8fHwxNzYzOTc5ODUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/prodotti/straccetti-asino.jpg",
       "imageHint": "donkey strips"
     },
     {
@@ -191,6 +191,12 @@
       "description": "Una salsiccia dal carattere forte e deciso, con una speziatura equilibrata che ne esalta il gusto unico. Ottima per sughi o alla griglia.",
       "imageUrl": "/prodotti/salsiccia-asino.jpg",
       "imageHint": "donkey sausage"
+    },
+    {
+      "id": "straccetti-asino-marinati",
+      "description": "Sottili straccetti di asino marinati, veloci da cuocere e perfetti per piatti sfiziosi.",
+      "imageUrl": "/prodotti/straccetti-asino-marinati.jpg",
+      "imageHint": "marinated donkey strips"
     }
   ],
   "galleries": {
