@@ -10,7 +10,7 @@ import React from "react";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/chisiamo", label: "Chi Siamo" },
-  { href: "/prodotti", label: "I Nostri Prodotti" },
+  { href: "/shop", label: "Shop" },
   { href: "/salute", label: "Salute" },
   { href: "/contatti", label: "Contatti" },
   { href: "/termini", label: "Termini" },
