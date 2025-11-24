@@ -143,10 +143,10 @@ export async function POST(req: NextRequest) {
 
         // 1. Invio email al negoziante
         try {
-            console.log('--- TENTO INVIO A NEGOZIANTE: pagamenti@fanulicarniequine.it ---');
+            console.log('--- TENTO INVIO A NEGOZIANTE: pagamentifce@gmail.com ---');
             const shopEmailResponse = await resend.emails.send({
-                from: 'Fanuli Carni Equine <info@fanulicarniequine.it>',
-                to: ['pagamenti@fanulicarniequine.it'],
+                from: 'Fanuli Carni <info@fanulicarniequine.it>',
+                to: ['pagamentifce@gmail.com'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
                 replyTo: customer.email,
                 html: generateShopEmailHtml(customer, billing, products as CartItem[], total, transactionId),
