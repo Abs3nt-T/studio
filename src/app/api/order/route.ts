@@ -147,9 +147,10 @@ export async function POST(req: NextRequest) {
         try {
             console.log('--- TENTO INVIO A NEGOZIANTE: pagamenti@fanulicarniequine.it ---');
             const shopEmailResponse = await resend.emails.send({
-                from: 'Fanuli Carni <pagamenti@fanulicarniequine.it>',
+                from: 'Sito Web Fanuli <onboarding@resend.dev>',
                 to: ['pagamenti@fanulicarniequine.it'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
+                reply_to: customer.email,
                 html: generateShopEmailHtml(customer, billing, products as CartItem[], total, transactionId),
             });
             if (shopEmailResponse.data) {
@@ -188,3 +189,5 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, message: "General error" });
     }
 }
+
+    
