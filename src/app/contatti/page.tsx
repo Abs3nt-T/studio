@@ -1,5 +1,5 @@
 'use client';
-import { MapPin } from 'lucide-react';
+import { MapPin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -40,9 +40,9 @@ export default function ContattiPage() {
             
             <section className="py-20">
                  <div className="container mx-auto px-4 md:px-6">
-                    <div className="grid grid-cols-1 items-center gap-12 text-center">
-                            <Card className="mx-auto max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg">
-                                <CardContent className="flex flex-col items-center justify-center gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-stretch gap-8">
+                            <Card className="mx-auto w-full max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg">
+                                <CardContent className="flex flex-col items-center justify-center gap-4 text-center h-full">
                                     <MapPin className="h-10 w-10 text-primary" />
                                     <p className="text-xl font-medium">
                                         Siamo a Erchie (BR)
@@ -50,6 +50,17 @@ export default function ContattiPage() {
                                     <p className="text-2xl font-bold text-primary">
                                         Via Santa Lucia, 69
                                     </p>
+                                </CardContent>
+                            </Card>
+                             <Card className="mx-auto w-full max-w-md border-primary/20 bg-card pt-6 text-foreground shadow-lg">
+                                <CardContent className="flex flex-col items-center justify-center gap-4 text-center h-full">
+                                    <Mail className="h-10 w-10 text-primary" />
+                                    <p className="text-xl font-medium">
+                                       Scrivici una mail
+                                    </p>
+                                    <a href="mailto:assistenza@fanulicarniequine.it" className="text-2xl font-bold text-primary hover:underline">
+                                        assistenza@fanulicarniequine.it
+                                    </a>
                                 </CardContent>
                             </Card>
                     </div>
