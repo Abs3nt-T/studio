@@ -58,7 +58,7 @@ export default function ContattiPage() {
                                     <p className="text-xl font-medium">
                                        Scrivici una mail
                                     </p>
-                                    <a href="mailto:assistenza@fanulicarniequine.it" className="text-2xl font-bold text-primary hover:underline">
+                                    <a href="mailto:assistenza@fanulicarniequine.it" className="break-all text-xl font-bold text-primary hover:underline">
                                         assistenza@fanulicarniequine.it
                                     </a>
                                 </CardContent>
