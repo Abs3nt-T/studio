@@ -15,6 +15,13 @@ const shipmentSchema = z.object({
   courierLink: z.string().url().optional().or(z.literal('')),
 });
 
+// For auth check only
+const authCheckSchema = z.object({
+  password: z.string(),
+  checkAuthOnly: z.literal(true).optional(),
+});
+
+
 const generateShippedEmailHtml = (customerName: string, trackingCode: string, courier: string, courierLink?: string | null) => {
     return `
 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
@@ -50,6 +57,17 @@ export async function POST(req: NextRequest) {
 
     try {
         const body = await req.json();
+
+        // Handle simple auth check for the frontend
+        if (body.checkAuthOnly) {
+             const authValidation = authCheckSchema.safeParse(body);
+             if (!authValidation.success || authValidation.data.password !== adminPassword) {
+                return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
+             }
+             return NextResponse.json({ success: true, message: "Autenticazione valida." });
+        }
+
+
         const validation = shipmentSchema.safeParse(body);
 
         if (!validation.success) {
