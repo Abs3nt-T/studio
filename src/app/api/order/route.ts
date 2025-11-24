@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
         try {
             console.log('--- TENTO INVIO A NEGOZIANTE: pagamenti@fanulicarniequine.it ---');
             const shopEmailResponse = await resend.emails.send({
-                from: 'Ordini Web <info@fanulicarniequine.it>',
+                from: 'Ordini Web <ordini@send.fanulicarniequine.it>',
                 to: ['pagamenti@fanulicarniequine.it'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
                 replyTo: customer.email,
