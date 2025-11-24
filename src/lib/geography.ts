@@ -49,3 +49,51 @@ export const blockedZipCodes: string[] = [
     // La Maddalena (SS)
     '07024',
 ];
+
+// Elenco dei comuni (città) situati su isole minori
+export const blockedCities: string[] = [
+    // Arcipelago Toscano
+    'Portoferraio',
+    'Campo nell\'Elba',
+    'Capoliveri',
+    'Marciana',
+    'Marciana Marina',
+    'Porto Azzurro',
+    'Rio',
+    'Isola del Giglio',
+    'Capraia Isola',
+    // Isole Ponziane
+    'Ponza',
+    'Ventotene',
+    // Arcipelago Campano
+    'Anacapri',
+    'Barano d\'Ischia',
+    'Capri',
+    'Casamicciola Terme',
+    'Forio',
+    'Ischia',
+    'Lacco Ameno',
+    'Procida',
+    'Serrara Fontana',
+    // Isole Tremiti
+    'Isole Tremiti',
+    // Isole Egadi
+    'Favignana',
+    // Isole Eolie
+    'Lipari',
+    'Leni',
+    'Malfa',
+    'Santa Marina Salina',
+    // Pantelleria
+    'Pantelleria',
+    // Isole Pelagie
+    'Lampedusa e Linosa',
+    // Ustica
+    'Ustica',
+    // San Pietro & Sant'Antioco
+    'Carloforte',
+    'Sant\'Antioco',
+    'Calasetta',
+    // La Maddalena
+    'La Maddalena'
+];

@@ -14,12 +14,23 @@ import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
-import { blockedProvinces, blockedZipCodes } from '@/lib/geography';
+import { blockedProvinces, blockedZipCodes, blockedCities } from '@/lib/geography';
+
+const normalizeString = (str: string) => 
+    str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
 
 const shippingSchema = z.object({
     name: z.string().min(2, "Il nome e cognome sono obbligatori."),
     address: z.string().min(5, "L'indirizzo è obbligatorio."),
-    city: z.string().min(2, "La città è obbligatoria."),
+    city: z.string().min(2, "La città è obbligatoria.")
+      .refine(val => {
+          const normalizedVal = normalizeString(val);
+          const normalizedBlockedCities = blockedCities.map(normalizeString);
+          return !normalizedBlockedCities.includes(normalizedVal);
+      }, {
+          message: "Spiacenti, non spediamo in questo comune."
+      }),
     province: z.string().length(2, "La provincia deve essere di 2 caratteri.").transform(val => val.toUpperCase())
       .refine(val => !blockedProvinces.includes(val), {
           message: "Spiacenti, non spediamo in questa provincia."
