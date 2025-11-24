@@ -70,8 +70,26 @@ export default function Home() {
                 </div>
             </section>
 
+             {/* Scoprici Section */}
+            <section id="scoprici" className="bg-secondary/30 py-20 sm:py-24">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="mx-auto max-w-3xl text-center">
+                        <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                            Scoprici
+                        </h2>
+                        <p className="mt-6 text-lg text-foreground/80 md:text-xl">
+                            Dal 1840, la nostra famiglia porta avanti una tradizione di eccellenza. Una storia di passione, segreti tramandati e un amore incondizionato per la qualità. {' '}
+                            <Link href="/chisiamo" className="font-bold text-primary underline transition-colors hover:text-primary/80">
+                                Scopri la nostra storia
+                            </Link>
+                            {' '} e perché la nostra carne è diversa da tutte le altre.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             {/* Reviews Section */}
-            <section id="recensioni" className="bg-secondary/30 py-20 sm:py-24">
+            <section id="recensioni" className="bg-background py-20 sm:py-24">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="mx-auto mb-12 max-w-3xl text-center">
                         <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
@@ -106,7 +124,7 @@ export default function Home() {
             </section>
 
             {/* Values Section */}
-            <section id="valori" className="bg-background py-20 sm:py-24">
+            <section id="valori" className="bg-secondary/30 py-20 sm:py-24">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="mx-auto mb-12 max-w-3xl text-center">
                         <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
@@ -130,24 +148,6 @@ export default function Home() {
                                 </CardContent>
                             </Card>
                         ))}
-                    </div>
-                </div>
-            </section>
-
-             {/* Scoprici Section */}
-            <section id="scoprici" className="bg-secondary/30 py-20 sm:py-24">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                            Scoprici
-                        </h2>
-                        <p className="mt-6 text-lg text-foreground/80 md:text-xl">
-                            Dal 1840, la nostra famiglia porta avanti una tradizione di eccellenza. Una storia di passione, segreti tramandati e un amore incondizionato per la qualità. {' '}
-                            <Link href="/chisiamo" className="font-bold text-primary underline transition-colors hover:text-primary/80">
-                                Scopri la nostra storia
-                            </Link>
-                            {' '} e perché la nostra carne è diversa da tutte le altre.
-                        </p>
                     </div>
                 </div>
             </section>
