@@ -1,15 +1,49 @@
+'use client';
+import React from "react";
+import placeholderData from "@/lib/placeholder-images.json";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
 
 export default function ChiSiamoPage() {
+    const chiSiamoHeroImages = placeholderData.galleries.chiSiamoHero.map(id => 
+        placeholderData.placeholderImages.find(p => p.id === id)
+    ).filter(Boolean);
 
     return (
         <div className="bg-background">
-            <section className="w-full bg-primary/10 py-20 md:py-32">
-                <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6">
-                    <div className="space-y-6 text-center">
-                        <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+             <section className="relative w-full h-[50vh] md:h-[60vh] bg-secondary text-white">
+                 <Carousel
+                    className="w-full h-full"
+                    plugins={[
+                        Autoplay({
+                            delay: 5000,
+                        }),
+                    ]}
+                    opts={{
+                        loop: true,
+                    }}
+                >
+                    <CarouselContent className="h-full">
+                         {chiSiamoHeroImages.map((image) => (
+                            <CarouselItem key={image!.id} className="h-full">
+                                <img 
+                                    src={image!.imageUrl}
+                                    alt={image!.description}
+                                    className="w-full h-full object-cover"
+                                    data-ai-hint={image!.imageHint}
+                                />
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="container mx-auto px-4 md:px-6 text-center">
+                        <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
                             Scegliamo per voi le carni migliori da generazioni
                         </h1>
-                        <p className="mx-auto max-w-3xl text-lg text-foreground/80 md:mx-0 md:text-xl">
+                        <p className="mx-auto mt-6 max-w-3xl text-lg text-white/90 md:mx-0 md:text-xl">
                             Una storia di famiglia, passione e qualità che dura dal 1840.
                         </p>
                     </div>
