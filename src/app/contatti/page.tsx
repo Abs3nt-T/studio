@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import React from 'react';
 import placeholderData from "@/lib/placeholder-images.json";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -16,37 +14,19 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function ContattiPage() {
-     const contattiHeroImages = placeholderData.galleries.contattiHero.map(id => 
-        placeholderData.placeholderImages.find(p => p.id === id)
-    ).filter(Boolean);
+     const heroImage = placeholderData.placeholderImages.find(p => p.id === 'contatti-1');
 
     return (
         <div className="w-full bg-background">
              <section className="relative w-full h-[50vh] md:h-[60vh] bg-secondary text-white">
-                 <Carousel
-                    className="w-full h-full"
-                    plugins={[
-                        Autoplay({
-                            delay: 5000,
-                        }),
-                    ]}
-                    opts={{
-                        loop: true,
-                    }}
-                >
-                    <CarouselContent className="h-full">
-                         {contattiHeroImages.map((image) => (
-                            <CarouselItem key={image!.id} className="h-full">
-                                <img 
-                                    src={image!.imageUrl}
-                                    alt={image!.description}
-                                    className="w-full h-full object-cover"
-                                    data-ai-hint={image!.imageHint}
-                                />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
+                {heroImage && (
+                    <img
+                        src={heroImage.imageUrl}
+                        alt={heroImage.description}
+                        className="w-full h-full object-cover"
+                        data-ai-hint={heroImage.imageHint}
+                    />
+                )}
                 <div className="absolute inset-0 bg-black/50" />
                 <div className="absolute inset-0 flex items-center justify-center">
                      <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6 text-center">
