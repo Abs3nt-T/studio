@@ -7,6 +7,7 @@ import type { CartItem } from '@/context/CartContext';
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
+// Indirizzi forzati come da richiesta per il debug e la produzione
 const shopEmail = 'pagamenti@fanulicarniequine.it';
 const fromEmail = 'Fanuli Carni <pagamenti@fanulicarniequine.it>';
 
@@ -131,7 +132,7 @@ export async function POST(req: NextRequest) {
 
     if (!resend) {
         console.log('--- ERRORE: Chiave API Resend non configurata ---');
-        return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true, message: "Resend not configured" });
     }
 
     try {
@@ -140,18 +141,17 @@ export async function POST(req: NextRequest) {
 
         if (!validation.success) {
             console.log('--- ERRORE: Dati non validi ---', validation.error.flatten());
-            // Return success to not block the user, but log the validation error
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true, message: "Invalid data" });
         }
 
         const { customer, billing, products, total, transactionId } = validation.data;
 
         // 1. Invio email al negoziante
         try {
-            console.log('--- TENTO INVIO A NEGOZIANTE ---');
+            console.log('--- TENTO INVIO A NEGOZIANTE: ' + shopEmail + ' ---');
             const shopEmailResponse = await resend.emails.send({
                 from: fromEmail,
-                to: shopEmail,
+                to: [shopEmail], // Indirizzo hardcoded
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
                 html: generateShopEmailHtml(customer, billing, products as CartItem[], total, transactionId),
             });
@@ -166,10 +166,10 @@ export async function POST(req: NextRequest) {
 
         // 2. Invio email al cliente
         try {
-            console.log('--- TENTO INVIO A CLIENTE ---');
+            console.log('--- TENTO INVIO A CLIENTE: ' + customer.email + ' ---');
             const customerEmailResponse = await resend.emails.send({
                 from: fromEmail,
-                to: customer.email,
+                to: customer.email, // Email del cliente dal form
                 subject: `Conferma Ordine #${transactionId.substring(0,8)} - Fanuli Carni Equine`,
                 html: generateCustomerEmailHtml(customer.name, products as CartItem[], total, transactionId),
             });
@@ -188,6 +188,6 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.log('--- ERRORE GENERALE API:', error);
         // Risposta di successo al frontend anche in caso di errore generale
-        return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true, message: "General error" });
     }
 }
