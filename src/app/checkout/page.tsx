@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { blockedProvinces, blockedZipCodes, blockedCities } from '@/lib/geography';
+import { Textarea } from '@/components/ui/textarea';
 
 const normalizeString = (str: string) => 
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -23,6 +24,7 @@ const normalizeString = (str: string) =>
 const shippingSchema = z.object({
     name: z.string().min(2, "Il nome e cognome sono obbligatori."),
     address: z.string().min(5, "L'indirizzo è obbligatorio."),
+    notes: z.string().optional(),
     city: z.string().min(2, "La città è obbligatoria.")
       .refine(val => {
           const normalizedVal = normalizeString(val);
@@ -77,6 +79,7 @@ export default function CheckoutPage() {
             customer: {
                 name: '',
                 address: '',
+                notes: '',
                 city: '',
                 province: '',
                 zip: '',
@@ -126,6 +129,9 @@ export default function CheckoutPage() {
                                     )} />
                                     <FormField control={form.control} name="customer.address" render={({ field }) => (
                                         <FormItem><FormLabel>Indirizzo</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                    )} />
+                                     <FormField control={form.control} name="customer.notes" render={({ field }) => (
+                                        <FormItem><FormLabel>Note (opzionale)</FormLabel><FormControl><Textarea placeholder="Istruzioni per il corriere, es: citofono, orari..." {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
                                     <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                                         <FormField control={form.control} name="customer.city" render={({ field }) => (
@@ -186,6 +192,9 @@ export default function CheckoutPage() {
                                         )} />
                                         <FormField control={form.control} name="billing.address" render={({ field }) => (
                                             <FormItem><FormLabel>Indirizzo (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        )} />
+                                        <FormField control={form.control} name="billing.notes" render={({ field }) => (
+                                            <FormItem><FormLabel>Note (opzionale)</FormLabel><FormControl><Textarea placeholder="Istruzioni per il corriere, es: citofono, orari..." {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
                                         <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
                                             <FormField control={form.control} name="billing.city" render={({ field }) => (
@@ -352,3 +361,4 @@ export default function CheckoutPage() {
             </div>
         </PayPalScriptProvider>
     );
+}

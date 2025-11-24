@@ -10,6 +10,7 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const shippingSchema = z.object({
     name: z.string(),
     address: z.string(),
+    notes: z.string().optional(),
     city: z.string(),
     province: z.string(),
     zip: z.string(),
@@ -136,6 +137,11 @@ const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | un
         ${customer.address}<br>
         ${customer.city}, ${customer.province}, ${customer.zip}
     </p>
+    
+    ${customer.notes ? `
+    <h3 style="color: #A32E2E; border-bottom: 2px solid #A32E2E; padding-bottom: 5px;">Note Cliente</h3>
+    <p><i>${customer.notes}</i></p>
+    ` : ''}
 
     ${billing ? `
     <h3 style="color: #A32E2E; border-bottom: 2px solid #A32E2E; padding-bottom: 5px;">Indirizzo di Fatturazione</h3>
