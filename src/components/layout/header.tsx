@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Beef, Snowflake } from "lucide-react";
+import { Menu, Beef } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import React from "react";
@@ -26,19 +26,19 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const headerTextColor = isScrolled ? 'text-primary' : 'text-primary-foreground';
+  const headerClass = `sticky top-0 z-50 w-full transition-colors duration-300 ${
+    isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' : 'bg-primary'
+  }`;
+  
+  const textColor = isScrolled ? 'text-primary' : 'text-primary-foreground';
   const navLinkColor = isScrolled ? 'text-foreground/80 hover:text-foreground' : 'text-primary-foreground/80 hover:text-primary-foreground';
-  const mobileMenuButtonColor = isScrolled ? 'text-foreground' : 'text-primary-foreground hover:bg-white/10';
 
   return (
-    <header className={
-      `sticky top-0 z-50 w-full transition-colors duration-300
-      ${isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' : 'bg-transparent'}`
-    }>
+    <header className={headerClass}>
       <div className="container flex h-16 max-w-screen-xl items-center justify-between">
         <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <Beef className={`h-8 w-8 transition-colors duration-300 ${headerTextColor}`} />
-          <span className={`font-headline text-2xl font-bold transition-colors duration-300 ${headerTextColor}`}>
+          <Beef className={`h-8 w-8 transition-colors duration-300 ${textColor}`} />
+          <span className={`font-headline text-2xl font-bold transition-colors duration-300 ${textColor}`}>
             Fanuli Carni Equine
           </span>
         </Link>
@@ -53,13 +53,12 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-           <Snowflake className="h-5 w-5 text-primary/70" />
         </nav>
         
         <div className="flex items-center gap-2 md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className={`${mobileMenuButtonColor} transition-colors duration-300`}>
+              <Button variant="ghost" size="icon" className={`transition-colors duration-300 ${navLinkColor}`}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Apri menu</span>
               </Button>

@@ -19,20 +19,23 @@ export default function ContattiPage() {
 
     return (
         <div className="w-full bg-background">
-             <section className="w-full py-10 text-center bg-secondary text-foreground">
-                <div className="container mx-auto px-4 md:px-6 mb-8 text-center">
-                    <h1 className="font-headline text-4xl font-bold tracking-tight text-primary sm:text-5xl md:text-6xl">
+             <section className="relative w-full h-[50vh] min-h-[400px] text-white">
+                 {heroImage && (
+                    <>
+                        <img
+                            src={heroImage.imageUrl}
+                            alt={heroImage.description}
+                            className="absolute inset-0 h-full w-full object-cover"
+                            data-ai-hint={heroImage.imageHint}
+                        />
+                        <div className="absolute inset-0 bg-black/50" />
+                    </>
+                 )}
+                <div className="relative z-10 flex h-full flex-col items-center justify-center text-center p-4">
+                    <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-md">
                         Vieni a trovarci in Bottega
                     </h1>
                 </div>
-                 {heroImage && (
-                     <img
-                        src={heroImage.imageUrl}
-                        alt={heroImage.description}
-                        className="mx-auto max-w-4xl rounded-lg shadow-lg"
-                        data-ai-hint={heroImage.imageHint}
-                    />
-                 )}
             </section>
             
             <section className="py-20">
