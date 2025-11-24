@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { allProducts, Product } from '@/lib/products';
 import { PlaceHolderImages, ImagePlaceholder } from '@/lib/placeholder-images';
-import Image from 'next/image';
 
 const categories = ['Tutti', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
@@ -58,11 +57,9 @@ export default function ShopPage() {
                             <CardHeader className="p-0">
                                 {product.image && (
                                     <div className="aspect-video w-full overflow-hidden">
-                                    <Image
+                                    <img
                                         src={product.image.imageUrl}
                                         alt={product.image.description}
-                                        width={600}
-                                        height={400}
                                         className="object-cover w-full h-full"
                                         data-ai-hint={product.image.imageHint}
                                     />
