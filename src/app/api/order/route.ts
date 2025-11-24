@@ -127,7 +127,6 @@ export async function POST(req: NextRequest) {
 
     if (!resend) {
         console.log('--- ERRORE: Chiave API Resend non configurata ---');
-        // Ritorna comunque successo per non bloccare il frontend
         return NextResponse.json({ success: true, message: "Resend not configured" });
     }
 
@@ -137,7 +136,6 @@ export async function POST(req: NextRequest) {
 
         if (!validation.success) {
             console.log('--- ERRORE: Dati non validi ---', validation.error.flatten());
-            // Ritorna comunque successo per non bloccare il frontend
             return NextResponse.json({ success: true, message: "Invalid data" });
         }
 
@@ -147,7 +145,7 @@ export async function POST(req: NextRequest) {
         try {
             console.log('--- TENTO INVIO A NEGOZIANTE: pagamenti@fanulicarniequine.it ---');
             const shopEmailResponse = await resend.emails.send({
-                from: 'Sito Web Fanuli <onboarding@resend.dev>',
+                from: 'Ordini Web <info@fanulicarniequine.it>',
                 to: ['pagamenti@fanulicarniequine.it'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
                 reply_to: customer.email,
@@ -166,8 +164,8 @@ export async function POST(req: NextRequest) {
         try {
             console.log('--- TENTO INVIO A CLIENTE: ' + customer.email + ' ---');
             const customerEmailResponse = await resend.emails.send({
-                from: 'Fanuli Carni <pagamenti@fanulicarniequine.it>',
-                to: customer.email,
+                from: 'Fanuli Carni Equine <info@fanulicarniequine.it>',
+                to: [customer.email],
                 subject: `Conferma Ordine #${transactionId.substring(0,8)} - Fanuli Carni Equine`,
                 html: generateCustomerEmailHtml(customer.name, products as CartItem[], total, transactionId),
             });
@@ -180,12 +178,10 @@ export async function POST(req: NextRequest) {
             console.log('--- ERRORE CATCH (CLIENTE):', error);
         }
 
-        // Risposta di successo al frontend in ogni caso
         return NextResponse.json({ success: true, message: 'Processo di invio email completato.' });
 
     } catch (error) {
         console.log('--- ERRORE GENERALE API:', error);
-        // Risposta di successo al frontend anche in caso di errore generale
         return NextResponse.json({ success: true, message: "General error" });
     }
 }
