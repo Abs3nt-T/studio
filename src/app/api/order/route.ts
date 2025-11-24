@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 import type { CartItem } from '@/context/CartContext';
+import { client } from '@/sanity/client';
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -159,21 +160,43 @@ const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | un
 export async function POST(req: NextRequest) {
     console.log('--- AVVIO API ORDINE ---');
 
-    if (!resend) {
-        console.log('--- ERRORE: Chiave API Resend non configurata ---');
-        return NextResponse.json({ success: true, message: "Resend not configured, but pretending it worked for the user." });
-    }
-
     try {
         const body = await req.json();
         const validation = orderSchema.safeParse(body);
 
         if (!validation.success) {
             console.log('--- ERRORE: Dati non validi ---', validation.error.flatten());
-            return NextResponse.json({ success: true, message: "Invalid data received, but pretending it worked." });
+            return NextResponse.json({ success: false, message: "Invalid data received" }, { status: 400 });
         }
 
-        const { customer, billing, products, total, transactionId } = validation.data;
+        const { customer, products, total, transactionId } = validation.data;
+
+        // Save to Sanity
+        try {
+            console.log('--- TENTO SALVATAGGIO SU SANITY ---');
+            const newOrder = {
+                _type: 'order',
+                orderId: transactionId,
+                customerName: customer.name,
+                customerEmail: customer.email,
+                total: total,
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+            };
+            const sanityResult = await client.create(newOrder);
+            console.log('--- ORDINE SALVATO SU SANITY CON SUCCESSO: ' + sanityResult._id + ' ---');
+        } catch (error) {
+            console.log('--- ERRORE CATCH (SANITY):', error);
+            // Non blocchiamo il flusso se Sanity fallisce, le email sono più importanti
+        }
+        
+
+        if (!resend) {
+            console.log('--- ERRORE: Chiave API Resend non configurata ---');
+            return NextResponse.json({ success: true, message: "Order saved to Sanity, but Resend not configured." });
+        }
+        
+        const { billing } = validation.data;
 
         // 1. Invio email al negoziante
         try {
@@ -216,6 +239,6 @@ export async function POST(req: NextRequest) {
 
     } catch (error) {
         console.log('--- ERRORE GENERALE API:', error);
-        return NextResponse.json({ success: true, message: "General error, but pretending it worked for the user." });
+        return NextResponse.json({ success: false, message: "General server error." }, { status: 500 });
     }
 }

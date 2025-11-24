@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { client } from '@/sanity/client';
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -8,6 +9,7 @@ const adminPassword = process.env.ADMIN_PASSWORD;
 
 const shipmentSchema = z.object({
   password: z.string(),
+  orderDocumentId: z.string(), // Sanity document ID (_id)
   email: z.string().email(),
   name: z.string(),
   trackingCode: z.string(),
@@ -15,7 +17,6 @@ const shipmentSchema = z.object({
   courierLink: z.string().url().optional().or(z.literal('')),
 });
 
-// For auth check only
 const authCheckSchema = z.object({
   password: z.string(),
   checkAuthOnly: z.literal(true).optional(),
@@ -52,7 +53,7 @@ const generateShippedEmailHtml = (customerName: string, trackingCode: string, co
 
 export async function POST(req: NextRequest) {
     if (!resend || !adminPassword) {
-        return NextResponse.json({ error: "Servizio di invio email non configurato correttamente." }, { status: 500 });
+        return NextResponse.json({ error: "Servizio non configurato correttamente." }, { status: 500 });
     }
 
     try {
@@ -64,7 +65,9 @@ export async function POST(req: NextRequest) {
              if (!authValidation.success || authValidation.data.password !== adminPassword) {
                 return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
              }
-             return NextResponse.json({ success: true, message: "Autenticazione valida." });
+             // On successful auth, fetch pending orders
+             const pendingOrders = await client.fetch('*[_type == "order" && status == "pending"] | order(createdAt desc)');
+             return NextResponse.json({ success: true, message: "Autenticazione valida.", orders: pendingOrders });
         }
 
 
@@ -74,12 +77,30 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Dati non validi.", details: validation.error.flatten() }, { status: 400 });
         }
         
-        const { password, email, name, trackingCode, courier, courierLink } = validation.data;
+        const { password, orderDocumentId, email, name, trackingCode, courier, courierLink } = validation.data;
 
         if (password !== adminPassword) {
             return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
         }
 
+        // 1. Update Sanity document
+        try {
+            await client
+                .patch(orderDocumentId)
+                .set({
+                    status: 'shipped',
+                    trackingCode: trackingCode,
+                    courier: courier,
+                    ...(courierLink && { courierLink: courierLink })
+                })
+                .commit();
+        } catch (sanityError) {
+            console.error("Sanity Update Error:", sanityError);
+            return NextResponse.json({ error: "Impossibile aggiornare l'ordine su Sanity.", details: sanityError }, { status: 500 });
+        }
+
+
+        // 2. Send email
         const emailHtml = generateShippedEmailHtml(name, trackingCode, courier, courierLink);
 
         const { data, error } = await resend.emails.send({
@@ -91,10 +112,11 @@ export async function POST(req: NextRequest) {
 
         if (error) {
             console.error("Resend Error:", error);
+            // Optional: try to revert Sanity status if email fails? For now, we just log.
             return NextResponse.json({ error: "Impossibile inviare l'email.", details: error.message }, { status: 500 });
         }
 
-        return NextResponse.json({ success: true, message: `Email di spedizione inviata a ${name}.`, emailId: data?.id });
+        return NextResponse.json({ success: true, message: `Email di spedizione inviata a ${name} e ordine aggiornato.`, emailId: data?.id });
 
     } catch (error) {
         console.error("API Error:", error);
