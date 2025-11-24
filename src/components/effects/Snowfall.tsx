@@ -1,8 +1,10 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const Snowfall: React.FC = () => {
   const [snowflakes, setSnowflakes] = useState<JSX.Element[]>([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     // This code will only run on the client, after the component has mounted.
@@ -15,7 +17,7 @@ const Snowfall: React.FC = () => {
           animationDelay: `${Math.random() * 10}s`,
         };
         return (
-          <div key={i} className="snowflake" style={style}>
+          <div key={`${pathname}-${i}`} className="snowflake" style={style}>
             •
           </div>
         );
@@ -23,7 +25,7 @@ const Snowfall: React.FC = () => {
     };
     
     setSnowflakes(generateSnowflakes());
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, [pathname]); // Reruns the effect when the pathname changes
 
   return <div className="snow-container">{snowflakes}</div>;
 };
