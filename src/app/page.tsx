@@ -41,7 +41,6 @@ const reviews = [
 ];
 
 export default function Home() {
-    const testImage = placeholderData.placeholderImages.find(p => p.id === 'test-image');
     const heroImage = placeholderData.placeholderImages.find(p => p.id === 'hero-1');
 
     return (
@@ -57,28 +56,13 @@ export default function Home() {
                     </p>
                 </div>
                  {heroImage && (
-                     <img 
-                        src={heroImage.imageUrl} 
+                     <img
+                        src={heroImage.imageUrl}
                         alt={heroImage.description}
                         className="mx-auto max-w-4xl rounded-lg shadow-lg"
                         data-ai-hint={heroImage.imageHint}
-                     />
+                    />
                  )}
-            </section>
-            
-            <section className="py-10 text-center">
-                <h2 className="font-headline text-2xl">Test Visualizzazione Immagine</h2>
-                <p className="mb-4 text-muted-foreground">Se vedi l'immagine di un banco macelleria qui sotto, il problema di base è risolto.</p>
-                {testImage ? (
-                     <img 
-                        src={testImage.imageUrl} 
-                        alt={testImage.description}
-                        className="mx-auto max-w-lg rounded-lg shadow-lg"
-                        data-ai-hint={testImage.imageHint}
-                     />
-                ) : (
-                    <p className="text-destructive">Immagine di test non trovata nel file JSON.</p>
-                )}
             </section>
 
             {/* Reviews Section */}
