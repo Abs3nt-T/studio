@@ -212,7 +212,7 @@ export default function CheckoutPage() {
                                             <FormItem><FormLabel>Email (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
                                         <FormField control={form.control} name="billing.phone" render={({ field }) => (
-                                            <FormItem><FormLabel>Telefono (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                            <FormItem><FormLabel>Telefono (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormMessage>
                                         )} />
                                     </div>
                                 )}
@@ -235,9 +235,9 @@ export default function CheckoutPage() {
                                                     <p className="text-muted-foreground">{formatPrice(item.offerPrice)} cad.</p>
                                                 </div>
                                                 <div className="flex items-center gap-2">
-                                                    <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => decreaseQuantity(item.id)}><Minus className="h-4 w-4" /></Button>
+                                                    <Button type="button" variant="outline" size="icon" className="h-6 w-6" onClick={() => decreaseQuantity(item.id)}><Minus className="h-4 w-4" /></Button>
                                                     <span className="font-bold w-4 text-center">{item.quantity}</span>
-                                                     <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => addToCart(item)}><Plus className="h-4 w-4" /></Button>
+                                                     <Button type="button" variant="outline" size="icon" className="h-6 w-6" onClick={() => addToCart(item)}><Plus className="h-4 w-4" /></Button>
                                                 </div>
                                                 <span className="font-medium w-20 text-right">{formatPrice(item.offerPrice * item.quantity)}</span>
                                             </div>
@@ -262,7 +262,7 @@ export default function CheckoutPage() {
 
                                     {cart.length > 0 && (
                                         <div className="flex justify-end">
-                                            <Button variant="outline" size="sm" onClick={clearCart} className="text-red-500 hover:text-red-600">
+                                            <Button type="button" variant="outline" size="sm" onClick={clearCart} className="text-red-500 hover:text-red-600">
                                                 <Trash2 className="mr-2 h-4 w-4" />
                                                 Svuota Carrello
                                             </Button>
