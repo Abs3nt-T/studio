@@ -209,10 +209,10 @@ export default function CheckoutPage() {
                                             )} />
                                         </div>
                                         <FormField control={form.control} name="billing.email" render={({ field }) => (
-                                            <FormItem><FormLabel>Email (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                            <FormItem><FormLabel>Email (Fatt.)</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
                                         <FormField control={form.control} name="billing.phone" render={({ field }) => (
-                                            <FormItem><FormLabel>Telefono (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormMessage>
+                                            <FormItem><FormLabel>Telefono (Fatt.)</FormLabel><FormControl><Input type="tel" {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
                                     </div>
                                 )}
@@ -352,4 +352,3 @@ export default function CheckoutPage() {
             </div>
         </PayPalScriptProvider>
     );
-}
