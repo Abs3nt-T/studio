@@ -7,10 +7,6 @@ import type { CartItem } from '@/context/CartContext';
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-// Indirizzi forzati come da richiesta per il debug e la produzione
-const shopEmail = 'pagamenti@fanulicarniequine.it';
-const fromEmail = 'Fanuli Carni <pagamenti@fanulicarniequine.it>';
-
 const orderSchema = z.object({
     customer: z.object({
         name: z.string(),
@@ -71,7 +67,7 @@ const generateCustomerEmailHtml = (customerName: string, products: CartItem[], t
 </div>
 `;
 
-const generateShopEmailHtml = (customer: CustomerData, billing: BillingData, products: CartItem[], total: number, transactionId: string) => `
+const generateShopEmailHtml = (customer: CustomerData, billing: BillingData | undefined, products: CartItem[], total: number, transactionId: string) => `
 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px;">
     <h1 style="color: #A32E2E; text-align: center;">Nuovo Ordine Ricevuto!</h1>
     <p>Hai ricevuto un nuovo ordine da preparare. Ecco i dettagli:</p>
@@ -126,12 +122,12 @@ const generateShopEmailHtml = (customer: CustomerData, billing: BillingData, pro
 </div>
 `;
 
-
 export async function POST(req: NextRequest) {
     console.log('--- AVVIO API ORDINE ---');
 
     if (!resend) {
         console.log('--- ERRORE: Chiave API Resend non configurata ---');
+        // Ritorna comunque successo per non bloccare il frontend
         return NextResponse.json({ success: true, message: "Resend not configured" });
     }
 
@@ -141,6 +137,7 @@ export async function POST(req: NextRequest) {
 
         if (!validation.success) {
             console.log('--- ERRORE: Dati non validi ---', validation.error.flatten());
+            // Ritorna comunque successo per non bloccare il frontend
             return NextResponse.json({ success: true, message: "Invalid data" });
         }
 
@@ -148,10 +145,10 @@ export async function POST(req: NextRequest) {
 
         // 1. Invio email al negoziante
         try {
-            console.log('--- TENTO INVIO A NEGOZIANTE: ' + shopEmail + ' ---');
+            console.log('--- TENTO INVIO A NEGOZIANTE: pagamenti@fanulicarniequine.it ---');
             const shopEmailResponse = await resend.emails.send({
-                from: fromEmail,
-                to: [shopEmail], // Indirizzo hardcoded
+                from: 'Fanuli Carni <pagamenti@fanulicarniequine.it>',
+                to: ['pagamenti@fanulicarniequine.it'],
                 subject: `Nuovo Ordine #${transactionId.substring(0,8)} da ${customer.name}`,
                 html: generateShopEmailHtml(customer, billing, products as CartItem[], total, transactionId),
             });
@@ -168,8 +165,8 @@ export async function POST(req: NextRequest) {
         try {
             console.log('--- TENTO INVIO A CLIENTE: ' + customer.email + ' ---');
             const customerEmailResponse = await resend.emails.send({
-                from: fromEmail,
-                to: customer.email, // Email del cliente dal form
+                from: 'Fanuli Carni <pagamenti@fanulicarniequine.it>',
+                to: customer.email,
                 subject: `Conferma Ordine #${transactionId.substring(0,8)} - Fanuli Carni Equine`,
                 html: generateCustomerEmailHtml(customer.name, products as CartItem[], total, transactionId),
             });
