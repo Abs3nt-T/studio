@@ -91,7 +91,7 @@ export default function Home() {
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="mx-auto max-w-3xl text-center mb-12">
                         <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                           Buone Feste da Fanuli!
+                           Buone Feste da Fanuli Carni Equine!
                         </h2>
                         <p className="mt-6 text-lg text-foreground/80 md:text-xl">
                             In questo periodo di festa, il nostro cuore si riempie di gratitudine. Vogliamo ringraziare di cuore ognuno di voi, clienti affezionati e nuovi amici, per averci scelto e per aver portato la nostra passione sulle vostre tavole. È con immensa gioia che celebriamo queste festività presentando il nuovo volto di Fanuli Carni Equine, un progetto che unisce la nostra lunga tradizione a uno sguardo verso il futuro. Auguri di cuore da tutta la nostra famiglia!
