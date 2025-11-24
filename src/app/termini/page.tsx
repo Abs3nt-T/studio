@@ -24,12 +24,12 @@ export default function TerminiPage() {
             La presente Privacy Policy descrive come i tuoi dati personali vengono raccolti, utilizzati e condivisi quando visiti o effettui un acquisto su questo sito web.
           </p>
 
-          <h3>Dati Personali che Raccogliamo</h3>
+          <h3 className="mt-10 text-2xl">Dati Personali che Raccogliamo</h3>
           <p>
             Quando visiti il sito, raccogliamo automaticamente alcune informazioni sul tuo dispositivo, tra cui informazioni sul tuo browser web, indirizzo IP, fuso orario e alcuni dei cookie installati sul tuo dispositivo. Inoltre, mentre navighi sul sito, raccogliamo informazioni sulle singole pagine web o sui prodotti che visualizzi, quali siti web o termini di ricerca ti hanno indirizzato al sito e informazioni su come interagisci con il sito.
           </p>
 
-          <h3>Come Utilizziamo i Tuoi Dati Personali?</h3>
+          <h3 className="mt-10 text-2xl">Come Utilizziamo i Tuoi Dati Personali?</h3>
           <p>
             Utilizziamo le informazioni che raccogliamo per comunicare con te, ottimizzare e migliorare il nostro sito (ad esempio, generando analisi su come i nostri clienti navigano e interagiscono con il sito) e per valutare il successo delle nostre campagne di marketing.
           </p>
@@ -37,17 +37,17 @@ export default function TerminiPage() {
             Quando prenoti la spesa tramite WhatsApp, i dati che fornisci (come nome e numero di telefono) saranno utilizzati esclusivamente per gestire il tuo ordine e per comunicazioni di servizio relative ad esso.
           </p>
 
-          <h3>Condivisione dei Tuoi Dati Personali</h3>
+          <h3 className="mt-10 text-2xl">Condivisione dei Tuoi Dati Personali</h3>
           <p>
             Non condividiamo i tuoi dati personali con terze parti, ad eccezione dei fornitori di servizi che ci aiutano a svolgere le nostre attività commerciali (come i fornitori di analisi web). Questi fornitori sono contrattualmente obbligati a proteggere i tuoi dati e a utilizzarli solo per gli scopi per cui li abbiamo incaricati.
           </p>
 
-          <h3>I Tuoi Diritti</h3>
+          <h3 className="mt-10 text-2xl">I Tuoi Diritti</h3>
           <p>
             Se sei residente in Europa, hai il diritto di accedere ai dati personali in nostro possesso che ti riguardano e di chiedere che i tuoi dati personali siano corretti, aggiornati o cancellati. Se desideri esercitare questo diritto, ti preghiamo di contattarci tramite le informazioni di contatto sottostanti.
           </p>
 
-          <h3>Contattaci</h3>
+          <h3 className="mt-10 text-2xl">Contattaci</h3>
           <p>
             Per maggiori informazioni sulle nostre pratiche sulla privacy, se hai domande o se desideri presentare un reclamo, ti preghiamo di contattarci via e-mail a{' '}
             <a href="mailto:assistenza@fanulicarniequine.it">assistenza@fanulicarniequine.it</a>.
