@@ -94,7 +94,7 @@ export default function Home() {
                            Buone Feste da Fanuli!
                         </h2>
                         <p className="mt-6 text-lg text-foreground/80 md:text-xl">
-                           Un ringraziamento affettuoso a tutti i nostri clienti, e la felicità di ridare a Fanuli Carni Equine un nuovo volto durante queste festività.
+                            In questo periodo di festa, il nostro cuore si riempie di gratitudine. Vogliamo ringraziare di cuore ognuno di voi, clienti affezionati e nuovi amici, per averci scelto e per aver portato la nostra passione sulle vostre tavole. È con immensa gioia che celebriamo queste festività presentando il nuovo volto di Fanuli Carni Equine, un progetto che unisce la nostra lunga tradizione a uno sguardo verso il futuro. Auguri di cuore da tutta la nostra famiglia!
                         </p>
                     </div>
                      <Carousel
