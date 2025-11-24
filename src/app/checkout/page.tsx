@@ -15,26 +15,28 @@ import { useRouter } from 'next/navigation';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 
+const shippingSchema = z.object({
+    name: z.string().min(2, "Il nome e cognome sono obbligatori."),
+    address: z.string().min(5, "L'indirizzo è obbligatorio."),
+    city: z.string().min(2, "La città è obbligatoria."),
+    province: z.string().length(2, "La provincia deve essere di 2 caratteri.").transform(val => val.toUpperCase()),
+    zip: z.string().length(5, "Il CAP deve essere di 5 cifre."),
+    email: z.string().email("L'email non è valida."),
+    phone: z.string().min(9, "Il numero di telefono non è valido."),
+});
+
 const formSchema = z.object({
-    name: z.string().min(2, "Il nome è obbligatorio"),
-    address: z.string().min(5, "L'indirizzo è obbligatorio"),
-    city: z.string().min(2, "La città è obbligatoria"),
-    zip: z.string().min(5, "Il CAP è obbligatorio").max(5, "Il CAP deve essere di 5 cifre"),
-    email: z.string().email("Inserisci un'email valida"),
-    phone: z.string().min(9, "Il numero di telefono non è valido"),
+    customer: shippingSchema,
     billingSameAsShipping: z.boolean().default(true),
-    billingName: z.string().optional(),
-    billingAddress: z.string().optional(),
-    billingCity: z.string().optional(),
-    billingZip: z.string().optional(),
+    billing: shippingSchema.optional(),
 }).refine(data => {
     if (!data.billingSameAsShipping) {
-        return !!data.billingName && !!data.billingAddress && !!data.billingCity && !!data.billingZip;
+        return !!data.billing;
     }
     return true;
 }, {
     message: "I dati di fatturazione sono obbligatori se diversi da quelli di spedizione.",
-    path: ["billingName"], // arbitrary path to show the error
+    path: ["billing"],
 });
 
 
@@ -52,18 +54,19 @@ export default function CheckoutPage() {
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: '',
-            address: '',
-            city: '',
-            zip: '',
-            email: '',
-            phone: '',
+            customer: {
+                name: '',
+                address: '',
+                city: '',
+                province: '',
+                zip: '',
+                email: '',
+                phone: '',
+            },
             billingSameAsShipping: true,
-            billingName: '',
-            billingAddress: '',
-            billingCity: '',
-            billingZip: '',
+            billing: undefined,
         },
+        mode: "onBlur",
     });
 
     const watchBillingSameAsShipping = form.watch('billingSameAsShipping');
@@ -98,24 +101,37 @@ export default function CheckoutPage() {
                             <div>
                                 <h2 className="font-headline text-2xl font-bold mb-6">Dati di Spedizione</h2>
                                 <div className="grid grid-cols-1 gap-6">
-                                    <FormField control={form.control} name="name" render={({ field }) => (
+                                    <FormField control={form.control} name="customer.name" render={({ field }) => (
                                         <FormItem><FormLabel>Nome e Cognome</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
-                                    <FormField control={form.control} name="address" render={({ field }) => (
+                                    <FormField control={form.control} name="customer.address" render={({ field }) => (
                                         <FormItem><FormLabel>Indirizzo</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <FormField control={form.control} name="city" render={({ field }) => (
-                                            <FormItem><FormLabel>Città</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <FormField control={form.control} name="customer.city" render={({ field }) => (
+                                            <FormItem className="sm:col-span-2"><FormLabel>Città</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
-                                        <FormField control={form.control} name="zip" render={({ field }) => (
-                                            <FormItem><FormLabel>CAP</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        <FormField control={form.control} name="customer.province" render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Provincia</FormLabel>
+                                                <FormControl>
+                                                    <Input 
+                                                        {...field} 
+                                                        maxLength={2} 
+                                                        onChange={(e) => field.onChange(e.target.value.toUpperCase())}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
                                         )} />
                                     </div>
-                                    <FormField control={form.control} name="email" render={({ field }) => (
+                                     <FormField control={form.control} name="customer.zip" render={({ field }) => (
+                                        <FormItem><FormLabel>CAP</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                    )} />
+                                    <FormField control={form.control} name="customer.email" render={({ field }) => (
                                         <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
-                                    <FormField control={form.control} name="phone" render={({ field }) => (
+                                    <FormField control={form.control} name="customer.phone" render={({ field }) => (
                                         <FormItem><FormLabel>Telefono</FormLabel><FormControl><Input type="tel" {...field} /></FormControl><FormMessage /></FormItem>
                                     )} />
                                 </div>
@@ -144,21 +160,40 @@ export default function CheckoutPage() {
                                 />
 
                                 {!watchBillingSameAsShipping && (
-                                    <div className="grid grid-cols-1 gap-6 border p-4 rounded-md">
-                                        <FormField control={form.control} name="billingName" render={({ field }) => (
-                                            <FormItem><FormLabel>Nome e Cognome (Fatturazione)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                     <div className="grid grid-cols-1 gap-6 border p-6 rounded-md">
+                                        <FormField control={form.control} name="billing.name" render={({ field }) => (
+                                            <FormItem><FormLabel>Nome e Cognome (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
-                                        <FormField control={form.control} name="billingAddress" render={({ field }) => (
-                                            <FormItem><FormLabel>Indirizzo (Fatturazione)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        <FormField control={form.control} name="billing.address" render={({ field }) => (
+                                            <FormItem><FormLabel>Indirizzo (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                         )} />
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <FormField control={form.control} name="billingCity" render={({ field }) => (
-                                                <FormItem><FormLabel>Città (Fatturazione)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                            <FormField control={form.control} name="billing.city" render={({ field }) => (
+                                               <FormItem className="sm:col-span-2"><FormLabel>Città (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
                                             )} />
-                                            <FormField control={form.control} name="billingZip" render={({ field }) => (
-                                                <FormItem><FormLabel>CAP (Fatturazione)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                            <FormField control={form.control} name="billing.province" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Prov. (Fatt.)</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            {...field}
+                                                            maxLength={2}
+                                                            onChange={(e) => field.onChange(e.target.value.toUpperCase())}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
                                             )} />
                                         </div>
+                                        <FormField control={form.control} name="billing.zip" render={({ field }) => (
+                                            <FormItem><FormLabel>CAP (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        )} />
+                                        <FormField control={form.control} name="billing.email" render={({ field }) => (
+                                            <FormItem><FormLabel>Email (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        )} />
+                                        <FormField control={form.control} name="billing.phone" render={({ field }) => (
+                                            <FormItem><FormLabel>Telefono (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                                        )} />
                                     </div>
                                 )}
                             </div>
@@ -205,16 +240,19 @@ export default function CheckoutPage() {
                                     <div className="pt-4">
                                          <PayPalButtons
                                             style={{ layout: "vertical" }}
-                                            createOrder={async (data, actions) => {
+                                            onClick={async (data, actions) => {
                                                 const isFormValid = await form.trigger();
                                                 if (!isFormValid) {
                                                     toast({
-                                                        title: "Errore nel form",
-                                                        description: "Per favore, compila tutti i campi richiesti prima di procedere.",
+                                                        title: "Dati mancanti o non validi",
+                                                        description: "Per favore, compila tutti i campi obbligatori prima di procedere.",
                                                         variant: "destructive",
                                                     });
-                                                    return "";
+                                                    return actions.reject();
                                                 }
+                                                return actions.resolve();
+                                            }}
+                                            createOrder={async (data, actions) => {
                                                 return actions.order.create({
                                                     purchase_units: [{
                                                         amount: {
@@ -227,23 +265,11 @@ export default function CheckoutPage() {
                                             onApprove={async (data, actions) => {
                                                 if (!actions.order) return;
                                                 const details = await actions.order.capture();
-                                                const customerData = form.getValues();
+                                                const formData = form.getValues();
                                                 
                                                 const orderPayload = {
-                                                    customer: {
-                                                        name: customerData.name,
-                                                        address: customerData.address,
-                                                        city: customerData.city,
-                                                        zip: customerData.zip,
-                                                        email: customerData.email,
-                                                        phone: customerData.phone,
-                                                    },
-                                                    billing: customerData.billingSameAsShipping ? undefined : {
-                                                        name: customerData.billingName,
-                                                        address: customerData.billingAddress,
-                                                        city: customerData.billingCity,
-                                                        zip: customerData.billingZip,
-                                                    },
+                                                    customer: formData.customer,
+                                                    billing: formData.billingSameAsShipping ? undefined : formData.billing,
                                                     products: cart,
                                                     total: getCartTotal(),
                                                     transactionId: details.id
@@ -293,3 +319,5 @@ export default function CheckoutPage() {
         </PayPalScriptProvider>
     );
 }
+
+    
