@@ -84,7 +84,7 @@ export default function ShopPage() {
                                      <p className="text-2xl font-bold text-primary">{formatPrice(product.offerPrice)}</p>
                                      <p className="text-base font-medium text-muted-foreground line-through">{formatPrice(product.listPrice)}</p>
                                 </div>
-                                <p className="text-xs text-muted-foreground mt-1">/ {product.weight} kg</p>
+                                 <p className="text-xs text-muted-foreground mt-1">/ {product.weight === 0.1 ? '100 g' : '1 kg'}</p>
                             </CardContent>
                             <CardFooter className="p-6 pt-0">
                                 <Button className="w-full" onClick={() => handleAddToCart(product)}>

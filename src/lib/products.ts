@@ -36,7 +36,7 @@ export const allProducts: Product[] = [
         name: 'Bresaola di asino della casa',
         listPrice: 5.6,
         offerPrice: 4.4,
-        weight: 1,
+        weight: 0.1,
         category: 'Carne di asino',
         imageId: 'bresaola-asino',
         description: 'Leggera, magra e incredibilmente saporita. La nostra bresaola è una delizia per il palato, ideale per piatti freschi e carpacci gourmet.'
