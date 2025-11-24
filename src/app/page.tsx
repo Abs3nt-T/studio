@@ -1,9 +1,17 @@
 'use client';
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Gem, ScrollText, Leaf, Star } from "lucide-react";
 import React from "react";
 import placeholderData from "@/lib/placeholder-images.json";
 import Link from "next/link";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { allProducts, Product } from "@/lib/products";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Button } from "@/components/ui/button";
+
+const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
+};
 
 const values = [
   {
@@ -44,6 +52,14 @@ const reviews = [
 export default function Home() {
     const heroImageId = placeholderData.galleries.homeHero[0];
     const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
+    
+    const roastProductsIds = ['picanha-asino', 'costate-asino-osso', 'tomahawk-asino-con-osso', 'ribeye-asino', 'asado-mulo', 'asado-asino'];
+    const roastProducts = allProducts
+        .filter(p => roastProductsIds.includes(p.id))
+        .map(product => {
+            const image = PlaceHolderImages.find(img => img.id === product.imageId);
+            return { ...product, image };
+        });
 
     return (
         <div className="flex flex-col">
@@ -67,6 +83,66 @@ export default function Home() {
                     <p className="mx-auto mt-6 max-w-[700px] text-lg text-white/90 md:text-xl drop-shadow-sm">
                       A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
                     </p>
+                </div>
+            </section>
+            
+            {/* Holiday Section */}
+            <section id="festivita" className="bg-background py-20 sm:py-24">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="mx-auto max-w-3xl text-center mb-12">
+                        <h2 className="font-headline text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                           Buone Feste da Fanuli!
+                        </h2>
+                        <p className="mt-6 text-lg text-foreground/80 md:text-xl">
+                           Un ringraziamento affettuoso a tutti i nostri clienti, e la felicità di ridare a Fanuli Carni Equine un nuovo volto durante queste festività.
+                        </p>
+                    </div>
+                     <Carousel
+                        opts={{
+                            align: "start",
+                            loop: true,
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent>
+                            {roastProducts.map((product) => (
+                                <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3">
+                                    <div className="p-1 h-full">
+                                         <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                                            <CardHeader className="p-0">
+                                                {product.image && (
+                                                    <div className="aspect-video w-full overflow-hidden">
+                                                        <img
+                                                            src={product.image.imageUrl}
+                                                            alt={product.image.description}
+                                                            className="object-cover w-full h-full"
+                                                            data-ai-hint={product.image.imageHint}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </CardHeader>
+                                            <CardContent className="flex flex-1 flex-col p-6">
+                                                <p className="text-sm font-medium text-primary">{product.category}</p>
+                                                <CardTitle className="font-headline text-xl mt-1">{product.name}</CardTitle>
+                                                <div className="mt-4 flex items-baseline gap-2">
+                                                    <p className="text-2xl font-bold text-primary">{formatPrice(product.offerPrice)}</p>
+                                                    <p className="text-base font-medium text-muted-foreground line-through">{formatPrice(product.listPrice)}</p>
+                                                </div>
+                                                <p className="text-xs text-muted-foreground mt-1">/ kg</p>
+                                            </CardContent>
+                                            <CardFooter className="p-6 pt-0">
+                                                <Button asChild className="w-full">
+                                                    <Link href="/shop">Vedi nello Shop</Link>
+                                                </Button>
+                                            </CardFooter>
+                                        </Card>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="ml-12" />
+                        <CarouselNext className="mr-12" />
+                    </Carousel>
                 </div>
             </section>
 
