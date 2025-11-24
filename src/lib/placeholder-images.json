@@ -1,82 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-1",
-      "description": "Banco macelleria con addobbi natalizi e luci calde.",
-      "imageUrl": "/images/hero-1.jpg",
-      "imageHint": "butcher counter christmas"
-    },
-    {
-      "id": "hero-2",
-      "description": "Dettaglio di carni selezionate nel banco frigo.",
-      "imageUrl": "/images/hero-2.jpg",
-      "imageHint": "selected meats"
-    },
-    {
-      "id": "hero-3",
-      "description": "Esterno della macelleria illuminata per le feste.",
-      "imageUrl": "/images/hero-3.jpg",
-      "imageHint": "butcher shop exterior"
-    },
-    {
-      "id": "values-bg",
-      "description": "Uno sfondo natalizio con neve e bokeh dorati.",
-      "imageUrl": "/images/values-bg-natale.jpg",
-      "imageHint": "christmas background"
-    },
-    {
-      "id": "product1",
-      "description": "Una bistecca di cavallo cruda su un tagliere di legno.",
-      "imageUrl": "/images/product-bistecca.jpg",
-      "imageHint": "raw steak"
-    },
-    {
-      "id": "product2",
-      "description": "Spezzatino di cavallo in una ciotola, pronto per essere cucinato.",
-      "imageUrl": "/images/product-spezzatino.jpg",
-      "imageHint": "diced meat"
-    },
-    {
-      "id": "product3",
-      "description": "Macinato fresco di cavallo in un mucchietto.",
-      "imageUrl": "/images/product-macinato.jpg",
-      "imageHint": "ground meat"
-    },
-    {
-      "id": "product4",
-      "description": "Bombette di carne arrotolate e pronte per la griglia.",
-      "imageUrl": "/images/product-bombette.jpg",
-      "imageHint": "meat rolls"
-    },
-    {
-      "id": "product5",
-      "description": "Hamburger di carne crudo e compatto.",
-      "imageUrl": "/images/product-burger.jpg",
-      "imageHint": "burger patty"
-    },
-    {
-      "id": "product6",
-      "description": "Tartare di carne finemente tritata con un tuorlo d'uovo sopra.",
-      "imageUrl": "/images/product-tartare.jpg",
-      "imageHint": "steak tartare"
-    },
-    {
-      "id": "contact-bg-1",
-      "description": "Interno accogliente di una macelleria con cliente.",
-      "imageUrl": "/images/contact-1.jpg",
-      "imageHint": "cozy butcher shop"
-    },
-    {
-      "id": "contact-bg-2",
-      "description": "Insegna al neon della macelleria di notte.",
-      "imageUrl": "/images/contact-2.jpg",
-      "imageHint": "butcher neon sign"
-    },
-    {
-      "id": "whatsapp-bg",
-      "description": "Interno di una salumeria con prosciutti appesi e un'atmosfera accogliente.",
-      "imageUrl": "/images/whatsapp-bg-natale.jpg",
-      "imageHint": "deli christmas"
+      "id": "test-image",
+      "description": "Banco macelleria con selezione di carni.",
+      "imageUrl": "https://images.unsplash.com/photo-1763033035770-e83f50e8e8b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YnV0Y2hlciUyMGNvdW50ZXJ8ZW58MHx8fHwxNzYzOTQ3MDA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "butcher counter"
     }
   ]
 }
