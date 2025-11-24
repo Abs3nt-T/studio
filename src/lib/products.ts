@@ -197,7 +197,7 @@ export const allProducts: Product[] = [
         listPrice: 22.2,
         offerPrice: 19.5,
         weight: 1,
-        category: 'Carne di lattone',
+        category: 'Carne di cavallo',
         imageId: 'fettine-lattone',
         description: 'Incredibilmente tenere e delicate, queste fettine di puledro sono così versatili da essere perfette per ogni ricetta, dai più grandi ai più piccoli.'
     },
@@ -207,7 +207,7 @@ export const allProducts: Product[] = [
         listPrice: 21,
         offerPrice: 19,
         weight: 1,
-        category: 'Carne di lattone',
+        category: 'Carne di cavallo',
         imageId: 'polpa-equina',
         description: 'Tagli sceltissimi di polpa di puledro, perfetti per arrosti, spezzatini o da tritare per un ragù eccezionale. La base per la tua creatività.'
     },
@@ -237,7 +237,7 @@ export const allProducts: Product[] = [
         listPrice: 17.9,
         offerPrice: 14,
         weight: 1,
-        category: 'Carne di asino',
+        category: 'Carne di cavallo',
         imageId: 'tritato-equino',
         description: 'Il nostro macinato freschissimo di prima scelta, magro e nutriente. Perfetto per ragù leggeri, polpette gustose o ripieni saporiti.'
     },
