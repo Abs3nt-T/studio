@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext, ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -60,7 +60,24 @@ const steps = [
     { id: 'pickupTime', label: 'E a che ora?', icon: Clock },
 ] as const;
 
-export function BookingChat() {
+
+interface BookingChatContextType {
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+}
+
+const BookingChatContext = createContext<BookingChatContextType | undefined>(undefined);
+
+export const useBookingChat = () => {
+    const context = useContext(BookingChatContext);
+    if (!context) {
+        throw new Error('useBookingChat must be used within a BookingChat component');
+    }
+    return context;
+};
+
+
+export function BookingChat({ children }: { children?: ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -160,7 +177,8 @@ export function BookingChat() {
     };
 
     return (
-        <>
+        <BookingChatContext.Provider value={{ isOpen, setIsOpen }}>
+            {children}
             <Button
                 className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50"
                 onClick={() => setIsOpen(true)}
@@ -205,6 +223,6 @@ export function BookingChat() {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </>
+        </BookingChatContext.Provider>
     );
 }

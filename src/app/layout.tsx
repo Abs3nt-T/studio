@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall';
 import { CartProvider } from '@/context/CartContext';
+import { BookingChat } from '@/components/BookingChat';
 
 export const metadata: Metadata = {
   title: 'Fanuli Carni Equine',
@@ -32,6 +33,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
+          <BookingChat />
         </CartProvider>
       </body>
     </html>
