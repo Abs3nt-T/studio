@@ -31,19 +31,34 @@ export default function PrenotazioniAdminPage() {
   const [authError, setAuthError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [pendingReservations, setPendingReservations] = useState<Reservation[]>([]);
+  const [verifiedPassword, setVerifiedPassword] = useState('');
   
   const form = useForm();
 
-  const fetchPendingReservations = useCallback(async () => {
+  const fetchPendingReservations = useCallback(async (currentPassword: string) => {
     setIsLoading(true);
     setAuthError('');
     try {
-      const reservations = await client.fetch('*[_type == "reservation" && status == "pending"] | order(pickupDate asc, pickupTime asc)');
-      setPendingReservations(reservations);
+       const response = await fetch('/api/reservation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: currentPassword, checkAuthOnly: true }),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || "Password errata o errore di verifica.");
+      }
+
+      setPendingReservations(result.reservations || []);
+      setVerifiedPassword(currentPassword);
       setIsAuthenticated(true);
-    } catch (error) {
-      setAuthError("Impossibile caricare le prenotazioni.");
+
+    } catch (error: any) {
+      setAuthError(error.message);
       toast({ variant: 'destructive', title: 'Errore', description: 'Caricamento prenotazioni fallito.' });
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -51,21 +66,8 @@ export default function PrenotazioniAdminPage() {
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      fetchPendingReservations();
-    } else {
-      setAuthError("Password errata.");
-    }
+    fetchPendingReservations(password);
   };
-  
-  // Replace direct env access with NEXT_PUBLIC_ for client-side password check
-  useEffect(() => {
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-        setIsAuthenticated(true);
-        fetchPendingReservations();
-    }
-  }, [password, fetchPendingReservations]);
-
 
   const markAsCompleted = async (reservationId: string) => {
     setIsSubmitting(reservationId);
@@ -73,7 +75,7 @@ export default function PrenotazioniAdminPage() {
       await client
         .patch(reservationId)
         .set({ status: 'completed' })
-        .commit();
+        .commit({ token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN }); // Usa una env pubblica per questa azione client
       
       toast({
         title: 'Successo!',
@@ -83,10 +85,11 @@ export default function PrenotazioniAdminPage() {
       setPendingReservations(prev => prev.filter(r => r._id !== reservationId));
 
     } catch (error) {
+       console.error("Failed to update reservation:", error);
       toast({
         variant: 'destructive',
         title: 'Errore',
-        description: "Impossibile aggiornare la prenotazione.",
+        description: "Impossibile aggiornare la prenotazione. Controlla i permessi del token Sanity.",
       });
     } finally {
       setIsSubmitting(null);
@@ -105,7 +108,7 @@ export default function PrenotazioniAdminPage() {
               </CardDescription>
             </div>
              {isAuthenticated && (
-              <Button onClick={fetchPendingReservations} disabled={isLoading}>
+              <Button onClick={() => fetchPendingReservations(verifiedPassword)} disabled={isLoading}>
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
                 Aggiorna Lista
               </Button>

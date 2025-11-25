@@ -9,6 +9,8 @@ import { it } from 'date-fns/locale';
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const shopEmail = process.env.SHOP_EMAIL || 'pagamentifce@gmail.com';
+const adminPassword = process.env.ADMIN_PASSWORD;
+
 
 const reservationSchema = z.object({
     customerName: z.string().min(2, "Il nome è obbligatorio."),
@@ -16,6 +18,11 @@ const reservationSchema = z.object({
     productList: z.string().min(3, "La lista della spesa non può essere vuota."),
     pickupDate: z.string().nonempty("La data di ritiro è obbligatoria."),
     pickupTime: z.string().nonempty("L'ora di ritiro è obbligatoria."),
+});
+
+const authCheckSchema = z.object({
+  password: z.string(),
+  checkAuthOnly: z.literal(true).optional(),
 });
 
 const generateShopReservationEmailHtml = (data: z.infer<typeof reservationSchema>) => {
@@ -49,6 +56,22 @@ export async function POST(req: NextRequest) {
 
     try {
         const body = await req.json();
+
+        // Handle simple auth check for the frontend admin page
+        if (body.checkAuthOnly) {
+             if (!adminPassword) {
+                return NextResponse.json({ error: "Servizio non configurato correttamente." }, { status: 500 });
+             }
+             const authValidation = authCheckSchema.safeParse(body);
+             if (!authValidation.success || authValidation.data.password !== adminPassword) {
+                return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
+             }
+             // On successful auth, fetch pending reservations
+             const pendingReservations = await client.fetch('*[_type == "reservation" && status == "pending"] | order(pickupDate asc, pickupTime asc)');
+             return NextResponse.json({ success: true, message: "Autenticazione valida.", reservations: pendingReservations });
+        }
+
+
         const validation = reservationSchema.safeParse(body);
 
         if (!validation.success) {
