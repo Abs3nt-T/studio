@@ -9,7 +9,6 @@ import { Form, FormLabel } from '@/components/ui/form';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, LogIn, RefreshCw, CheckCircle, Phone, Calendar, Clock, ShoppingBasket } from 'lucide-react';
-import { client } from '@/sanity/client';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
@@ -72,10 +71,19 @@ export default function PrenotazioniAdminPage() {
   const markAsCompleted = async (reservationId: string) => {
     setIsSubmitting(reservationId);
     try {
-      await client
-        .patch(reservationId)
-        .set({ status: 'completed' })
-        .commit({ token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN }); // Usa una env pubblica per questa azione client
+       const response = await fetch('/api/reservation', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          password: verifiedPassword,
+          reservationId: reservationId,
+         }),
+      });
+
+      if (!response.ok) {
+        const result = await response.json();
+        throw new Error(result.error || "Impossibile aggiornare la prenotazione.");
+      }
       
       toast({
         title: 'Successo!',
@@ -84,12 +92,12 @@ export default function PrenotazioniAdminPage() {
 
       setPendingReservations(prev => prev.filter(r => r._id !== reservationId));
 
-    } catch (error) {
+    } catch (error: any) {
        console.error("Failed to update reservation:", error);
       toast({
         variant: 'destructive',
         title: 'Errore',
-        description: "Impossibile aggiornare la prenotazione. Controlla i permessi del token Sanity.",
+        description: error.message || "Impossibile aggiornare la prenotazione.",
       });
     } finally {
       setIsSubmitting(null);

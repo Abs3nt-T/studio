@@ -11,7 +11,7 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const shopEmail = process.env.SHOP_EMAIL || 'pagamentifce@gmail.com';
 const adminPassword = process.env.ADMIN_PASSWORD;
 
-
+// Schema for creating a new reservation
 const reservationSchema = z.object({
     customerName: z.string().min(2, "Il nome è obbligatorio."),
     customerPhone: z.string().min(9, "Il numero di telefono non è valido."),
@@ -20,10 +20,18 @@ const reservationSchema = z.object({
     pickupTime: z.string().nonempty("L'ora di ritiro è obbligatoria."),
 });
 
+// Schema for admin authentication checks
 const authCheckSchema = z.object({
   password: z.string(),
   checkAuthOnly: z.literal(true).optional(),
 });
+
+// Schema for updating reservation status
+const updateReservationSchema = z.object({
+    password: z.string(),
+    reservationId: z.string(),
+});
+
 
 const generateShopReservationEmailHtml = (data: z.infer<typeof reservationSchema>) => {
     const formattedDate = format(new Date(data.pickupDate), "EEEE dd MMMM yyyy", { locale: it });
@@ -51,9 +59,9 @@ const generateShopReservationEmailHtml = (data: z.infer<typeof reservationSchema
 `;
 };
 
+// Handle POST requests for creating and authenticating
 export async function POST(req: NextRequest) {
-    console.log('--- AVVIO API PRENOTAZIONE ---');
-
+    console.log('--- AVVIO API PRENOTAZIONE (POST) ---');
     try {
         const body = await req.json();
 
@@ -95,11 +103,10 @@ export async function POST(req: NextRequest) {
 
         try {
             console.log('--- TENTO SALVATAGGIO PRENOTAZIONE SU SANITY ---');
-            const sanityResult = await client.create(newReservation);
+            const sanityResult = await client.create(newReservation, { token: process.env.SANITY_API_TOKEN });
             console.log('--- PRENOTAZIONE SALVATA SU SANITY CON SUCCESSO: ' + sanityResult._id + ' ---');
         } catch (error) {
             console.log('--- ERRORE CATCH (SANITY):', error);
-            // In questo caso, se Sanity fallisce, è meglio non procedere.
             return NextResponse.json({ success: false, message: "Errore nel salvataggio della prenotazione." }, { status: 500 });
         }
 
@@ -129,7 +136,43 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: true, message: 'Prenotazione creata con successo.' });
 
     } catch (error) {
-        console.log('--- ERRORE GENERALE API PRENOTAZIONE:', error);
+        console.log('--- ERRORE GENERALE API PRENOTAZIONE (POST):', error);
         return NextResponse.json({ success: false, message: "Errore generale del server." }, { status: 500 });
+    }
+}
+
+// Handle PATCH requests for updating status
+export async function PATCH(req: NextRequest) {
+    console.log('--- AVVIO API PRENOTAZIONE (PATCH) ---');
+    try {
+        const body = await req.json();
+
+        if (!adminPassword) {
+            return NextResponse.json({ error: "Servizio non configurato correttamente." }, { status: 500 });
+        }
+
+        const validation = updateReservationSchema.safeParse(body);
+        if (!validation.success) {
+            return NextResponse.json({ error: "Dati richiesta non validi." }, { status: 400 });
+        }
+        
+        const { password, reservationId } = validation.data;
+
+        if (password !== adminPassword) {
+            return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
+        }
+
+        // Update Sanity document using the secure token
+        await client
+            .patch(reservationId)
+            .set({ status: 'completed' })
+            .commit({ token: process.env.SANITY_API_TOKEN });
+
+        console.log(`--- PRENOTAZIONE AGGIORNATA A COMPLETATA: ${reservationId} ---`);
+        return NextResponse.json({ success: true, message: "Prenotazione aggiornata con successo." });
+
+    } catch (error) {
+        console.error("--- ERRORE GENERALE API PRENOTAZIONE (PATCH):", error);
+        return NextResponse.json({ error: "Errore durante l'aggiornamento della prenotazione." }, { status: 500 });
     }
 }
