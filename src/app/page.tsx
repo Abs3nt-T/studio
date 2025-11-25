@@ -78,7 +78,7 @@ export default function Home() {
                  )}
                  <div className="relative z-10 flex h-full flex-col items-center justify-center text-center p-4">
                     <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-md">
-                      Fanuli Carni Equine: L'Eccellenza della Tradizione.
+                      Fanuli Carni Equine di Damiano Fanuli: L'eccellenza dal 1840
                     </h1>
                     <p className="mx-auto mt-6 max-w-[700px] text-lg text-white/90 md:text-xl drop-shadow-sm">
                       A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
