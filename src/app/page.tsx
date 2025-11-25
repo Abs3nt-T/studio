@@ -1,3 +1,4 @@
+
 'use client';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Gem, ScrollText, Leaf, Star } from "lucide-react";
@@ -123,7 +124,7 @@ export default function Home() {
                                             </CardHeader>
                                             <CardContent className="flex flex-1 flex-col p-6">
                                                 <p className="text-sm font-medium text-primary">{product.category}</p>
-                                                <CardTitle className="font-headline text-xl mt-1">{product.name}</CardTitle>
+                                                <CardTitle className="font-headline text-xl font-bold mt-1">{product.name}</CardTitle>
                                                 <div className="mt-4 flex items-baseline gap-2">
                                                     <p className="text-2xl font-bold text-primary">{formatPrice(product.offerPrice)}</p>
                                                     <p className="text-base font-medium text-muted-foreground line-through">{formatPrice(product.listPrice)}</p>
@@ -181,7 +182,7 @@ export default function Home() {
                                 <CardHeader>
                                     <div className="flex items-center gap-4">
                                         <div>
-                                            <CardTitle className="font-headline text-xl">{review.name}</CardTitle>
+                                            <CardTitle className="font-headline text-xl font-bold">{review.name}</CardTitle>
                                             <div className="flex items-center">
                                                 {[...Array(review.rating)].map((_, i) => (
                                                     <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
@@ -217,7 +218,7 @@ export default function Home() {
                                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                                         <value.icon className="h-8 w-8" />
                                     </div>
-                                    <CardTitle className="font-headline text-2xl">{value.title}</CardTitle>
+                                    <CardTitle className="font-headline text-2xl font-bold">{value.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-muted-foreground">{value.description}</p>

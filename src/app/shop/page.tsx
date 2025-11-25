@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useContext } from 'react';
@@ -78,7 +79,7 @@ export default function ShopPage() {
                             </CardHeader>
                             <CardContent className="flex flex-1 flex-col p-6">
                                 <p className="text-sm font-medium text-primary">{product.category}</p>
-                                <CardTitle className="font-headline text-xl mt-1">{product.name}</CardTitle>
+                                <CardTitle className="font-headline text-xl font-bold mt-1">{product.name}</CardTitle>
                                 <CardDescription className="mt-2 text-sm text-muted-foreground flex-grow">{product.description}</CardDescription>
                                 <div className="mt-4 flex items-baseline gap-2">
                                      <p className="text-2xl font-bold text-primary">{formatPrice(product.offerPrice)}</p>

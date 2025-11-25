@@ -8,8 +8,8 @@ import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall'; 
 
 // IMPORTAZIONI CORRETTE (Verifica i percorsi)
 import { CartProvider } from '@/context/CartContext';
-import { BookingChatProvider } from '@/components/BookingChat';
-import { BookingChat } from '@/components/BookingChat';
+import { BookingChatProvider, BookingChat } from '@/components/BookingChat';
+
 
 export const metadata: Metadata = {
   title: 'Fanuli Carni Equine',
@@ -29,24 +29,17 @@ export default function RootLayout({
           <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-background text-foreground antialiased">
-        
         <CartProvider>
           <BookingChatProvider>
-            
             <div className="relative flex min-h-dvh flex-col">
               <Header />
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
-
             <Toaster />
-            
-            {/* Componente Chat visibile che ora ha accesso al suo provider */}
             <BookingChat />
-
           </BookingChatProvider>
         </CartProvider>
-        
       </body>
     </html>
   );
