@@ -108,3 +108,7 @@ body {
     transform: translateY(105vh) translateX(calc(var(--i) * 30vw - 15vw));
   }
 }
+
+.font-headline {
+    font-family: 'Playfair Display', serif;
+}
