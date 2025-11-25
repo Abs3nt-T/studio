@@ -71,7 +71,7 @@ const BookingChatContext = createContext<BookingChatContextType | undefined>(und
 export const useBookingChat = () => {
     const context = useContext(BookingChatContext);
     if (!context) {
-        throw new Error('useBookingChat must be used within a BookingChat component');
+        throw new Error('useBookingChat must be used within a BookingChatProvider');
     }
     return context;
 };
@@ -86,8 +86,8 @@ export const BookingChatProvider = ({ children }: { children: ReactNode }) => {
 };
 
 
-export function BookingChat({ children }: { children?: ReactNode }) {
-    const [isOpen, setIsOpen] = useState(false);
+export function BookingChat() {
+    const { isOpen, setIsOpen } = useBookingChat();
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -186,8 +186,7 @@ export function BookingChat({ children }: { children?: ReactNode }) {
     };
 
     return (
-        <BookingChatContext.Provider value={{ isOpen, setIsOpen }}>
-            {children}
+        <>
             <Button
                 className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50"
                 onClick={() => setIsOpen(true)}
@@ -232,6 +231,6 @@ export function BookingChat({ children }: { children?: ReactNode }) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </BookingChatContext.Provider>
+        </>
     );
 }

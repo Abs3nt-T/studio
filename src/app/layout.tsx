@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall';
 import { CartProvider } from '@/context/CartContext';
-import { BookingChat } from '@/components/BookingChat';
+import { BookingChat, BookingChatProvider } from '@/components/BookingChat';
 
 export const metadata: Metadata = {
   title: 'Fanuli Carni Equine',
@@ -26,7 +26,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <CartProvider>
-          <BookingChat>
+          <BookingChatProvider>
             <ConditionalSnowfall />
             <div className="relative flex min-h-dvh flex-col">
               <Header />
@@ -34,7 +34,8 @@ export default function RootLayout({
               <Footer />
             </div>
             <Toaster />
-          </BookingChat>
+            <BookingChat />
+          </BookingChatProvider>
         </CartProvider>
       </body>
     </html>
