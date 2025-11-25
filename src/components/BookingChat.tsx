@@ -76,6 +76,15 @@ export const useBookingChat = () => {
     return context;
 };
 
+export const BookingChatProvider = ({ children }: { children: ReactNode }) => {
+    const [isOpen, setIsOpen] = useState(false);
+     return (
+        <BookingChatContext.Provider value={{ isOpen, setIsOpen }}>
+            {children}
+        </BookingChatContext.Provider>
+    );
+};
+
 
 export function BookingChat({ children }: { children?: ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);

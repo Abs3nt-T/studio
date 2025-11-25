@@ -26,14 +26,15 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <CartProvider>
-          <ConditionalSnowfall />
-          <div className="relative flex min-h-dvh flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-          <BookingChat />
+          <BookingChat>
+            <ConditionalSnowfall />
+            <div className="relative flex min-h-dvh flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <Toaster />
+          </BookingChat>
         </CartProvider>
       </body>
     </html>
