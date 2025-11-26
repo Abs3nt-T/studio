@@ -1,3 +1,4 @@
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -19,9 +20,12 @@ export function Footer() {
             <Link href="/cookie-policy" className="underline hover:text-primary-foreground">
                 Cookie Policy
             </Link>
-             <a href="javascript:Cookiebot.renew()" className="underline hover:text-primary-foreground">
-                Impostazioni Cookie
-            </a>
+             <button
+              onClick={() => (window as any).Cookiebot?.renew()}
+              className="underline hover:text-primary-foreground bg-transparent border-none p-0 cursor-pointer text-inherit font-medium"
+            >
+              Impostazioni Cookie
+            </button>
             <Link href="/termini" className="underline hover:text-primary-foreground">
                 Termini di Servizio
             </Link>
