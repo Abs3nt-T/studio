@@ -23,12 +23,12 @@ export function Footer() {
              <button
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).Cookiebot) {
-                  (window as any).Cookiebot.renew();
+                  (window as any).Cookiebot.renew?.();
                 } else {
                   console.warn("Cookiebot non caricato (probabilmente sei in localhost o ambiente di sviluppo)");
                 }
               }}
-              className="underline hover:text-primary-foreground bg-transparent border-none p-0 cursor-pointer text-inherit font-medium"
+              className="underline hover:text-primary-foreground bg-transparent border-none p-0 cursor-pointer text-inherit"
             >
               Impostazioni Cookie
             </button>
