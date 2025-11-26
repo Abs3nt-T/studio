@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall'; // Se presente
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
 // IMPORTAZIONI CORRETTE (Verifica i percorsi)
 import { CartProvider } from '@/context/CartContext';
@@ -42,6 +43,13 @@ export default function RootLayout({
           </BookingChatProvider>
         </CartProvider>
         <GoogleAnalytics gaId="G-ET76K6TL4Y" />
+        <Script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="7d278eae-9893-4e89-8176-f9b2453d85ea"
+          data-blockingmode="auto"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );
