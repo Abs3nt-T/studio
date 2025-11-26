@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall'; // Se presente
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 // IMPORTAZIONI CORRETTE (Verifica i percorsi)
 import { CartProvider } from '@/context/CartContext';
@@ -40,6 +41,7 @@ export default function RootLayout({
             <BookingChat />
           </BookingChatProvider>
         </CartProvider>
+        <GoogleAnalytics gaId="G-ET76K6TL4Y" />
       </body>
     </html>
   );
