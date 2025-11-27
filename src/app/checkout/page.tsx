@@ -12,10 +12,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { Plus, Minus, Trash2 } from 'lucide-react';
+import { Plus, Minus, Trash2, AlertTriangle } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { blockedProvinces, blockedZipCodes, blockedCities } from '@/lib/geography';
 import { Textarea } from '@/components/ui/textarea';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
 
 const normalizeString = (str: string) => 
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -117,6 +119,14 @@ export default function CheckoutPage() {
                     </h1>
                 </header>
 
+                <Alert variant="destructive" className="mb-8">
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertTitle>ATTENZIONE</AlertTitle>
+                  <AlertDescription>
+                    Si informa la clientela che Fanuli Carni Equine spedisce SOLO in Italia, isole ESCLUSE.
+                  </AlertDescription>
+                </Alert>
+
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(() => {})} className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
                         {/* Shipping & Billing Details Column */}
@@ -211,7 +221,7 @@ export default function CheckoutPage() {
                                                         />
                                                     </FormControl>
                                                     <FormMessage />
-                                                </FormItem>
+                                                </Item>
                                             )} />
                                             <FormField control={form.control} name="billing.zip" render={({ field }) => (
                                                 <FormItem><FormLabel>CAP (Fatt.)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
@@ -362,3 +372,5 @@ export default function CheckoutPage() {
         </PayPalScriptProvider>
     );
 }
+
+    
