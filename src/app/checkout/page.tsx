@@ -123,7 +123,7 @@ export default function CheckoutPage() {
                 <Alert variant="destructive" className="mb-8">
                   <AlertTriangle className="h-4 w-4" />
                   <AlertTitle>ATTENZIONE</AlertTitle>
-                  <AlertDescription>
+                  <AlertDescription className="font-bold">
                     Si informa la clientela che Fanuli Carni Equine spedisce SOLO in Italia, isole ESCLUSE.
                   </AlertDescription>
                 </Alert>
@@ -372,5 +372,7 @@ export default function CheckoutPage() {
             </div>
         </PayPalScriptProvider>
     );
+
+    
 
     
