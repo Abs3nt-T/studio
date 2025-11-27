@@ -129,3 +129,37 @@
     opacity: 0;
   }
 }
+
+
+/* Animated Glow Border */
+@keyframes animated-glow-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-glow-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.animated-glow-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, #ffd700, #ff6347, #ba55d3, #87ceeb, #ffd700);
+  background-size: 400% 400%;
+  z-index: -1;
+  opacity: 0;
+  border-radius: inherit;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.animated-glow-button:hover::before {
+  opacity: 1;
+  animation: animated-glow-border 4s linear infinite;
+}

@@ -48,7 +48,7 @@ export const SnowBurstButton: React.FC<ButtonProps> = ({ onClick, children, ...p
   };
 
   return (
-    <Button onClick={handleClick} {...props} className={`relative overflow-hidden ${props.className}`}>
+    <Button onClick={handleClick} {...props} className={`relative overflow-hidden animated-glow-button ${props.className}`}>
       {children}
       {particles.map((particle) => (
         <span key={particle.id} className="snow-particle" style={particle.style}>
