@@ -10,7 +10,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CartContext } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
 import { useBookingChat } from '@/components/BookingChat';
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, Star } from 'lucide-react';
 
 const categories = ['Tutti', 'Esclusive', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
@@ -64,6 +64,16 @@ export default function ShopPage() {
                         </Button>
                     ))}
                 </div>
+
+                {selectedCategory === 'Esclusive' && (
+                    <div className="mb-12 text-center bg-secondary/30 p-6 rounded-lg">
+                        <Star className="mx-auto h-8 w-8 text-primary mb-2" />
+                        <h3 className="font-headline text-2xl font-bold text-foreground">Le nostre preparazioni speciali</h3>
+                        <p className="text-foreground/80 mt-2 max-w-2xl mx-auto">
+                            Le "Esclusive" sono i nostri piatti pronti della tradizione, disponibili in quantità limitate e solo per il ritiro in macelleria. Prenota la tua per assicurarti un sapore autentico che sa di casa!
+                        </p>
+                    </div>
+                )}
 
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {filteredProducts.map((product) => (
