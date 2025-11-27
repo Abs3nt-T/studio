@@ -11,6 +11,7 @@ import { CartContext } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
 import { useBookingChat } from '@/components/BookingChat';
 import { MessageSquare, Star } from 'lucide-react';
+import { SnowBurstButton } from '@/components/effects/SnowBurstButton';
 
 const categories = ['Tutti', 'Esclusive', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
@@ -53,16 +54,27 @@ export default function ShopPage() {
                 </header>
 
                 <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
-                    {categories.map(category => (
-                        <Button
-                            key={category}
-                            variant={selectedCategory === category ? 'default' : 'outline'}
-                            onClick={() => setSelectedCategory(category)}
-                            className="rounded-full"
-                        >
-                            {category}
-                        </Button>
-                    ))}
+                    {categories.map(category =>
+                        category === 'Esclusive' ? (
+                            <SnowBurstButton
+                                key={category}
+                                variant={selectedCategory === category ? 'default' : 'outline'}
+                                onClick={() => setSelectedCategory(category)}
+                                className="rounded-full"
+                            >
+                                {category}
+                            </SnowBurstButton>
+                        ) : (
+                            <Button
+                                key={category}
+                                variant={selectedCategory === category ? 'default' : 'outline'}
+                                onClick={() => setSelectedCategory(category)}
+                                className="rounded-full"
+                            >
+                                {category}
+                            </Button>
+                        )
+                    )}
                 </div>
 
                 {selectedCategory === 'Esclusive' && (

@@ -109,3 +109,23 @@
 .font-headline {
     font-family: 'Playfair Display', serif;
 }
+
+/* Snow Burst Animation */
+.snow-particle {
+  position: absolute;
+  color: hsl(var(--primary-foreground));
+  text-shadow: 0 0 2px hsl(var(--primary-foreground) / 0.5);
+  pointer-events: none;
+  animation: burst-fade-out 0.8s ease-out forwards;
+}
+
+@keyframes burst-fade-out {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) translate(var(--x-end), var(--y-end)) scale(1);
+    opacity: 0;
+  }
+}
