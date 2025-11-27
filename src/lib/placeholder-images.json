@@ -19,6 +19,24 @@
       "imageHint": "butcher shop neon"
     },
     {
+      "id": "braciole-cotte",
+      "description": "Braciole di cavallo cotte lentamente in un ricco sugo di pomodoro, pronte da servire.",
+      "imageUrl": "/prodotti/braciole-cotte.jpg",
+      "imageHint": "cooked meat rolls"
+    },
+    {
+      "id": "pezzetti-cotti",
+      "description": "Pezzetti di carne di cavallo stufati, teneri e saporiti, immersi in un denso sugo.",
+      "imageUrl": "/prodotti/pezzetti-cotti.jpg",
+      "imageHint": "horse meat stew"
+    },
+    {
+      "id": "trippa-cotta",
+      "description": "Piatto tradizionale di trippa cotta al sugo, ricca e gustosa.",
+      "imageUrl": "/prodotti/trippa-cotta.jpg",
+      "imageHint": "cooked tripe stew"
+    },
+    {
       "id": "asino-cotta",
       "description": "Piatto di carne d'asino cotta lentamente, tenera e succulenta, servita con contorno.",
       "imageUrl": "/prodotti/asino-cotta.jpg",

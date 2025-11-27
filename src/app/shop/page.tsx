@@ -9,8 +9,10 @@ import { allProducts, Product } from '@/lib/products';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CartContext } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
+import { useBookingChat } from '@/components/BookingChat';
+import { MessageSquare } from 'lucide-react';
 
-const categories = ['Tutti', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
+const categories = ['Tutti', 'Esclusive', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
 const formatPrice = (price: number) => {
     return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
@@ -19,6 +21,7 @@ const formatPrice = (price: number) => {
 export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState('Tutti');
     const { addToCart } = useContext(CartContext);
+    const { setIsOpen } = useBookingChat();
 
     const handleAddToCart = (product: Product) => {
         addToCart(product);
@@ -83,14 +86,23 @@ export default function ShopPage() {
                                 <CardDescription className="mt-2 text-sm text-muted-foreground flex-grow">{product.description}</CardDescription>
                                 <div className="mt-4 flex items-baseline gap-2">
                                      <p className="text-2xl font-bold text-primary">{formatPrice(product.offerPrice)}</p>
-                                     <p className="text-base font-medium text-muted-foreground line-through">{formatPrice(product.listPrice)}</p>
+                                     {product.offerPrice < product.listPrice && (
+                                        <p className="text-base font-medium text-muted-foreground line-through">{formatPrice(product.listPrice)}</p>
+                                     )}
                                 </div>
-                                 <p className="text-xs text-muted-foreground mt-1">/ {product.weight === 0.1 ? '100 g' : '1 kg'}</p>
+                                 <p className="text-xs text-muted-foreground mt-1">/ {product.weight >= 1 ? 'kg' : `${product.weight * 1000} g`}</p>
                             </CardContent>
                             <CardFooter className="p-6 pt-0">
-                                <Button className="w-full" onClick={() => handleAddToCart(product)}>
-                                    Aggiungi al Carrello
-                                </Button>
+                                {product.category === 'Esclusive' ? (
+                                     <Button variant="secondary" className="w-full" onClick={() => setIsOpen(true)}>
+                                         <MessageSquare className="mr-2 h-4 w-4" />
+                                        Prenota il Ritiro
+                                    </Button>
+                                ) : (
+                                    <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                                        Aggiungi al Carrello
+                                    </Button>
+                                )}
                             </CardFooter>
                         </Card>
                     ))}

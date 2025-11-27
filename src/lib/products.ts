@@ -5,12 +5,42 @@ export type Product = {
     listPrice: number;
     offerPrice: number;
     weight: number;
-    category: 'Carne di asino' | 'Carne di mulo' | 'Carne di cavallo' | 'Carne di lattone';
+    category: 'Carne di asino' | 'Carne di mulo' | 'Carne di cavallo' | 'Carne di lattone' | 'Esclusive';
     imageId: string;
     description: string;
 };
 
 export const allProducts: Product[] = [
+    {
+        id: 'braciole-cotte',
+        name: 'Braciole Cotte al Sugo',
+        listPrice: 18,
+        offerPrice: 18,
+        weight: 1,
+        category: 'Esclusive',
+        imageId: 'braciole-cotte',
+        description: 'Le tradizionali braciole, già cotte lentamente nel nostro sugo ricco. Un piatto pronto che porta in tavola il sapore della domenica.'
+    },
+    {
+        id: 'pezzetti-cotti',
+        name: 'Pezzetti Cotti al Sugo',
+        listPrice: 16,
+        offerPrice: 16,
+        weight: 1,
+        category: 'Esclusive',
+        imageId: 'pezzetti-cotti',
+        description: 'I classici pezzetti di cavallo, stufati a lungo fino a diventare tenerissimi. Pronti da scaldare per un pasto che sa di casa.'
+    },
+    {
+        id: 'trippa-cotta',
+        name: 'Trippa Cotta al Sugo',
+        listPrice: 13,
+        offerPrice: 13,
+        weight: 1,
+        category: 'Esclusive',
+        imageId: 'trippa-cotta',
+        description: 'La ricetta della tradizione per una trippa saporita e avvolgente, già cotta e pronta da gustare. Un sapore autentico e confortante.'
+    },
     {
         id: 'carne-asino-cotta',
         name: 'Carne di asino cotta',
