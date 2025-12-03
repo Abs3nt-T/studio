@@ -9,6 +9,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { allProducts, Product } from "@/lib/products";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
+import { ScrollHero } from "@/components/ScrollHero";
 
 const formatPrice = (price: number) => {
     return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
@@ -51,9 +52,6 @@ const reviews = [
 ];
 
 export default function Home() {
-    const heroImageId = placeholderData.galleries.homeHero[0];
-    const heroImage = placeholderData.placeholderImages.find(p => p.id === heroImageId);
-    
     const roastProductsIds = ['picanha-asino', 'costate-asino-osso', 'tomahawk-asino-con-osso', 'ribeye-asino', 'asado-mulo', 'asado-asino'];
     const roastProducts = allProducts
         .filter(p => roastProductsIds.includes(p.id))
@@ -64,28 +62,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col">
-            {/* Hero Section */}
-            <section className="relative w-full h-[50vh] min-h-[400px] text-white">
-                 {heroImage && (
-                    <>
-                        <img
-                            src={heroImage.imageUrl}
-                            alt={heroImage.description}
-                            className="absolute inset-0 h-full w-full object-cover"
-                            data-ai-hint={heroImage.imageHint}
-                        />
-                        <div className="absolute inset-0 bg-black/50" />
-                    </>
-                 )}
-                 <div className="relative z-10 flex h-full flex-col items-center justify-center text-center p-4">
-                    <h1 className="font-headline text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl drop-shadow-md">
-                      Fanuli Carni Equine di Damiano Fanuli: L'eccellenza dal 1840
-                    </h1>
-                    <p className="mx-auto mt-6 max-w-[700px] text-lg text-white/90 md:text-xl drop-shadow-sm">
-                      A Erchie, la carne equina più genuina. Qualità artigianale e sapori di una volta.
-                    </p>
-                </div>
-            </section>
+            <ScrollHero />
             
             {/* Holiday Section */}
             <section id="festivita" className="bg-background py-20 sm:py-24">
