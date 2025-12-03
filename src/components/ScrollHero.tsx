@@ -14,13 +14,14 @@ export function ScrollHero() {
   });
 
   // Fase 1: Dissolvenza del testo iniziale e dell'overlay
-  const initialTextOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const initialTextY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.2], [0.5, 0]);
+  const initialTextOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const initialTextY = useTransform(scrollYProgress, [0, 0.25], [0, -50]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.25], [0.5, 0]);
 
   // Fase 3: Rivelazione del nuovo contenuto
-  const revealContentOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
-  const revealContentY = useTransform(scrollYProgress, [0.4, 0.6], [50, 0]);
+  const revealContentOpacity = useTransform(scrollYProgress, [0.5, 0.8], [0, 1]);
+  const revealContentY = useTransform(scrollYProgress, [0.5, 0.8], [50, 0]);
+
 
   return (
     <section ref={targetRef} className="relative h-[300vh] w-full">
@@ -61,16 +62,18 @@ export function ScrollHero() {
             opacity: revealContentOpacity,
             y: revealContentY,
           }}
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white p-4"
+          className="absolute inset-0 z-20 flex items-center justify-between text-white p-8 md:p-16"
         >
-          <div className="text-center bg-black/50 p-8 rounded-lg">
-            <h2 className="font-headline text-5xl md:text-7xl font-bold drop-shadow-lg">
-              La nostra ultima novità
-            </h2>
-            <Button asChild size="lg" className="mt-8">
-              <Link href="/shop">Provalo</Link>
-            </Button>
-          </div>
+            <div className="w-1/3">
+                 <h2 className="font-headline text-5xl md:text-7xl font-bold drop-shadow-lg text-left">
+                    La nostra ultima novità
+                </h2>
+            </div>
+            <div className="w-1/3 flex justify-end">
+                <Button asChild size="lg">
+                  <Link href="/shop">Provalo</Link>
+                </Button>
+            </div>
         </motion.div>
       </div>
     </section>
