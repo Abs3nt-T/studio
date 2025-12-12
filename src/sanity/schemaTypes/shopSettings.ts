@@ -15,7 +15,7 @@ export default defineType({
       title: 'Negozio Online Aperto',
       type: 'boolean',
       description: 'Spunta questa casella per permettere ai clienti di effettuare acquisti. Deselezionala per chiudere temporaneamente lo shop.',
-      initialValue: true,
+      initialValue: false,
     }),
     defineField({
         name: 'closingReason',
