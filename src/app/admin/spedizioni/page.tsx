@@ -233,144 +233,143 @@ export default function SpedizioniAdminPage() {
              </CardContent>
          </Card>
        ) : (
-        <div className="space-y-8">
-            <Card className="shadow-lg">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2 font-headline text-3xl"><Store /> Gestione Negozio Online</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    {shopStatus ? (
-                         <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <Alert className={shopStatus.isShopOpen ? 'border-green-500' : 'border-red-500'}>
-                                <div className="flex items-center gap-3">
-                                    {shopStatus.isShopOpen 
-                                        ? <Power className="h-5 w-5 text-green-500" />
-                                        : <PowerOff className="h-5 w-5 text-red-500" />
-                                    }
-                                    <div>
-                                        <AlertTitle className="font-bold">
-                                            Stato attuale del negozio: {shopStatus.isShopOpen ? 'APERTO' : 'CHIUSO'}
-                                        </AlertTitle>
-                                        <AlertDescription>
-                                            {shopStatus.isShopOpen ? 'I clienti possono effettuare ordini.' : 'I clienti non possono completare acquisti.'}
-                                        </AlertDescription>
+        <Form {...form}>
+            <div className="space-y-8">
+                <Card className="shadow-lg">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 font-headline text-3xl"><Store /> Gestione Negozio Online</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        {shopStatus ? (
+                            <div className="flex flex-col sm:flex-row items-center gap-4">
+                                <Alert className={shopStatus.isShopOpen ? 'border-green-500' : 'border-red-500'}>
+                                    <div className="flex items-center gap-3">
+                                        {shopStatus.isShopOpen 
+                                            ? <Power className="h-5 w-5 text-green-500" />
+                                            : <PowerOff className="h-5 w-5 text-red-500" />
+                                        }
+                                        <div>
+                                            <AlertTitle className="font-bold">
+                                                Stato attuale del negozio: {shopStatus.isShopOpen ? 'APERTO' : 'CHIUSO'}
+                                            </AlertTitle>
+                                            <AlertDescription>
+                                                {shopStatus.isShopOpen ? 'I clienti possono effettuare ordini.' : 'I clienti non possono completare acquisti.'}
+                                            </AlertDescription>
+                                        </div>
                                     </div>
-                                </div>
-                            </Alert>
-                             <Button 
-                                onClick={handleToggleShopStatus}
-                                disabled={isTogglingShop}
-                                variant={shopStatus.isShopOpen ? 'destructive' : 'default'}
-                                className="w-full sm:w-auto"
-                            >
-                                {isTogglingShop ? (
-                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                ) : shopStatus.isShopOpen ? (
-                                     <PowerOff className="mr-2 h-4 w-4" />
-                                ) : (
-                                    <Power className="mr-2 h-4 w-4" />
-                                )}
-                                {shopStatus.isShopOpen ? 'Chiudi Negozio' : 'Apri Negozio'}
-                            </Button>
-                        </div>
-                    ) : <Loader2 className="h-6 w-6 animate-spin" />}
-                </CardContent>
-            </Card>
-
-            <Card className="shadow-lg">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="font-headline text-3xl">Pannello Spedizioni</CardTitle>
-                    <CardDescription>
-                      Gestisci gli ordini in attesa e invia le notifiche di spedizione.
-                    </CardDescription>
-                  </div>
-                  <Button onClick={() => fetchPendingOrders(verifiedPassword)} disabled={isLoadingOrders}>
-                    {isLoadingOrders ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
-                    Aggiorna Lista
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Form {...form}>
-                    {isLoadingOrders ? (
-                      <div className="flex justify-center items-center h-40">
-                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                      </div>
-                    ) : pendingOrders.length > 0 ? (
-                      <form>
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>Ordine</TableHead>
-                              <TableHead>Cliente</TableHead>
-                              <TableHead>Tracking</TableHead>
-                              <TableHead>Corriere</TableHead>
-                              <TableHead>Link Corriere (Opz.)</TableHead>
-                              <TableHead className="text-right">Azione</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {fields.map((field, index) => (
-                              <TableRow key={field.id}>
-                                <TableCell>
-                                  <p className="font-mono text-xs">{pendingOrders[index]?.orderId.substring(0, 8)}</p>
-                                  <p className="text-xs text-muted-foreground">
-                                    {format(new Date(pendingOrders[index]?.createdAt), 'dd/MM/yy HH:mm', { locale: it })}
-                                  </p>
-                                </TableCell>
-                                <TableCell>
-                                  <p className="font-medium">{field.name}</p>
-                                  <p className="text-xs text-muted-foreground">{field.email}</p>
-                                </TableCell>
-                                <TableCell>
-                                  <FormField control={form.control} name={`orders.${index}.trackingCode`} render={({ field }) => (
-                                    <FormItem><FormControl><Input placeholder="ABC12345" {...field} /></FormControl><FormMessage /></FormItem>
-                                  )} />
-                                </TableCell>
-                                <TableCell>
-                                  <FormField control={form.control} name={`orders.${index}.courier`} render={({ field }) => (
-                                    <FormItem><FormControl><Input placeholder="SDA" {...field} /></FormControl><FormMessage /></FormItem>
-                                  )} />
-                                </TableCell>
-                                <TableCell>
-                                  <FormField control={form.control} name={`orders.${index}.courierLink`} render={({ field }) => (
-                                    <FormItem><FormControl><Input type="url" placeholder="https://..." {...field} /></FormControl><FormMessage /></FormItem>
-                                  )} />
-                                </TableCell>
-                                <TableCell className="text-right">
-                                  <Button
-                                    type="button"
-                                    onClick={() => onSubmit(form.getValues(), index)}
-                                    disabled={isSubmitting === field.orderDocumentId}
-                                  >
-                                    {isSubmitting === field.orderDocumentId ? (
-                                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                </Alert>
+                                <Button 
+                                    onClick={handleToggleShopStatus}
+                                    disabled={isTogglingShop}
+                                    variant={shopStatus.isShopOpen ? 'destructive' : 'default'}
+                                    className="w-full sm:w-auto"
+                                >
+                                    {isTogglingShop ? (
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    ) : shopStatus.isShopOpen ? (
+                                        <PowerOff className="mr-2 h-4 w-4" />
                                     ) : (
-                                      <Send className="mr-2 h-4 w-4" />
+                                        <Power className="mr-2 h-4 w-4" />
                                     )}
-                                    Invia
-                                  </Button>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </form>
-                    ) : (
-                      <div className="text-center py-12">
-                        <CardTitle className="font-headline text-2xl">Nessun ordine in attesa</CardTitle>
-                        <CardDescription className="mt-2">Ottimo lavoro! Tutti gli ordini sono stati spediti.</CardDescription>
+                                    {shopStatus.isShopOpen ? 'Chiudi Negozio' : 'Apri Negozio'}
+                                </Button>
+                            </div>
+                        ) : <Loader2 className="h-6 w-6 animate-spin" />}
+                    </CardContent>
+                </Card>
+
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="font-headline text-3xl">Pannello Spedizioni</CardTitle>
+                        <CardDescription>
+                          Gestisci gli ordini in attesa e invia le notifiche di spedizione.
+                        </CardDescription>
                       </div>
-                    )
-                  }
-                </Form>
-              </CardContent>
-            </Card>
-        </div>
+                      <Button onClick={() => fetchPendingOrders(verifiedPassword)} disabled={isLoadingOrders}>
+                        {isLoadingOrders ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
+                        Aggiorna Lista
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                        {isLoadingOrders ? (
+                          <div className="flex justify-center items-center h-40">
+                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                          </div>
+                        ) : pendingOrders.length > 0 ? (
+                          <form>
+                            <Table>
+                              <TableHeader>
+                                <TableRow>
+                                  <TableHead>Ordine</TableHead>
+                                  <TableHead>Cliente</TableHead>
+                                  <TableHead>Tracking</TableHead>
+                                  <TableHead>Corriere</TableHead>
+                                  <TableHead>Link Corriere (Opz.)</TableHead>
+                                  <TableHead className="text-right">Azione</TableHead>
+                                </TableRow>
+                              </TableHeader>
+                              <TableBody>
+                                {fields.map((field, index) => (
+                                  <TableRow key={field.id}>
+                                    <TableCell>
+                                      <p className="font-mono text-xs">{pendingOrders[index]?.orderId.substring(0, 8)}</p>
+                                      <p className="text-xs text-muted-foreground">
+                                        {format(new Date(pendingOrders[index]?.createdAt), 'dd/MM/yy HH:mm', { locale: it })}
+                                      </p>
+                                    </TableCell>
+                                    <TableCell>
+                                      <p className="font-medium">{field.name}</p>
+                                      <p className="text-xs text-muted-foreground">{field.email}</p>
+                                    </TableCell>
+                                    <TableCell>
+                                      <FormField control={form.control} name={`orders.${index}.trackingCode`} render={({ field }) => (
+                                        <FormItem><FormControl><Input placeholder="ABC12345" {...field} /></FormControl><FormMessage /></FormItem>
+                                      )} />
+                                    </TableCell>
+                                    <TableCell>
+                                      <FormField control={form.control} name={`orders.${index}.courier`} render={({ field }) => (
+                                        <FormItem><FormControl><Input placeholder="SDA" {...field} /></FormControl><FormMessage /></FormItem>
+                                      )} />
+                                    </TableCell>
+                                    <TableCell>
+                                      <FormField control={form.control} name={`orders.${index}.courierLink`} render={({ field }) => (
+                                        <FormItem><FormControl><Input type="url" placeholder="https://..." {...field} /></FormControl><FormMessage /></FormItem>
+                                      )} />
+                                    </TableCell>
+                                    <TableCell className="text-right">
+                                      <Button
+                                        type="button"
+                                        onClick={() => onSubmit(form.getValues(), index)}
+                                        disabled={isSubmitting === field.orderDocumentId}
+                                      >
+                                        {isSubmitting === field.orderDocumentId ? (
+                                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        ) : (
+                                          <Send className="mr-2 h-4 w-4" />
+                                        )}
+                                        Invia
+                                      </Button>
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                              </TableBody>
+                            </Table>
+                          </form>
+                        ) : (
+                          <div className="text-center py-12">
+                            <CardTitle className="font-headline text-2xl">Nessun ordine in attesa</CardTitle>
+                            <CardDescription className="mt-2">Ottimo lavoro! Tutti gli ordini sono stati spediti.</CardDescription>
+                          </div>
+                        )
+                      }
+                  </CardContent>
+                </Card>
+            </div>
+        </Form>
       )}
     </div>
   );
 }
-
