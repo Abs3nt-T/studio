@@ -1,11 +1,16 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/client';
+import { z } from 'zod';
 
 const adminPassword = process.env.ADMIN_PASSWORD;
-
-// This is the singleton document ID for the shop settings
 const SETTINGS_DOC_ID = 'shopSettings';
+
+const patchSchema = z.object({
+    password: z.string(),
+    isShopOpen: z.boolean(),
+    closingReason: z.string().optional(),
+});
 
 // GET all settings
 export async function GET(req: NextRequest) {
@@ -13,11 +18,10 @@ export async function GET(req: NextRequest) {
         const settings = await client.fetch(`*[_type == "shopSettings" && _id == "${SETTINGS_DOC_ID}"][0]`);
         
         if (!settings) {
-            // If settings don't exist, return default open state but indicate non-existence
+            // If settings don't exist, return default open state
             return NextResponse.json({ 
                 isShopOpen: true, 
                 closingReason: '',
-                _warning: 'Shop settings document not found in Sanity. Using default values.' 
             });
         }
         
@@ -43,32 +47,37 @@ export async function PATCH(req: NextRequest) {
         }
 
         const body = await req.json();
-        const { password, isShopOpen, closingReason } = body;
+        const validation = patchSchema.safeParse(body);
+
+        if (!validation.success) {
+            console.error('--- ERRORE: Dati richiesta non validi ---', validation.error.flatten());
+            return NextResponse.json({ error: "Dati richiesta non validi.", details: validation.error.flatten() }, { status: 400 });
+        }
+        
+        const { password, isShopOpen, closingReason } = validation.data;
 
         if (password !== adminPassword) {
             console.error('--- ERRORE: Password non autorizzata ---');
             return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
         }
 
-        if (typeof isShopOpen !== 'boolean') {
-             console.error('--- ERRORE: Dato isShopOpen non valido ---');
-             return NextResponse.json({ error: "Dato 'isShopOpen' non valido." }, { status: 400 });
-        }
-
-        // Use the API token with write access for this operation
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
+        // Start with the required field
         const patch = writeClient.patch(SETTINGS_DOC_ID).set({ isShopOpen });
 
+        // Conditionally set the closingReason only if it's provided
         if (typeof closingReason === 'string') {
             patch.set({ closingReason });
         }
 
         const result = await patch.commit({
-            // Creates the document if it doesn't exist.
-            createIfNotExists: true,
-            // You must specify the document type for creation.
-            type: 'shopSettings'
+            createIfNotExists: {
+              _id: SETTINGS_DOC_ID,
+              _type: 'shopSettings',
+              isShopOpen: isShopOpen,
+              closingReason: closingReason || 'Negozio temporaneamente chiuso.', // Default reason
+            },
         });
 
         console.log('--- STATO NEGOZIO AGGIORNATO CON SUCCESSO ---', result);
@@ -77,6 +86,7 @@ export async function PATCH(req: NextRequest) {
 
     } catch (error) {
         console.error("--- ERRORE GENERALE API SHOP STATUS (PATCH):", error);
-        return NextResponse.json({ error: "Errore durante l'aggiornamento dello stato del negozio.", details: (error as Error).message }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : "Errore sconosciuto.";
+        return NextResponse.json({ error: "Errore durante l'aggiornamento dello stato del negozio.", details: errorMessage }, { status: 500 });
     }
 }

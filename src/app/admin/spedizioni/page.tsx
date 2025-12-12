@@ -93,6 +93,7 @@ export default function SpedizioniAdminPage() {
       setShopStatus(result);
     } catch (error: any) {
       console.error('Failed to fetch shop status', error);
+      // Non mostriamo un toast qui per non essere invasivi al caricamento
     }
   }, []);
 
@@ -132,29 +133,46 @@ export default function SpedizioniAdminPage() {
 
   const handleToggleShopStatus = async () => {
     if (!shopStatus) return;
+
     setIsTogglingShop(true);
     try {
-       const response = await fetch('/api/shop-status', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          password: verifiedPassword,
-          isShopOpen: !shopStatus.isShopOpen,
-        }),
-      });
-       const result = await response.json();
-       if (!response.ok) throw new Error(result.error);
-       setShopStatus(result.newStatus);
-       toast({
-         title: 'Successo!',
-         description: `Il negozio è ora ${result.newStatus.isShopOpen ? 'APERTO' : 'CHIUSO'}.`,
-       });
+        const response = await fetch('/api/shop-status', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                password: verifiedPassword,
+                isShopOpen: !shopStatus.isShopOpen,
+                // Invia una stringa vuota se si sta aprendo il negozio
+                closingReason: !shopStatus.isShopOpen ? '' : shopStatus.closingReason,
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            // Usa il messaggio di errore dal server se disponibile
+            throw new Error(result.error || result.details || "Impossibile aggiornare lo stato.");
+        }
+        
+        // Aggiorna lo stato locale con la risposta del server
+        setShopStatus(result.newStatus);
+        
+        toast({
+            title: 'Successo!',
+            description: `Il negozio è ora ${result.newStatus.isShopOpen ? 'APERTO' : 'CHIUSO'}.`,
+        });
+
     } catch (error: any) {
-      toast({ variant: 'destructive', title: 'Errore', description: error.message });
+        console.error("Failed to toggle shop status:", error);
+        toast({ 
+            variant: 'destructive', 
+            title: 'Errore', 
+            description: error.message 
+        });
     } finally {
         setIsTogglingShop(false);
     }
-  };
+};
 
   const onSubmit = async (data: ShipmentFormData, orderIndex: number) => {
     if (!isAuthenticated) {
@@ -373,5 +391,3 @@ export default function SpedizioniAdminPage() {
     </div>
   );
 }
-
-    
