@@ -43,7 +43,7 @@ export async function PATCH(req: NextRequest) {
         }
 
         const body = await req.json();
-        const { password, isShopOpen } = body;
+        const { password, isShopOpen, closingReason } = body;
 
         if (password !== adminPassword) {
             console.error('--- ERRORE: Password non autorizzata ---');
@@ -58,23 +58,18 @@ export async function PATCH(req: NextRequest) {
         // Use the API token with write access for this operation
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
-        console.log(`--- TENTO AGGIORNAMENTO: ${SETTINGS_DOC_ID} a isShopOpen: ${isShopOpen} ---`);
+        const patch = writeClient.patch(SETTINGS_DOC_ID).set({ isShopOpen });
 
-        const newStatusDoc = {
-            _type: 'shopSettings',
-            _id: SETTINGS_DOC_ID,
-            isShopOpen: isShopOpen,
-        };
-        
-        const result = await writeClient
-            .patch(SETTINGS_DOC_ID)
-            .set({ isShopOpen: isShopOpen })
-            .commit({
-                // Creates the document if it doesn't exist
-                createIfNotExists: true,
-                // Specifies the document type for creation
-                type: 'shopSettings'
-            });
+        if (typeof closingReason === 'string') {
+            patch.set({ closingReason });
+        }
+
+        const result = await patch.commit({
+            // Creates the document if it doesn't exist.
+            createIfNotExists: true,
+            // You must specify the document type for creation.
+            type: 'shopSettings'
+        });
 
         console.log('--- STATO NEGOZIO AGGIORNATO CON SUCCESSO ---', result);
         
@@ -82,6 +77,6 @@ export async function PATCH(req: NextRequest) {
 
     } catch (error) {
         console.error("--- ERRORE GENERALE API SHOP STATUS (PATCH):", error);
-        return NextResponse.json({ error: "Errore durante l'aggiornamento dello stato del negozio." }, { status: 500 });
+        return NextResponse.json({ error: "Errore durante l'aggiornamento dello stato del negozio.", details: (error as Error).message }, { status: 500 });
     }
 }
