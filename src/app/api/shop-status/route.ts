@@ -35,8 +35,10 @@ export async function GET(req: NextRequest) {
 
 // PATCH to update settings
 export async function PATCH(req: NextRequest) {
+    console.log('--- AVVIO API SHOP STATUS (PATCH) ---');
     try {
         if (!adminPassword) {
+            console.error('--- ERRORE: Password admin non configurata ---');
             return NextResponse.json({ error: "Servizio non configurato correttamente." }, { status: 500 });
         }
 
@@ -44,26 +46,42 @@ export async function PATCH(req: NextRequest) {
         const { password, isShopOpen } = body;
 
         if (password !== adminPassword) {
+            console.error('--- ERRORE: Password non autorizzata ---');
             return NextResponse.json({ error: "Password non autorizzata." }, { status: 401 });
         }
 
         if (typeof isShopOpen !== 'boolean') {
+             console.error('--- ERRORE: Dato isShopOpen non valido ---');
              return NextResponse.json({ error: "Dato 'isShopOpen' non valido." }, { status: 400 });
         }
 
         // Use the API token with write access for this operation
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
-        const newStatus = await writeClient
+        console.log(`--- TENTO AGGIORNAMENTO: ${SETTINGS_DOC_ID} a isShopOpen: ${isShopOpen} ---`);
+
+        const newStatusDoc = {
+            _type: 'shopSettings',
+            _id: SETTINGS_DOC_ID,
+            isShopOpen: isShopOpen,
+        };
+        
+        const result = await writeClient
             .patch(SETTINGS_DOC_ID)
             .set({ isShopOpen: isShopOpen })
-            // Use createIfNotExists to handle the case where the document doesn't exist yet
-            .commit({ autoGenerateArrayKeys: true, createIfNotExists: true, type: 'shopSettings' });
+            .commit({
+                // Creates the document if it doesn't exist
+                createIfNotExists: true,
+                // Specifies the document type for creation
+                type: 'shopSettings'
+            });
+
+        console.log('--- STATO NEGOZIO AGGIORNATO CON SUCCESSO ---', result);
         
-        return NextResponse.json({ success: true, message: "Stato del negozio aggiornato.", newStatus });
+        return NextResponse.json({ success: true, message: "Stato del negozio aggiornato.", newStatus: result });
 
     } catch (error) {
-        console.error("Failed to update shop status:", error);
+        console.error("--- ERRORE GENERALE API SHOP STATUS (PATCH):", error);
         return NextResponse.json({ error: "Errore durante l'aggiornamento dello stato del negozio." }, { status: 500 });
     }
 }
