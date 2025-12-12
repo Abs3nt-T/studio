@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -13,11 +13,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { Plus, Minus, Trash2, AlertTriangle } from 'lucide-react';
+import { Plus, Minus, Trash2, AlertTriangle, XCircle, Loader2 } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { blockedProvinces, blockedZipCodes, blockedCities } from '@/lib/geography';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import type { ShopSettings } from '@/lib/types';
 
 
 const normalizeString = (str: string) => 
@@ -73,6 +74,26 @@ export default function CheckoutPage() {
     const { cart, getCartTotal, clearCart, addToCart, decreaseQuantity } = useContext(CartContext);
     const router = useRouter();
     const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+    const [shopSettings, setShopSettings] = useState<ShopSettings | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchShopStatus() {
+            try {
+                const response = await fetch('/api/shop-status');
+                const data = await response.json();
+                setShopSettings(data);
+            } catch (error) {
+                console.error("Failed to fetch shop status:", error);
+                // Assume shop is open if API fails, to not block customers unnecessarily
+                setShopSettings({ isShopOpen: true, closingReason: '' });
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchShopStatus();
+    }, []);
+
 
     const { subtotal, shippingCost, total } = getCartTotal();
 
@@ -97,6 +118,14 @@ export default function CheckoutPage() {
 
     const watchBillingSameAsShipping = form.watch('billingSameAsShipping');
 
+    if (isLoading) {
+        return (
+            <div className="container mx-auto py-24 flex justify-center items-center">
+                <Loader2 className="h-12 w-12 animate-spin" />
+            </div>
+        )
+    }
+
     if (!paypalClientId) {
         return <div className="container mx-auto py-24 text-center text-red-500">La configurazione di PayPal non è completa.</div>
     }
@@ -120,6 +149,16 @@ export default function CheckoutPage() {
                     </h1>
                 </header>
 
+                {shopSettings && !shopSettings.isShopOpen && (
+                     <Alert variant="destructive" className="mb-8">
+                      <XCircle className="h-4 w-4" />
+                      <AlertTitle>Negozio Temporaneamente Chiuso</AlertTitle>
+                      <AlertDescription>
+                        {shopSettings.closingReason}
+                      </AlertDescription>
+                    </Alert>
+                )}
+                
                 <Alert variant="destructive" className="mb-8">
                   <AlertTriangle className="h-4 w-4" />
                   <AlertTitle>ATTENZIONE</AlertTitle>
@@ -292,7 +331,17 @@ export default function CheckoutPage() {
                                     <div className="pt-4">
                                          <PayPalButtons
                                             style={{ layout: "vertical" }}
+                                            disabled={!shopSettings?.isShopOpen}
                                             onClick={async (data, actions) => {
+                                                if (!shopSettings?.isShopOpen) {
+                                                    toast({
+                                                        title: "Negozio Chiuso",
+                                                        description: "Non è possibile effettuare ordini in questo momento.",
+                                                        variant: "destructive",
+                                                    });
+                                                    return actions.reject();
+                                                }
+
                                                 const isFormValid = await form.trigger();
                                                 if (!isFormValid) {
                                                     toast({

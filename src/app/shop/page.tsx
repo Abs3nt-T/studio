@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,8 +10,11 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CartContext } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
 import { useBookingChat } from '@/components/BookingChat';
-import { MessageSquare, Star } from 'lucide-react';
+import { MessageSquare, Star, XCircle, Loader2 } from 'lucide-react';
 import { SnowBurstButton } from '@/components/effects/SnowBurstButton';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import type { ShopSettings } from '@/lib/types';
+
 
 const categories = ['Tutti', 'Esclusive', 'Carne di asino', 'Carne di mulo', 'Carne di cavallo', 'Carne di lattone'];
 
@@ -23,6 +26,24 @@ export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState('Tutti');
     const { addToCart } = useContext(CartContext);
     const { setIsOpen } = useBookingChat();
+    const [shopSettings, setShopSettings] = useState<ShopSettings | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchShopStatus() {
+            try {
+                const response = await fetch('/api/shop-status');
+                const data = await response.json();
+                setShopSettings(data);
+            } catch (error) {
+                console.error("Failed to fetch shop status:", error);
+                setShopSettings({ isShopOpen: true, closingReason: '' });
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchShopStatus();
+    }, []);
 
     const handleAddToCart = (product: Product) => {
         addToCart(product);
@@ -52,6 +73,21 @@ export default function ShopPage() {
                         Qualità e tradizione, direttamente a casa tua.
                     </p>
                 </header>
+                 
+                {isLoading ? (
+                    <div className="flex justify-center mb-12">
+                        <Loader2 className="h-8 w-8 animate-spin" />
+                    </div>
+                ) : shopSettings && !shopSettings.isShopOpen && (
+                     <Alert variant="destructive" className="mb-12 max-w-4xl mx-auto">
+                      <XCircle className="h-4 w-4" />
+                      <AlertTitle>Negozio Online Temporaneamente Chiuso</AlertTitle>
+                      <AlertDescription>
+                        {shopSettings.closingReason}
+                      </AlertDescription>
+                    </Alert>
+                )}
+
 
                 <div className="mb-12 flex flex-wrap items-center justify-center gap-2">
                     {categories.map(category =>
@@ -121,7 +157,11 @@ export default function ShopPage() {
                                         Prenota il Ritiro
                                     </Button>
                                 ) : (
-                                    <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                                    <Button 
+                                        className="w-full" 
+                                        onClick={() => handleAddToCart(product)}
+                                        disabled={!shopSettings?.isShopOpen}
+                                    >
                                         Aggiungi al Carrello
                                     </Button>
                                 )}
