@@ -14,26 +14,11 @@ const patchSchema = z.object({
 
 // GET all settings
 export async function GET(req: NextRequest) {
-    try {
-        const settings = await client.fetch(`*[_type == "shopSettings" && _id == "${SETTINGS_DOC_ID}"][0]`);
-        
-        if (!settings) {
-            // If settings don't exist, return default open state
-            return NextResponse.json({ 
-                isShopOpen: true, 
-                closingReason: '',
-            });
-        }
-        
-        return NextResponse.json({
-            isShopOpen: settings.isShopOpen,
-            closingReason: settings.closingReason,
-        });
-
-    } catch (error) {
-        console.error("Failed to fetch shop settings:", error);
-        return NextResponse.json({ error: "Errore nel recupero dello stato del negozio." }, { status: 500 });
-    }
+    // FORZATURA MANUALE DELLO STATO "CHIUSO" COME DA RICHIESTA URGENTE
+    return NextResponse.json({ 
+        isShopOpen: false, 
+        closingReason: 'A causa dell\'intenso traffico di spedizioni durante le festività, abbiamo temporaneamente sospeso gli ordini online per garantire che ogni pacco arrivi in tempo e con la massima cura. Il servizio riprenderà regolarmente a breve. Grazie per la vostra comprensione e buone feste!',
+    });
 }
 
 
@@ -63,22 +48,14 @@ export async function PATCH(req: NextRequest) {
 
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
-        // This is a more robust way to handle the patch, ensuring closingReason is handled correctly.
         const result = await writeClient.patch(SETTINGS_DOC_ID)
-            .set({ 
-              isShopOpen: isShopOpen,
-              // Explicitly set closingReason to empty string if it's not provided or empty.
-              closingReason: closingReason || '' 
+            .set({
+                _type: 'shopSettings',
+                isShopOpen: isShopOpen,
+                closingReason: closingReason || '',
             })
             .commit({
-                // Creates the document if it doesn't exist.
-                createIfNotExists: {
-                  _id: SETTINGS_DOC_ID,
-                  _type: 'shopSettings',
-                  isShopOpen: isShopOpen,
-                  // Provide a default reason if creating for the first time
-                  closingReason: closingReason || 'Negozio temporaneamente chiuso.', 
-                },
+                createIfNotExists: true,
             });
 
         console.log('--- STATO NEGOZIO AGGIORNATO CON SUCCESSO ---', result);
