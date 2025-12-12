@@ -63,19 +63,23 @@ export async function PATCH(req: NextRequest) {
 
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
-        const patch = writeClient.patch(SETTINGS_DOC_ID)
-            .set({ isShopOpen })
-            // Set closingReason to an empty string if it is undefined or null
-            .set({ closingReason: closingReason || '' });
-
-        const result = await patch.commit({
-            createIfNotExists: {
-              _id: SETTINGS_DOC_ID,
-              _type: 'shopSettings',
+        // This is a more robust way to handle the patch, ensuring closingReason is handled correctly.
+        const result = await writeClient.patch(SETTINGS_DOC_ID)
+            .set({ 
               isShopOpen: isShopOpen,
-              closingReason: closingReason || 'Negozio temporaneamente chiuso.', // Default reason
-            },
-        });
+              // Explicitly set closingReason to empty string if it's not provided or empty.
+              closingReason: closingReason || '' 
+            })
+            .commit({
+                // Creates the document if it doesn't exist.
+                createIfNotExists: {
+                  _id: SETTINGS_DOC_ID,
+                  _type: 'shopSettings',
+                  isShopOpen: isShopOpen,
+                  // Provide a default reason if creating for the first time
+                  closingReason: closingReason || 'Negozio temporaneamente chiuso.', 
+                },
+            });
 
         console.log('--- STATO NEGOZIO AGGIORNATO CON SUCCESSO ---', result);
         
