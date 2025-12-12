@@ -63,13 +63,10 @@ export async function PATCH(req: NextRequest) {
 
         const writeClient = client.withConfig({ token: process.env.SANITY_API_TOKEN });
         
-        // Start with the required field
-        const patch = writeClient.patch(SETTINGS_DOC_ID).set({ isShopOpen });
-
-        // Conditionally set the closingReason only if it's provided
-        if (typeof closingReason === 'string') {
-            patch.set({ closingReason });
-        }
+        const patch = writeClient.patch(SETTINGS_DOC_ID)
+            .set({ isShopOpen })
+            // Set closingReason to an empty string if it is undefined or null
+            .set({ closingReason: closingReason || '' });
 
         const result = await patch.commit({
             createIfNotExists: {
