@@ -159,13 +159,6 @@ export default function CheckoutPage() {
                     </Alert>
                 )}
                 
-                <Alert variant="destructive" className="mb-8">
-                  <AlertTriangle className="h-4 w-4" />
-                  <AlertTitle>ATTENZIONE</AlertTitle>
-                  <AlertDescription className="font-bold">
-                    Si informa la clientela che Fanuli Carni Equine spedisce SOLO in Italia, isole ESCLUSE.
-                  </AlertDescription>
-                </Alert>
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(() => {})} className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
@@ -426,3 +419,4 @@ export default function CheckoutPage() {
     
 
     
+

@@ -14,11 +14,25 @@ const patchSchema = z.object({
 
 // GET all settings
 export async function GET(req: NextRequest) {
-    // FORZATURA MANUALE DELLO STATO "CHIUSO" COME DA RICHIESTA URGENTE
-    return NextResponse.json({ 
-        isShopOpen: false, 
-        closingReason: 'A causa dell\'intenso traffico di spedizioni durante le festività, abbiamo temporaneamente sospeso gli ordini online per garantire che ogni pacco arrivi in tempo e con la massima cura. Il servizio riprenderà regolarmente a breve. Grazie per la vostra comprensione e buone feste!',
-    });
+    try {
+        const settings = await client.fetch(`*[_type == "shopSettings" && _id == "${SETTINGS_DOC_ID}"][0]`);
+        
+        // If no settings doc is found, default to open
+        if (!settings) {
+            console.log('--- IMPOSTAZIONI NEGOZIO NON TROVATE, IMPOSTATO APERTO DI DEFAULT ---');
+            return NextResponse.json({ isShopOpen: true, closingReason: '' });
+        }
+
+        return NextResponse.json({ 
+            isShopOpen: settings.isShopOpen, 
+            closingReason: settings.closingReason 
+        });
+
+    } catch (error) {
+        console.error('--- ERRORE GET SHOP STATUS:', error);
+        // If there's an error, default to open to not block sales unnecessarily
+        return NextResponse.json({ isShopOpen: true, closingReason: '' }, { status: 500 });
+    }
 }
 
 
