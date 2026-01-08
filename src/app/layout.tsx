@@ -4,7 +4,6 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from "@/components/ui/toaster";
-import { ConditionalSnowfall } from '@/components/effects/ConditionalSnowfall';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 
@@ -31,7 +30,6 @@ export default function RootLayout({
           <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-background text-foreground antialiased font-headline">
-        <ConditionalSnowfall />
         <CartProvider>
           <BookingChatProvider>
             <div className="relative flex min-h-dvh flex-col">
