@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useRef, useEffect } from 'react';
@@ -57,7 +58,7 @@ export function ScrollHero() {
 
     const drawFrame = (index: number) => {
         const img = preloadedImages[index];
-        if (img && img.complete) {
+        if (img && img.complete && img.naturalHeight !== 0) { // Check if image is loaded and not broken
             // Logica per emulare object-fit: cover
             const hRatio = canvas.width / img.width;
             const vRatio = canvas.height / img.height;
@@ -74,7 +75,8 @@ export function ScrollHero() {
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        context.setTransform(dpr, 0, 0, dpr, 0, 0); // Usa setTransform per gestire lo scaling su schermi retina
+        // Non è necessario usare setTransform con dpr, basta scalare le coordinate
+        // context.setTransform(dpr, 0, 0, dpr, 0, 0); // Usa setTransform per gestire lo scaling su schermi retina
         drawFrame(Math.round(frameIndex.get()));
     };
 
