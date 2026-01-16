@@ -8,14 +8,14 @@ import Link from 'next/link';
 
 // --- Configuration ---
 // IMPORTANTE: Modifica questi valori per farli corrispondere alla tua sequenza di immagini.
-const FRAME_COUNT = 140; // Numero totale di frame nell'animazione
-const FRAME_PATH_PREFIX = '/hero-section/frames/tagliata_'; // Percorso e prefisso del nome dei file
+const FRAME_COUNT = 192; // Numero totale di frame nell'animazione
+const FRAME_PATH_PREFIX = '/hero-section/frames/ezgif-frame-'; // Percorso e prefisso del nome dei file
 const FRAME_FILE_EXTENSION = '.jpg'; // Estensione dei file dei frame
 // ---------------------
 
-const getFramePath = (frame: number): string => {
-  // Ipotizza che i frame siano nominati tipo: tagliata_0000.jpg, tagliata_0001.jpg, etc.
-  return `${FRAME_PATH_PREFIX}${frame.toString().padStart(4, '0')}${FRAME_FILE_EXTENSION}`;
+const getFramePath = (frameNumber: number): string => {
+  // I frame sono numerati da 1 a 192, con padding di 3 cifre (001, 002, ...)
+  return `${FRAME_PATH_PREFIX}${frameNumber.toString().padStart(3, '0')}${FRAME_FILE_EXTENSION}`;
 };
 
 export function ScrollHero() {
@@ -28,7 +28,8 @@ export function ScrollHero() {
       return [];
     }
     const images: HTMLImageElement[] = [];
-    for (let i = 0; i < FRAME_COUNT; i++) {
+    // Itera da 1 a FRAME_COUNT per far corrispondere i nomi dei file
+    for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       img.src = getFramePath(i);
       images.push(img);
@@ -46,6 +47,7 @@ export function ScrollHero() {
   const initialTextY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 0.15], [0.5, 0]);
   
+  // Il frameIndex mapperà lo scroll a un indice dell'array (da 0 a 191)
   const frameIndex = useTransform(scrollYProgress, [0.1, 0.8], [0, FRAME_COUNT - 1]);
   
   const revealContentOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
@@ -61,7 +63,8 @@ export function ScrollHero() {
     let requestId: number;
 
     const drawFrame = (index: number) => {
-        const img = preloadedImages[index];
+        // L'indice va da 0 a 191, quindi accediamo direttamente all'array
+        const img = preloadedImages[Math.round(index)];
         if (img && img.complete && img.naturalHeight !== 0) { // Check if image is loaded and not broken
             // Logica per emulare object-fit: cover
             const hRatio = canvas.width / img.width;
@@ -97,7 +100,7 @@ export function ScrollHero() {
 
     const unsubscribe = frameIndex.onChange((latest) => {
       cancelAnimationFrame(requestId);
-      requestId = requestAnimationFrame(() => drawFrame(Math.round(latest)));
+      requestId = requestAnimationFrame(() => drawFrame(latest));
     });
 
     return () => {
