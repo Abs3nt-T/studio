@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 // --- Configuration ---
 // IMPORTANTE: Modifica questi valori per farli corrispondere alla tua sequenza di immagini.
 const FRAME_COUNT = 140; // Numero totale di frame nell'animazione
-const FRAME_PATH_PREFIX = '/frames/tagliata_'; // Percorso e prefisso del nome dei file
+const FRAME_PATH_PREFIX = '/hero-section/frames/tagliata_'; // Percorso e prefisso del nome dei file
 const FRAME_FILE_EXTENSION = '.jpg'; // Estensione dei file dei frame
 // ---------------------
 
@@ -18,19 +18,23 @@ const getFramePath = (frame: number): string => {
   return `${FRAME_PATH_PREFIX}${frame.toString().padStart(4, '0')}${FRAME_FILE_EXTENSION}`;
 };
 
-// Pre-carica le immagini per un'animazione fluida
-const preloadedImages: HTMLImageElement[] = [];
-if (typeof window !== 'undefined') {
-  for (let i = 0; i < FRAME_COUNT; i++) {
-    const img = new Image();
-    img.src = getFramePath(i);
-    preloadedImages.push(img);
-  }
-}
-
 export function ScrollHero() {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Pre-carica le immagini per un'animazione fluida in modo sicuro
+  const preloadedImages = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return [];
+    }
+    const images: HTMLImageElement[] = [];
+    for (let i = 0; i < FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      images.push(img);
+    }
+    return images;
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -75,8 +79,6 @@ export function ScrollHero() {
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        // Non è necessario usare setTransform con dpr, basta scalare le coordinate
-        // context.setTransform(dpr, 0, 0, dpr, 0, 0); // Usa setTransform per gestire lo scaling su schermi retina
         drawFrame(Math.round(frameIndex.get()));
     };
 
@@ -85,10 +87,12 @@ export function ScrollHero() {
     window.addEventListener('resize', setCanvasSize);
     
     const firstImage = preloadedImages[0];
+    const renderFirstFrame = () => drawFrame(0);
+
     if (firstImage.complete) {
-        drawFrame(0);
+        renderFirstFrame();
     } else {
-        firstImage.onload = () => drawFrame(0);
+        firstImage.onload = renderFirstFrame;
     }
 
     const unsubscribe = frameIndex.onChange((latest) => {
@@ -100,8 +104,11 @@ export function ScrollHero() {
       unsubscribe();
       cancelAnimationFrame(requestId);
       window.removeEventListener('resize', setCanvasSize);
+      if (firstImage) {
+        firstImage.onload = null;
+      }
     };
-  }, [frameIndex]);
+  }, [frameIndex, preloadedImages]);
 
   return (
     <section ref={targetRef} className="relative h-[400vh] w-full">
